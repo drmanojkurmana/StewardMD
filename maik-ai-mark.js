@@ -20,7 +20,7 @@
    shows and the svg is hidden: never an empty gap. */
 (function (G) {
   "use strict";
-  var URL = "/assets/maik-ai-mark.svg?v=mkai3", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
+  var URL = "/assets/maik-ai-mark.svg?v=mkai4", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
   function variantFor(v, size) {
     if (v === "tile" && (size || 20) < 40) return "tile-mark";
     if (VARIANTS[v]) return v;
