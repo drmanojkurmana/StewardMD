@@ -12,8 +12,13 @@
 .pn-root .su-hic svg { width: 20px; height: 20px; }
 .pn-root .su-sheet > .su-body { display: flex; flex-direction: column; gap: 20px; flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
   margin: 0 -20px; padding: 2px 20px 12px; }
-.pn-root .su-sheet > .su-body::-webkit-scrollbar { width: 0; }
-.pn-root .su-sheet > .su-body { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14px); mask-image: linear-gradient(180deg, transparent 0, #000 14px); }
+/* Native pass 2: no scroll bar on the sheet (iOS draws its own indicator over an overflow box unless it is hidden), and no
+   mask on the scroller: a masked scroller is painted by WebKit on the main thread, so the scroll stuttered under the
+   finger. The soft top edge is a sticky fade inside the scroller instead (transform-free, composited with the content). */
+.pn-root .su-sheet > .su-body { scrollbar-width: none; }
+.pn-root .su-sheet > .su-body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.pn-root .su-sheet > .su-body::before { content: ""; position: sticky; top: -2px; z-index: 2; display: block; flex: 0 0 14px; height: 14px; margin: -2px -20px -34px;
+  background: linear-gradient(180deg, var(--pn-sheet), color-mix(in srgb, var(--pn-sheet) 0%, transparent)); pointer-events: none; }
 .pn-root .su-body > .pn-load { min-height: 0; padding: 28px 16px; text-align: center; contain: none; }
 .pn-root .su-body > .pn-load::before, .pn-root .su-body > .pn-load::after { content: none; }
 
@@ -35,6 +40,9 @@
 body.dark .pn-root .su-chip.on .su-n { background: rgba(2, 35, 31, .18); }
 .pn-root .su-chip.zero:not(.on) { color: var(--pn-mut); }
 .pn-root .su-chip.zero:not(.on) .su-n { opacity: .7; }
+/* an option with no questions cannot be chosen: flat, faded, no press */
+.pn-root .su-chip[disabled] { opacity: .48; box-shadow: none; cursor: default; }
+.pn-root .su-chip[disabled]:active { transform: none; }
 
 /* count and timer: presets beside a stepper */
 .pn-root .su-nrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
@@ -89,7 +97,7 @@ body.dark .pn-root .su-chip.on .su-n { background: rgba(2, 35, 31, .18); }
 
 @media (prefers-reduced-motion: reduce) { .pn-root .su-chip, .pn-root .su-sb, .pn-root .pc-thumb { transition: none; } }
 .pn-root .su-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-@media (hover: hover) and (pointer: fine) { .pn-root .su-chip:not(.on):hover, .pn-root .su-sb:not([disabled]):hover { background: var(--pn-s2); } .pn-root .pn-yq-subb:hover { background: var(--pn-s1); } }
+@media (hover: hover) and (pointer: fine) { .pn-root .su-chip:not(.on):not([disabled]):hover, .pn-root .su-sb:not([disabled]):hover { background: var(--pn-s2); } .pn-root .pn-yq-subb:hover { background: var(--pn-s1); } }
 /* dark: chips need a step above the sheet's own surface to read as controls */
 body.dark .pn-root .su-chip:not(.on), body.dark .pn-root .su-step { background: #18323a; box-shadow: inset 0 0 0 1px rgba(190, 235, 240, .07); }
 body.dark .pn-root .su-sb { background: #224049; }
@@ -99,3 +107,7 @@ body.dark .pn-root .su-sb { background: #224049; }
   .pn-root .su-sheet { max-height: 100%; padding-bottom: 0; }
   .pn-root .su-act { padding-bottom: 18px; border-radius: 0 0 var(--pn-r-xl) var(--pn-r-xl); }
 }
+/* timer panels stacked in one cell (prep-setup.js timerHtml): the group keeps the tallest panel's height */
+.pn-root .su-tstack { display: grid; }
+.pn-root .su-tp { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pn-root .su-tp:not(.on) { visibility: hidden; }

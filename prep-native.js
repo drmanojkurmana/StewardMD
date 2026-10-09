@@ -17,6 +17,8 @@
    it syncs on open, after a finished set and on "Sync now". Pure helpers load under node for tests. */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
 
   /* ================= pure ================= */
@@ -203,7 +205,7 @@
     var a = r && r.querySelector("#plQa"), b = r && r.querySelector("#plQb"), N = nudges();
     if (!a || !b || !N) return;
     var on = function () { if (/^\d{2}:\d{2}$/.test(a.value) && /^\d{2}:\d{2}$/.test(b.value)) { N.setQuiet(a.value, b.value); remNow(true); } };
-    a.addEventListener("change", on); b.addEventListener("change", on);
+    ON(a, "pn", "change", on); ON(b, "pn", "change", on);
   }
   function remToggle(redraw) {
     var LN = plug("LocalNotifications"); if (!LN) return Promise.resolve();
@@ -236,7 +238,7 @@
   function redrawSync(focus) {
     var r = root(), box = r && r.querySelector("#plSync"); if (!box) return;
     var a = focus || (G.document.activeElement && box.contains(G.document.activeElement) ? G.document.activeElement.getAttribute("data-act") : null);
-    box.innerHTML = syncInner();
+    if (G.PREP_DOM) G.PREP_DOM.patch(box, syncInner()); else box.innerHTML = syncInner();
     var f = a && box.querySelector('[data-act="' + a + '"]:not([disabled])');
     try { if (f) f.focus(); } catch (e) {}
   }
