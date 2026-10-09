@@ -122,15 +122,15 @@ test("lesson figures that are bank paths load through the bank API, in-app media
   assert.equal(LP.lessonImgUrl("prep/lessons/media/x.svg", "/api/prep/bank/"), "/prep/lessons/media/x.svg");
 });
 
-test("taxonomy: ss-radiology is valid with its new modules and reads bank v8 (v7 plus the radmax items)", () => {
+test("taxonomy: ss-radiology is valid with its new modules and reads bank v9 (v8 plus the radmax depth items)", () => {
   const s = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy/ss-radiology.json", import.meta.url), "utf8"));
   assert.deepEqual(validateSubject(s), []);
-  assert.equal(s.bank, "v8");
+  assert.equal(s.bank, "v9");
   const mods = s.sections.flatMap((x) => x.modules.map((m) => m.id));
   for (const m of ["srd-msk-metabolic", "srd-abd-peritoneum", "srd-anat-neuro", "srd-anat-body", "srd-anat-limbs"]) assert.ok(mods.includes(m), m);
   const app = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   const sub = app.branches.flatMap((b) => b.subjects).find((x) => x.id === "ss-radiology");
-  assert.equal(sub.bv, "v8");
+  assert.equal(sub.bv, "v9");
   assert.deepEqual(sub.sections.flatMap((x) => x.modules.map((m) => m.id)), mods, "the bundled tree matches the source");
   // every target and lesson names a module that exists
   const T = JSON.parse(fs.readFileSync(new URL("../tools/prep-radss/targets.json", import.meta.url), "utf8")).targets;
@@ -157,8 +157,21 @@ test("radmax: bank v8 index is committed with the v7 items plus the radmax items
     "img/radmax/rm-n1-p021-1.webp", "overlay/radmax/radiology/rad-radiation-protection.json", "overlay/radmax/radiology/rad-gi.json"];
   for (const p of ok) assert.equal(bankPath({ path: p.split("/") }), p, p);
   for (const p of ["v8/ss-radiology/img/rm-r11-4.166.4.webp", "img/radmax/rn-n1-p021-1.webp", "img/radnotes/rm-n1-p021-1.webp", "img/radmax/x.webp",
-    "overlay/radmax/rad-gi.json", "overlay/radmax/radiology/../x.json", "overlay/radmax2/radiology/rad-gi.json", "overlay/radmaxx/radiology/rad-gi.json",
+    "overlay/radmax/rad-gi.json", "overlay/radmax/radiology/../x.json", "overlay/radmax1/radiology/rad-gi.json", "overlay/radmaxx/radiology/rad-gi.json",
+    "overlay/radmax2/rad-gi.json", "overlay/radmax2/radiology/../x.json", "img/radmax2/rm-n1-p021-1.webp",
     "img/radmax/rm-AB.webp", "img/radmax/a/rm-ab.webp"]) assert.equal(bankPath({ path: p.split("/") }), null, p);
+});
+
+test("radmax depth: bank v9 index holds every v8 item plus the depth items, and the route serves v9 and the radmax2 set", () => {
+  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v9/ss-radiology/index.json", import.meta.url), "utf8"));
+  const v8 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v8/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.equal(ix.id, "ss-radiology");
+  assert.ok(ix.counts.total > v8.counts.total, "v9 adds items to v8");
+  for (const t of v8.topics) assert.ok(ix.topics.find((x) => x.id === t.id).count >= t.count, t.id);
+  assert.equal(ix.counts.total, ix.topics.reduce((n, t) => n + t.count, 0));
+  const ok = ["v9/ss-radiology/index.json", "v9/ss-radiology/mcq/srd-abd-liver.json",
+    "overlay/radmax2/radiology/rad-gi.json", "overlay/radmax2/radiology/rad-radiation-protection.json"];
+  for (const p of ok) assert.equal(bankPath({ path: p.split("/") }), p, p);
 });
 
 test("fit4 cuts a five-option reply to four and keeps key and reasons aligned", () => {
@@ -214,15 +227,15 @@ test("bankIndex writes the prep-build-bank subject index shape with a row per ta
   assert.ok(!/stewardmd|ai-generated|licen/i.test(JSON.stringify(ix)), "no source or AI field");
 });
 
-test("shipped v8 subject index: taxonomy bv v8, every taxonomy module listed with group and file, counts add up", () => {
+test("shipped v9 subject index: taxonomy bv v9, every taxonomy module listed with group and file, counts add up", () => {
   const tax = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   let sub = null; for (const b of tax.branches) for (const s of b.subjects) if (s.id === "ss-radiology") sub = s;
-  assert.equal(sub && sub.bv, "v8");
-  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v8/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.equal(sub && sub.bv, "v9");
+  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v9/ss-radiology/index.json", import.meta.url), "utf8"));
   const mods = sub.sections.flatMap((x) => x.modules.map((m) => m.id));
   assert.deepEqual(ix.topics.map((t) => t.id).sort(), mods.slice().sort());
   for (const t of ix.topics) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
   const n = ix.topics.reduce((a, t) => a + t.count, 0);
   assert.equal(ix.counts.total, n); assert.equal(ix.counts.d1 + ix.counts.d2 + ix.counts.d3, n);
-  assert.ok(n >= 690, "v8 holds the 189 v7 items and the 501 radmax items");
+  assert.ok(n >= 1272, "v9 holds the 690 v8 items and the 582 radmax depth items");
 });
