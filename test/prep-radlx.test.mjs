@@ -158,3 +158,8 @@ test("generator: parseList reads the detection reply", () => {
   assert.deepEqual(X.parseList('{"items":[{"label":"y"}]}'), [{ label: "y" }]);
   assert.deepEqual(X.parseList("no json"), []);
 });
+test("generator: a kept figure is never put on a second step", () => {
+  const p = { used: { 1: "C1" }, cands: pool.cands };
+  const { g } = X.gateLesson(les, p, { figs: [{ i: 0, c: "C1", cap: "Puts the kept figure on step one." }, { i: 1, c: "C1", cap: "Keeps the figure on its own step." }], add: [], spot: [], reveal: [], pair: [], qc: [], cards: [], keys: [] }, "word");
+  assert.equal(g.figs[0], undefined); assert.equal(g.figs[1].c, "C1");
+});

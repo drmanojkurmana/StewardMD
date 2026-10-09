@@ -352,7 +352,7 @@ async function plan(D, args) {
 // locate: the plan's own coordinates are unreliable (one request doing many jobs), so every spot and label set is
 // located again by a detection-only request per image (gemini-3.6-flash, the image and the names only).
 // =====================================================================================================================
-export const LOC_MODEL = "gemini-3.6-flash";
+export const LOC_MODEL = process.env.PREP_LOC_MODEL || "gemini-3.6-flash";
 /* parseList(text) -> the JSON list in a model reply (fenced or bare), or a list held in an object's first array field. */
 export function parseList(text) {
   const t = String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
@@ -384,7 +384,7 @@ async function locate(D, args) {
     while (k < jobs.length) {
       const j = jobs[k++], c = P[j.id].cands.find((x) => x.cid === j.c);
       const body = { contents: [{ role: "user", parts: [{ inlineData: { mimeType: "image/jpeg", data: fs.readFileSync(c.jpg).toString("base64") } }, { text: locPrompt(j.names, j.hint) }] }],
-        generationConfig: { temperature: 0, responseMimeType: "application/json" }, labels: { app: "prep", run: "radlx-loc" } };
+        generationConfig: { temperature: 0, responseMimeType: "application/json", ...(/^gemini-2\.5/.test(LOC_MODEL) ? { thinkingConfig: { thinkingBudget: 0 } } : {}) }, labels: { app: "prep", run: "radlx-loc" } };
       const url = `https://aiplatform.googleapis.com/v1/projects/${project}/locations/global/publishers/google/models/${LOC_MODEL}:generateContent`;
       try {
         let jr = null;
@@ -417,12 +417,13 @@ const capOk = (s, ground) => textOk(s, 5, 24, ground);
 export function gateLesson(les, p, pl, ground, loc) {
   const why = [], cid = new Set(p.cands.map((c) => c.cid)), useC = new Map();
   const g = { figs: {}, add: [], spot: [], reveal: [], pair: null, qc: [], cards: [], keys: [] };
+  for (const [i, c] of Object.entries(p.used)) useC.set(c, "s" + i);          // kept figures stay on their own steps
   for (const f of pl.figs || []) {
     const s = les.steps[f.i];
     if (!s || !cid.has(f.c)) { why.push("fig: unknown step or candidate"); continue; }
     if (s.vis && s.vis.kind !== "image") continue;                       // tables, flows and compares stay
     if (s.vis && p.used[f.i] && p.used[f.i] !== f.c) { why.push("fig: replaces a kept image"); continue; }
-    if (useC.has(f.c) || g.figs[f.i]) { why.push("fig: used twice"); continue; }
+    if ((useC.has(f.c) && useC.get(f.c) !== "s" + f.i) || g.figs[f.i]) { why.push("fig: used twice"); continue; }
     const e = capOk(f.cap, ground); if (e) { why.push("fig cap: " + e); if (!p.used[f.i]) continue; }
     g.figs[f.i] = { c: f.c, cap: e ? null : cleanText(f.cap, 200) }; useC.set(f.c, "s" + f.i);
   }
@@ -532,7 +533,11 @@ for j in job:
 function votesPrep(D, args) {
   const P = readJson(path.join(D.dir, "pool.json"), {}), G = readJson(path.join(D.dir, "gated.json"), null); if (!G) throw new Error("run gate first");
   const vd = path.join(D.dir, "votes"); fs.mkdirSync(path.join(vd, "img"), { recursive: true });
-  const lessons = shipped(D.book).filter((l) => G[l.id]), items = [], draw = [];
+  // only lessons whose every spot and label set has been through locate (a later locate run fills the rest)
+  const LOC = readJson(path.join(D.dir, "loc.json"), {});
+  const located = (id) => { const pl = readJson(path.join(D.dir, "plan", id + ".json"), {}).plan || {}, l = LOC[id] || {};
+    return (pl.spot || []).every((x) => l["s:" + x.c] !== undefined) && (pl.reveal || []).every((x) => l["r:" + x.c] !== undefined || new Set((x.marks || []).map((m) => m.label)).size < 2); };
+  const lessons = shipped(D.book).filter((l) => G[l.id] && located(l.id)), items = [], draw = [];
   for (const les of lessons) {
     const p = P[les.id], g = G[les.id], cOf = (id) => p.cands.find((c) => c.cid === id), uses = [];
     const stepText = (i) => LP.plain(les.steps[i].tx);
@@ -613,6 +618,8 @@ export function buildLesson(les, p, g, v) {
       const c = cOf(f.c), keep = s.vis && s.vis.kind === "image" ? s.vis : null;
       st.vis = over("fig:" + i, c, imgVis(c, f.cap || (keep && keep.caption) || "", keep && keep.alt));
       if (keep && keep.ar == null) { const ar = arOf(c); if (ar) st.vis.ar = ar; }
+    } else if (s.vis && s.vis.kind === "image" && (v.ident || []).includes("fig:" + i)) {
+      st.vis = null;                                                       // a voter read a patient identifier on it
     } else if (s.vis && s.vis.kind === "image") {
       const fid = p.used[i] && cOf(p.used[i]); if (fid) { media.set(fid.name, fid); const ar = arOf(fid); if (ar) st.vis = { ...s.vis, ar }; }
     }
