@@ -453,9 +453,27 @@ Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay m
 `#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
 
 
-## Bottom-nav Ask Maik tab uses the MaiK mark (2026-10-09)
-The centre `rnav-tab-maik` button in `home.js` (rnav tab bar) no longer uses the `auto_awesome` sparkle glyph.
-It shows `maik-mark-white.png`: the infinity "M" cropped from `maik-wordmark-color.png`, recoloured white with
-the diagonal stroke in mint (#7de2c8), 192x110. Sized by `.rnav-tab-maik .rnav-maik-mark img` (28px) in
-`redesign-system.css`; the teal circle / dark sphere styling is unchanged. Test: `test/run-maik-tab-ui.mjs`
-(screenshots in /tmp/stewardmd-maiktab). The older v3 tab bars (`v3-tab`, `svg("ai")`) were left as they were.
+## Bottom-nav Ask Maik tab: the MaiK star mark as a glowing orb (2026-10-09/10)
+The centre `rnav-tab-maik` button in `home.js` shows `maik-ai-mark.png` (the M + four-point star from the
+owner's "MaiK AI" logo, white, no text and no "AI" badge, 192x186) instead of the `auto_awesome` glyph. The
+`.rds-icon.rnav-maik-mark` rules in `redesign-system.css` make it a lit 3D teal sphere with a breathing halo
+(`smdMaikOrbGlow`), a glint sweep (`smdMaikOrbGlint`) and a glowing mark, in both themes; reduced motion
+drops the animation. Test: `test/run-maik-tab-ui.mjs` (screenshots in /tmp/stewardmd-maiktab).
+The older v3 tab bars (`v3-tab`, `svg("ai")`) were left as they were.
+
+## Stop ends every orb; orphaned orbs are cleared (2026-10-10)
+Owner screenshot: two "Searching StewardMD knowledge" orbs spinning for minutes and Stop doing nothing.
+`_maikStop` is ONE slot (the latest turn; `maikSetSendMode(false)` nulls it), and a bubble restored from a
+saved thread after its turn died (reload, OTA, crash) has no turn behind it. Now `_maikLiveGens` maps each
+clinical turn's `data-mg` id to `{stop, done}`; `maikStopNow` stops all of them and then
+`maikSweepOrphans(true)` replaces any leftover `.maik-buffer` with "Stopped."; `maikRestoreThread` calls
+`maikSweepOrphans(false)`, which clears only orbs with no live turn ("This answer was interrupted").
+`thinking-orbs.js` stops its rAF loop once the canvas is detached. Test: `test/run-maik-stop-ui.mjs`.
+
+## "Block cloud AI (test)" left on reads as "empty reply (HTTP 405)" (2026-10-10)
+With `smd_ai_cloud_block=1` (Settings > MaiK > Advanced), `reasoning.js aiBase()` sends cloud calls to
+`/api/ai-blocked-by-test-switch`, which Cloudflare Pages answers 405 with no body. `runClinical` now names
+the switch and offers "Turn off the block and ask again" instead of blaming the network.
+Headless gotcha: a fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every
+`SMD_AI.explain*` call waiting on the consent tick (no request is ever made). Seed `smd_consent_guest`
+with `consentAcceptedAt` + `clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.

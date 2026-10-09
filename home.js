@@ -2561,7 +2561,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom">' +
         '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-mark-white.png" alt="" width="28" height="16" draggable="false"></span><span>Ask Maik</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-ai-mark.png" alt="" width="26" height="26" draggable="false"></span><span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
       '</nav>';
@@ -4972,6 +4972,13 @@
    * it settles, so a stale handler can never cancel the NEXT question.
    */
   var _maikStop = null;
+  /* Every clinical turn still running, by its bubble id (data-mg) -> { stop, done }. Owner screenshot
+   * (2026-10-10): two "Searching StewardMD knowledge" orbs spinning for minutes, Stop doing nothing.
+   * _maikStop is ONE slot (the latest turn, and maikSetSendMode(false) clears it), and a bubble restored
+   * from a saved thread after the turn died (app reloaded, OTA, crash) has no turn behind it at all, so
+   * nothing could ever end its orb. Stop now ends every live turn, and any orb with no live turn is
+   * cleared (maikSweepOrphans). */
+  var _maikLiveGens = {};
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   var _maikRegen = false;         // set by the Regenerate action for exactly the next send (asks the local engine for sampling jitter)
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
@@ -6571,6 +6578,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var stopped = false;
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.cancel) { SMD_MAIK_LOCAL.cancel(); stopped = true; } } catch (e) {}
       try { if (typeof _maikStop === "function") { _maikStop(); stopped = true; } } catch (e) {}
+      // Every other turn still running (a question sent before a close/reopen), then any orb left over.
+      Object.keys(_maikLiveGens).forEach(function (k) { var g = _maikLiveGens[k]; try { if (g && !g.done()) { g.stop(); stopped = true; } } catch (e) {} delete _maikLiveGens[k]; });
+      if (maikSweepOrphans(true)) stopped = true;
       maikSetSendMode(false);
       try { toast(stopped ? "Stopped." : "Stopping."); } catch (e) {}
     }
@@ -7656,6 +7666,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         row.appendChild(dl); row.appendChild(cl); think.appendChild(row);
         maikBuddyCue("error"); scroll(); return;
       }
+      /* Owner screenshot (2026-10-10): "empty reply (HTTP 405)" on every question. Cause: the per-phone
+       * test switch "Block cloud AI (test)" (maik-engine.js, Settings > MaiK > Advanced) was left ON, so
+       * reasoning.js aiBase() sent every cloud call to a dead path that answers 405. Say so plainly and
+       * offer the one tap that turns it off, instead of blaming the network. */
+      var _blocked = false; try { _blocked = localStorage.getItem("smd_ai_cloud_block") === "1"; } catch (e) {}
+      if (r && _blocked && (r.error === "server-empty" || r.error === "server" || r.status === 405)) {
+        think.innerHTML = '<div class="maik-welcome">MaiK Cloud is blocked on this phone. The test switch <b>Block cloud AI (test)</b> in Settings, MaiK, Advanced is on, so no question can reach MaiK Cloud.' +
+          '<br><br>The deterministic StewardMD engine, calculators and reference tools remain available.</div>'; maikBuddyCue("error");
+        var unB = document.createElement("button"); unB.type = "button"; unB.className = "maik-chip"; unB.style.marginTop = "8px"; unB.textContent = "Turn off the block and ask again";
+        unB.addEventListener("click", function () {
+          if (_maikBusy) return;
+          try { localStorage.removeItem("smd_ai_cloud_block"); window.__SMD_CLOUD_ATTEMPTS = 0; } catch (e) {}
+          var bub = think.closest(".maik-b") || think; try { bub.remove(); } catch (e) {}
+          runClinical(question, question, depth, active, topicLabel);
+        });
+        think.appendChild(unB);
+        return;
+      }
       if (r && r.error) {
         think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error");
         var tryB = document.createElement("button"); tryB.type = "button"; tryB.className = "maik-chip"; tryB.style.marginTop = "8px"; tryB.textContent = "Try again";
@@ -7879,6 +7907,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // A cloud call already in flight is left to finish silently (_maikDone makes every later paint a
       // no-op); the on-device engine is cancelled by maikStopNow itself.
       _maikStop = function () {
+        delete _maikLiveGens[_gid];
         if (_maikDone) return;
         _maikStopped = true; maikBuddyCue("stop");
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
@@ -7899,6 +7928,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         _persist();
         _maikBusy = false; maikSetSendMode(false);
       };
+      (function (stopFn) { _maikLiveGens[_gid] = { stop: stopFn, done: function () { return _maikDone; } }; })(_maikStop);
       // ── SCOPE GATE (clinician-only): an obviously NON-clinical request (code, creative writing,
       // "integrate X into my project", lay self-help) is refused INSTANTLY here — BEFORE the KB engine,
       // the semantic router, and any Vertex call — so it can never fuzzy-match a disease name in the
@@ -8855,7 +8885,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
       });
     }
+    /* A bubble still showing the thinking orb whose turn is not running any more: end the orb and say
+     * what happened. On Stop (all=true) every orb goes; on reopen only orphans (a bubble with no live
+     * turn, or with no turn id while nothing is busy). Returns how many bubbles it cleared. */
+    function maikSweepOrphans(all) {
+      var n = 0, lb = document.getElementById("maikBody") || body;
+      if (!lb) return 0;
+      Array.prototype.forEach.call(lb.querySelectorAll(".maik-b"), function (b) {
+        if (!b.querySelector(".maik-buffer")) return;
+        var gid = b.getAttribute("data-mg"), g = gid && _maikLiveGens[gid];
+        var live = gid ? !!(g && !g.done()) : !!_maikBusy;
+        if (!all && live) return;
+        if (gid && g && g.done()) delete _maikLiveGens[gid];
+        b.innerHTML = '<div class="maik-welcome">' + (all ? "Stopped." : "This answer was interrupted. Ask the question again.") + '</div>';
+        try { b.removeAttribute("data-mg"); } catch (e) {}
+        n++;
+      });
+      if (n) { try { _maikBodyHTML = lb.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} }
+      return n;
+    }
     function maikRestoreThread() {
+      try { maikSweepOrphans(false); } catch (e) {}
       _maikTurns = [];
       var q = "", lastQ = "";
       Array.prototype.forEach.call(body.children, function (n) {
