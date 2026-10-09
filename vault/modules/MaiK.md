@@ -452,3 +452,10 @@ row shows "Engine: <name>" under its description. `smd_edge` "0" brings back the
 Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay mounts on `<body>`, outside
 `#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
 
+
+## Bottom-nav Ask Maik tab uses the MaiK mark (2026-10-09)
+The centre `rnav-tab-maik` button in `home.js` (rnav tab bar) no longer uses the `auto_awesome` sparkle glyph.
+It shows `maik-mark-white.png`: the infinity "M" cropped from `maik-wordmark-color.png`, recoloured white with
+the diagonal stroke in mint (#7de2c8), 192x110. Sized by `.rnav-tab-maik .rnav-maik-mark img` (28px) in
+`redesign-system.css`; the teal circle / dark sphere styling is unchanged. Test: `test/run-maik-tab-ui.mjs`
+(screenshots in /tmp/stewardmd-maiktab). The older v3 tab bars (`v3-tab`, `svg("ai")`) were left as they were.

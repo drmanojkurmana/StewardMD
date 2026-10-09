@@ -749,6 +749,8 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   box-shadow: var(--rds-el-cta); box-sizing: border-box;
 }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+/* Ask Maik tab carries the MaiK "M" mark (cropped from maik-wordmark-color.png) instead of a glyph. */
+#homeV2.rnav .rnav-tab-maik .rnav-maik-mark img { width: 28px; height: auto; display: block; pointer-events: none; }
 /* Dark: the Ask Maik FAB is a 3D sphere matching the Clinical Tools badges. */
 html body.dark #homeV2.rnav .rnav-tab-maik .rds-icon,
 html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {

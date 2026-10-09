@@ -2561,7 +2561,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom">' +
         '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("auto_awesome") + '<span>Ask Maik</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-mark-white.png" alt="" width="28" height="16" draggable="false"></span><span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
       '</nav>';
