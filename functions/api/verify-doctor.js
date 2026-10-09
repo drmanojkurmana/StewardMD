@@ -28,9 +28,10 @@ import { gateTrial, weekPatch, requestSignals, trialOnceMode, firstGrantAt, warm
 import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
 import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../_entitlement.js";
-import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName, strictNameMatch } from "../_verify_match.js";
+import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName, strictNameMatch, nameMatches, docReadAccepts, councilAgrees, regAgrees } from "../_verify_match.js";
 import { gatherReviewContact, contactHtml, escHtml } from "../_review_contact.js";
 import { nmcQuery } from "./_nmc.js";
+import { doApprove } from "./verifications/[[path]].js";
 // Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
 export { regCandidates, nmcNameOf };
 
@@ -315,7 +316,9 @@ async function signAction(secret, uid, action) {
   return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo, role, contact }) {
+// auto: reasons for doubt on an account the three tests ALREADY verified (owner, 2026-10-09). The email
+// then says so and carries one button, Revoke, instead of Approve / Block.
+async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo, role, contact, auto }) {
   const trainee = isTraineeVerifyRole(role);
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
@@ -332,7 +335,9 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
     const rejectSig  = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "reject");
     const approveUrl = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=approve&reg=${reg}&sig=${approveSig}`;
     const rejectUrl  = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=reject&sig=${rejectSig}`;
-    buttons =
+    buttons = auto ? (
+      `<p style="margin:18px 0"><a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">Revoke verification</a></p>` +
+      `<p style="font:400 12px system-ui;color:#64748b">Already verified and using StewardMD. Do nothing to keep it. Revoke removes the verification and blocks access until they upload a valid document again.</p>`) :
       `<p style="margin:18px 0">` +
       `<a href="${approveUrl}" style="background:#15803d;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui;margin-right:10px">✓ Verify &amp; grant access</a>` +
       `<a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">✕ Block until re-upload</a>` +
@@ -352,10 +357,12 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
       from, to: [support],
       // A name beats a privaterelay address in the inbox list: the subject is what the owner scans.
       // One line, bounded: the profile name is user-typed, and a newline would fail the whole send.
-      subject: `[StewardMD] Manual verification — ${String(regForAction || (contact && contact.name) || extracted.name || email || "unknown").replace(/\s+/g, " ").trim().slice(0, 80)} (${reason})`,
+      subject: auto ? `[StewardMD] Auto-verified, please check: ${String(regForAction || (contact && contact.name) || extracted.name || email || "unknown").replace(/\s+/g, " ").trim().slice(0, 80)}` : `[StewardMD] Manual verification — ${String(regForAction || (contact && contact.name) || extracted.name || email || "unknown").replace(/\s+/g, " ").trim().slice(0, 80)} (${reason})`,
       // Every value is escaped: the name and council are read off a user-supplied image.
       html:
-        `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${escHtml(reason)}</p>` +
+        (auto
+          ? `<h2>Auto-verified, please check</h2><p>This ${escHtml(role || "doctor")} passed one of the three checks and is already verified. Revoke it below if it looks wrong or duplicated.</p><ul>` + auto.map((d) => `<li>${escHtml(d)}</li>`).join("") + `</ul>`
+          : `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${escHtml(reason)}</p>`) +
         `<table cellpadding="6"><tr><td><b>UID</b></td><td>${escHtml(uid)}</td></tr>` +
         `<tr><td><b>Sign-in email</b></td><td>${escHtml(email)}</td></tr>` +
         `<tr><td><b>Role</b></td><td>${escHtml(role || "doctor")}</td></tr>` +
@@ -528,54 +535,74 @@ export async function onRequest(context) {
     return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: pendingOk ? PROVISIONAL_DAYS : 0, ...(pendingOk ? {} : { trialUsed: true }) });
   };
 
-  // Interns and students hold no full registration (interns: provisional only), so a college or
-  // internship ID cannot be auto-verified: straight to manual review (provisional access, Rx locked).
-  // The owner's approval gives them traineeVerified, never verified (functions/api/verifications).
-  // A PG RESIDENT holds full NMC/SMC registration and takes the doctor path below.
-  if (isTraineeVerifyRole(role)) return toManual(role === "student" ? "medical_student_id" : "intern_id");
+  // ── Three tests, any one passes (owner, 2026-10-09) ───────────────────────────────────────────
+  //   1. register: the number AND the name agree            -> verified, no email
+  //   2. register: a row carries the exact full name read    -> verified; >1 such row: owner emailed
+  //   3. the document reading itself, confidence above 0.7   -> verified; owner emailed to revoke if wrong
+  // One account per registration number on every path. Kill switches: VERIFY_NAME_FALLBACK=0 (test 2),
+  // VERIFY_DOC_ACCEPT=0 (test 3). Nothing here can reject: a total miss still goes to manual review.
+  const docOn = String(env.VERIFY_DOC_ACCEPT || "") !== "0";
+  const nameOn = String(env.VERIFY_NAME_FALLBACK || "") !== "0";
+  const conf = (ex && typeof ex.confidence === "number") ? ex.confidence : null;
 
-  // 3. decide — the register (live NMC, D1 fallback) is authoritative. In ID mode we match the
-  // name read off the ID against NMC's registered name for the reg number the doctor typed.
+  // Students and interns hold no registration, so only the document test applies: their college or
+  // internship ID read clearly is accepted as a REVIEWED TRAINEE (full access, never prescribes), and the
+  // owner is emailed to revoke if it looks wrong. Anything less clear goes to manual review as before.
+  if (isTraineeVerifyRole(role)) {
+    if (!(docOn && ex.looksValid !== false && ex.name && docReadAccepts(conf) && store)) return toManual(role === "student" ? "medical_student_id" : "intern_id");
+    try { await store.put(doctorKey(uid), JSON.stringify({ uid, email, status: "pending", role, extractedName: ex.name, name: ex.name,
+      extractedInstitution: ex.institution || "", confidence: conf, via: "cert", updatedAt: new Date().toISOString() })); } catch (e) {}
+    let d; try { d = await doApprove(store, env, uid, "", null, role); } catch (e) { return toManual(role === "student" ? "medical_student_id" : "intern_id"); }
+    try { d.approvedBy = "auto-document"; await store.put(doctorKey(uid), JSON.stringify(d)); } catch (e) {}
+    let contact = null; try { contact = await gatherReviewContact(env, uid, { email, token: decodePayload(idToken) }); } catch (e) {}
+    try { await emailSupport(env, { uid, email, extracted: ex, reason: "auto_trainee_document", imageB64, mime, attach: true, regNo: "", role, contact,
+      auto: ["Accepted on the ID card reading alone (confidence " + conf + "). A " + role + " ID cannot be checked against a register."] }); } catch (e) {}
+    console.log("[verify] uid", uid, "→ TRAINEE VERIFIED (document, " + role + ", conf " + conf + ")");
+    return json({ status: "trainee_verified", role, name: ex.name });
+  }
+
   if (ex.looksValid === false) return toManual(idMode ? "not_an_id" : "not_a_certificate");
   if (!ex.name)  return toManual("no_name_read");
 
-  let match = null, source = "nmc";
+  let match = null, source = "nmc", how = "";
+  const doubts = [];
+  lookupDiag = { };
+  // Test 1: the number on the document (or the one typed in ID mode), name agreeing.
   if (effReg) {
     const lk = await registerLookup(env, effReg);
     source = lk.source;
     lookupDiag = { queries: lk.queries, source: lk.source, records: lk.records.length, nmcDown: lk.nmcDown };
-    if (lk.unavailable) return toManual("nmc_unreachable");   // NMC down AND no offline DB
-    match = pickMatch(lk.records, effReg, ex.name, ex.council);
-    console.log("[verify] uid", uid, "source:", source, "queries:", JSON.stringify(lk.queries), "records:", lk.records.length, "match:", match ? "yes" : "NONE");
-    // The number found nobody with this name: ask the register for the NAME, and accept only one
-    // row with the same full name (strictNameMatch). Kill switch: env VERIFY_NAME_FALLBACK=0.
-    if (!match && String(env.VERIFY_NAME_FALLBACK || "") !== "0") {
-      const ln = await registerLookupByName(env, ex.name);
-      // live register only: the offline mirror's name search is capped and could hide a namesake
-      const nm = (ln.unavailable || ln.source !== "nmc" || ln.records.truncated) ? null : strictNameMatch(ln.records, ex.name);
-      lookupDiag.nameFallback = { source: ln.source, records: ln.records.length, matched: !!nm };
-      console.log("[verify] uid", uid, "name fallback:", ln.source, "records:", ln.records.length, "match:", nm ? "yes" : "NONE");
-      if (nm) { match = nm; source = ln.source + "-name"; }
-    }
-    if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
-  } else if (!idMode && nameOnlyEnabled(env)) {
-    // No number could be read. Off by default: it is a loosening of the rule, and the owner turns
-    // it on (env VERIFY_NAME_ONLY_MATCH=1). Even then, only a register that returns exactly one
-    // agreeing row counts - see uniqueNameMatch().
-    const lk = await registerLookupByName(env, ex.name);
-    source = lk.source;
-    lookupDiag = { queries: lk.queries, source: lk.source, records: lk.records.length, nmcDown: lk.nmcDown };
-    if (!lk.unavailable) match = uniqueNameMatch(lk.records, ex.name, ex.council);
-    console.log("[verify] uid", uid, "name-only source:", source, "records:", lk.records.length, "unique match:", match ? "yes" : "NONE");
-    if (!match) return toManual("no_reg_number");
-  } else {
-    return toManual("no_reg_number");
+    if (!lk.unavailable) match = pickMatch(lk.records, effReg, ex.name, ex.council);
+    if (match) how = "number";
+    console.log("[verify] uid", uid, "number test:", source, "records:", lk.records.length, "match:", match ? "yes" : "NONE");
   }
+  // Test 2: any register row carrying the exact full name read off the certificate or the photo ID.
+  if (!match && nameOn) {
+    const ln = await registerLookupByName(env, ex.name);
+    const rows = ln.unavailable ? [] : nameMatches(ln.records, ex.name);
+    lookupDiag.nameTest = { source: ln.source, records: ln.records.length, matched: rows.length };
+    console.log("[verify] uid", uid, "name test:", ln.source, "records:", ln.records.length, "exact-name rows:", rows.length);
+    if (rows.length) {
+      // Several namesakes: the one from the council printed on the document, else the one whose number
+      // was printed, else the first; and the owner gets the email.
+      match = (ex.council && rows.find((r) => councilAgrees(ex.council, r.smcName))) || (effReg && rows.find((r) => regAgrees(r.registrationNo, effReg))) || rows[0];
+      source = ln.source + "-name"; how = "name";
+      if (rows.length > 1) doubts.push(rows.length + " doctors on the register carry this exact name; matched " + (match.registrationNo || "") + " (" + (match.smcName || "") + ").");
+      if (ln.records.truncated || ln.source !== "nmc") doubts.push("The name was checked on " + (ln.source !== "nmc" ? "the offline copy of the register" : "a partial register answer") + ", so a namesake could be missing.");
+      if (effReg && !regAgrees(match.registrationNo, effReg)) doubts.push("The number on the document (" + effReg + ") is not the register's number for this name (" + match.registrationNo + ").");
+    }
+  }
+  // Test 3: the certificate reading itself. Certificate mode only (a photo ID proves a name, not a
+  // registration), and a registration number must have been read, for one account per number.
+  if (!match && docOn && !idMode && effReg && docReadAccepts(conf)) {
+    match = { registrationNo: effReg, firstName: ex.name, smcName: ex.council || "" };
+    source = "document"; how = "document";
+    doubts.push("Not found on the register by number or name; accepted on the certificate reading alone (confidence " + conf + ").");
+  }
+  if (!match) return toManual(effReg ? (source === "offline" ? "no_offline_match" : "no_nmc_match") : "no_reg_number");
 
-  // Confidence is a sanity floor once the register has agreed on number AND name, not a second
-  // verdict. The old 0.85 gate sent ordinary phone photos (0.6-0.8) to a human who could only
-  // confirm what the register had already said. AUTO_VERIFY_MIN_CONFIDENCE in _verify_match.js.
-  if (!autoVerifyOk(ex.confidence)) return toManual("low_confidence_review");
+  // A register match still needs a readable document: confidence is a floor there, not the verdict.
+  if (how !== "document" && !autoVerifyOk(ex.confidence)) return toManual("low_confidence_review");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
   if (store) {
@@ -590,11 +617,18 @@ export async function onRequest(context) {
   try {
     done = await completeAutoVerify(env, store, {
       uid, email, role, match, source, idMode, effReg, lookupDiag,
-      confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
+      confidence: conf,
       signals: await trialSignals(env, uid, request),
     });
   } catch (e) { try { console.warn("[verify] claim_write_failed"); } catch (x) {} return json({ error: "claim_write_failed" }, 500); }
-  console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ", role " + role + ")");
+  console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ", test " + how + ", role " + role + ")" + (doubts.length ? " doubtful" : ""));
+
+  // Less certain passes: the doctor is in, and the owner gets the document with a one-click revoke.
+  if (doubts.length) {
+    try { if (store) { const r = (await store.get(doctorKey(uid), "json")) || {}; r.autoBy = how; r.doubts = doubts; await store.put(doctorKey(uid), JSON.stringify(r)); } } catch (e) {}
+    let contact = null; try { contact = await gatherReviewContact(env, uid, { email, token: decodePayload(idToken) }); } catch (e) {}
+    try { await emailSupport(env, { uid, email, extracted: ex, reason: "auto_" + how, imageB64, mime, attach: !idMode, regNo: match.registrationNo, role, contact, auto: doubts }); } catch (e) {}
+  }
 
   return json({ status: "verified", role: done.role, regNo: done.regNo, name: done.name, council: done.council });
 }

@@ -171,6 +171,21 @@ export function strictNameMatch(records, extractedName) {
   return hits.length === 1 ? hits[0] : null;
 }
 
+/* Owner, 2026-10-09 ("we are doing three tests ... any one passed means verified"):
+ *   1. register, number + name   (pickMatch)
+ *   2. register, exact full name (nameMatches: every row carrying the document's / Aadhaar's full name)
+ *   3. the document reading      (docReadAccepts: the certificate model's confidence above 0.7)
+ * One account per registration number on every path. A pass that is less certain (more than one register
+ * row with the name, or the document reading alone) still verifies, and the owner is emailed a one-click
+ * revoke. */
+export function nameMatches(records, extractedName) {
+  const words = normName(extractedName).split(" ").filter(Boolean);
+  if (words.length < 2) return [];
+  return (Array.isArray(records) ? records : []).filter((r) => r && !r.removed && nameSame(extractedName, nmcNameOf(r)));
+}
+export const DOC_ACCEPT_MIN = 0.7;
+export function docReadAccepts(confidence) { return typeof confidence === "number" && confidence > DOC_ACCEPT_MIN; }
+
 /* Once the register has agreed on number and name, the model's confidence in its own OCR is a
  * sanity floor, not the verdict. 0.5 catches "I could barely read this"; it no longer routes an
  * ordinary phone photo (0.6-0.8) to a human who will only confirm what the register already said. */

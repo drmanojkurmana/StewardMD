@@ -62,11 +62,12 @@ const SRAVANI = { registration_no: "APMC/FMR/110431", name: "SIVA NAGA SRAVANI Y
 const CERT = { registration_number: "100286", full_name: "Dr.SIVA NAGA SRAVANI YARRARAPU", state_medical_council: "Delhi Medical Council", year: "2021", looks_valid: true, confidence: 0.95 };
 
 /* One fetch for everything the route calls: the certificate reader and the register. */
-function router({ byReg, byName, nmcDown }) {
-  const calls = [];
-  const f = async (url) => {
+function router({ byReg, byName, nmcDown, cert }) {
+  const calls = [], mails = [];
+  const f = async (url, opts) => {
     url = String(url); calls.push(url);
-    if (url.indexOf("generativelanguage") >= 0) return { ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(CERT) }] } }] }) };
+    if (url.indexOf("api.resend.com") >= 0) { mails.push(JSON.parse(opts.body)); return { ok: true, status: 200, json: async () => ({}), text: async () => "" }; }
+    if (url.indexOf("generativelanguage") >= 0) return { ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(cert || CERT) }] } }] }) };
     if (url.indexOf("nmc.org.in/indian-medical-register/search") >= 0) {
       if (nmcDown) return { ok: false, status: 404, json: async () => { throw new Error("html"); } };
       const u = new URL(url), type = u.searchParams.get("search_type");
@@ -75,15 +76,15 @@ function router({ byReg, byName, nmcDown }) {
     }
     return { ok: false, status: 404, json: async () => ({}) };
   };
-  f.calls = calls;
+  f.calls = calls; f.mails = mails;
   return f;
 }
-async function upload(store, uid, f) {
+async function upload(store, uid, f, role, extraEnv) {
   const real = globalThis.fetch; globalThis.fetch = f;
   try {
     const req = new Request("https://x/api/verify-doctor", { method: "POST", headers: { "Content-Type": "application/json", "CF-Connecting-IP": "203.0.113.9" },
-      body: JSON.stringify({ idToken: "tok-" + uid, image: "aGVsbG8=", mime: "image/jpeg", role: "doctor" }) });
-    const r = await verifyDoctor.onRequest({ request: req, env: env(store) });
+      body: JSON.stringify({ idToken: "tok-" + uid, image: "aGVsbG8=", mime: "image/jpeg", role: role || "doctor" }) });
+    const r = await verifyDoctor.onRequest({ request: req, env: { ...env(store), RESEND_API_KEY: "re", VERIFY_ADMIN_TOKEN: "adm", ...(extraEnv || {}) } });
     return r.json();
   } finally { globalThis.fetch = real; }
 }
@@ -126,27 +127,81 @@ test("Dr Sravani's certificate is verified automatically through the name on the
   assert.equal(CLAIMS.get("sravani").verified, true);
 });
 
-test("two doctors with her exact name: manual review, not a guess", async () => {
+const mailTo = (f) => f.mails.map((m) => m.subject + " | " + (m.html || "")).join("\n");
+
+test("test 1 (number + name on the register): verified, no email to the owner", async () => {
+  CLAIMS.clear(); const store = memKV();
+  const mine = { registration_no: "100286", name: "SIVA NAGA SRAVANI YARRARAPU", state_medical_council: "Delhi Medical Council" };
+  const f = router({ byReg: REG_100286.concat(mine), byName: [] });
+  const r = await upload(store, "num", f);
+  assert.equal(r.status, "verified"); assert.equal(r.regNo, "100286");
+  assert.equal(f.mails.length, 0, "a clean register match needs no check");
+});
+
+test("test 2 with namesakes: still verified, and the owner is emailed a Revoke link", async () => {
   CLAIMS.clear(); const store = memKV();
   const twin = { ...SRAVANI, registration_no: "DMC/R/55555", state_medical_council: "Delhi Medical Council" };
-  const r = await upload(store, "twin", router({ byReg: REG_100286, byName: [SRAVANI, twin] }));
-  assert.equal(r.status, "pending_review");
-  assert.notEqual((CLAIMS.get("twin") || {}).verified, true);
+  const f = router({ byReg: REG_100286, byName: [SRAVANI, twin] });
+  const r = await upload(store, "twin", f);
+  assert.equal(r.status, "verified");
+  assert.equal(r.regNo, "DMC/R/55555", "the namesake from the council printed on the certificate");
+  assert.match(mailTo(f), /Auto-verified, please check/); assert.match(mailTo(f), /2 doctors on the register carry this exact name/);
+  assert.match(mailTo(f), /do=reject/, "one-click revoke");
 });
 
-test("the name fallback can be switched off (env VERIFY_NAME_FALLBACK=0)", async () => {
+test("test 3 (the certificate reading alone, confidence above 0.7): verified, owner emailed", async () => {
   CLAIMS.clear(); const store = memKV();
-  const real = globalThis.fetch; globalThis.fetch = router({ byReg: REG_100286, byName: [SRAVANI] });
-  try {
-    const req = new Request("https://x/api/verify-doctor", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idToken: "tok-off", image: "aGVsbG8=", mime: "image/jpeg", role: "doctor" }) });
-    const r = await (await verifyDoctor.onRequest({ request: req, env: { ...env(store), VERIFY_NAME_FALLBACK: "0" } })).json();
-    assert.equal(r.status, "pending_review");
-  } finally { globalThis.fetch = real; }
+  const f = router({ byReg: REG_100286, byName: [] });
+  const r = await upload(store, "doc", f);
+  assert.equal(r.status, "verified"); assert.equal(r.regNo, "100286");
+  assert.equal(CLAIMS.get("doc").verified, true);
+  assert.match(mailTo(f), /accepted on the certificate reading alone \(confidence 0\.95\)/);
 });
 
-test("register down and no offline copy: manual review, says why", async () => {
+test("confidence 0.7 is not above 0.7: manual review", async () => {
+  CLAIMS.clear(); const store = memKV();
+  const r = await upload(store, "edge", router({ byReg: REG_100286, byName: [], cert: { ...CERT, confidence: 0.7 } }));
+  assert.equal(r.status, "pending_review");
+});
+
+test("register down: the certificate reading still verifies a clear certificate", async () => {
   CLAIMS.clear(); const store = memKV();
   const r = await upload(store, "down", router({ nmcDown: true }));
-  assert.equal(r.status, "pending_review"); assert.equal(r.reason, "nmc_unreachable");
+  assert.equal(r.status, "verified");
+  const low = await upload(memKV(), "down2", router({ nmcDown: true, cert: { ...CERT, confidence: 0.6 } }));
+  assert.equal(low.status, "pending_review", "an unclear one still goes to a person");
+});
+
+test("one account per registration number on every path", async () => {
+  CLAIMS.clear(); const store = memKV();
+  assert.equal((await upload(store, "first", router({ byReg: REG_100286, byName: [] }))).status, "verified");
+  const second = await upload(store, "second", router({ byReg: REG_100286, byName: [] }));
+  assert.equal(second.status, "rejected"); assert.equal(second.reason, "registration_already_claimed");
+  assert.notEqual((CLAIMS.get("second") || {}).verified, true);
+});
+
+test("revoking a duplicate gives the number back for the real doctor", async () => {
+  CLAIMS.clear(); const store = memKV();
+  await upload(store, "fake", router({ byReg: REG_100286, byName: [] }));
+  const { doReject } = await import("../functions/api/verifications/[[path]].js");
+  await doReject(store, env(store), "fake");
+  assert.equal(CLAIMS.get("fake").verified, false);
+  assert.equal((await upload(store, "real", router({ byReg: REG_100286, byName: [] }))).status, "verified");
+});
+
+test("a clearly read student ID is accepted as a reviewed trainee, never a prescriber", async () => {
+  CLAIMS.clear(); const store = memKV();
+  const f = router({ cert: { full_name: "Asha Rao", institution: "Andhra Medical College", course: "MBBS", looks_valid: true, confidence: 0.9 } });
+  const r = await upload(store, "stu", f, "student");
+  assert.equal(r.status, "trainee_verified");
+  assert.equal(CLAIMS.get("stu").traineeVerified, true); assert.notEqual(CLAIMS.get("stu").verified, true);
+  assert.match(mailTo(f), /Auto-verified, please check/);
+  const blurry = await upload(memKV(), "stu2", router({ cert: { full_name: "Asha Rao", looks_valid: true, confidence: 0.5 } }), "student");
+  assert.equal(blurry.status, "pending_review");
+});
+
+test("all three switched off (VERIFY_NAME_FALLBACK=0, VERIFY_DOC_ACCEPT=0): manual review", async () => {
+  CLAIMS.clear(); const store = memKV();
+  const r = await upload(store, "off", router({ byReg: REG_100286, byName: [SRAVANI] }), "doctor", { VERIFY_NAME_FALLBACK: "0", VERIFY_DOC_ACCEPT: "0" });
+  assert.equal(r.status, "pending_review");
 });

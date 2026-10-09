@@ -177,12 +177,15 @@ export async function listLegacyTraineeVerified(store) {
   out.sort((a, b) => String(b.verifiedAt).localeCompare(String(a.verifiedAt)));
   return out;
 }
-async function doReject(store, env, uid, reason) {
+export async function doReject(store, env, uid, reason) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   // Clear the free-week start and any pending grant too, or a rejected account keeps Pro.
   try { await mergeUserClaims(env, uid, { verified: false, traineeVerified: null, verifiedAt: null, provUntil: null }); } catch (e) {}   // merge: revoke verified only, keep pro
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   // Clear provisional so the client gate forces a fresh upload.
+  // A revoked account gives its registration number back, so the real doctor can verify with it
+  // (owner, 2026-10-09: auto-verifications come with a revoke link "if I feel it's duplicated").
+  try { const reg = rec.regNo || ""; if (reg && (await store.get(regKey(reg))) === uid) await store.delete(regKey(reg)); } catch (e) {}
   const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", photoKey: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
   try { await emailFailed(env, { email: rec.email, name: rec.name || rec.firstName, reason: updated.reason }); } catch (e) {}
