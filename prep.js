@@ -675,18 +675,90 @@
   // the cross-fade on it. The mark lapses after 1.5 s, so an unrelated repaint later never slides.
   // A key press (Escape) never animates: it is repeated often and must feel instant.
   function nav(dir) { st.nav = st.navKey ? null : { d: dir, t: Date.now() }; }
+  /* paint(html, focusSel): every screen draws through here. Mobile-native pass (2026-10-09), the cause of "the page
+     jumps up when I tap": each paint replaced the whole overlay, so the scrolling body was new (scrollTop 0) and then
+     focus() scrolled the focused element into view, a two-step jump on every tap that repaints in place (an answer, a
+     bookmark, a tag, a filter). Now:
+     - a repaint of the same screen keeps the body's scroll position (set before the frame is drawn, so no flash);
+     - a push starts the new screen at the top; a pop returns to where that screen was left (kept per stack depth);
+     - a new question (st.run.i changed) starts at the top; a tab or filter (nav 0) keeps the place when it can;
+     - focus moves without scrolling (preventScroll);
+     - a push or pop keeps the leaving body for one cross-fade (.pn-ghost), so the frame is never empty. */
+  function bodyOf(r) { return r ? r.querySelector(":scope > .pn-body") : null; }
+  function screenKey() { var r = st.run; return st.stack.length + "|" + (r && !r.done && st.stack[st.stack.length - 1] === renderRun ? "q" + r.i : ""); }
   function paint(html, focusSel) {
     if (!root) return;
-    root.innerHTML = html;
     var nv = st.nav; st.nav = null;
-    if (nv && Date.now() - nv.t < 1500 && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, nv.d); } catch (e) {} }
+    var live = nv && Date.now() - nv.t < 1500 ? nv : null;
+    var old = bodyOf(root), oldY = old ? old.scrollTop : 0, key = screenKey(), top = st.stack[st.stack.length - 1];
+    if (!st.scr) st.scr = {};
+    // Remember where the screen being left was (its depth before this paint).
+    if (st.pk && old) st.scr[st.pk.depth] = { fn: st.pk.fn, y: oldY };
+    var y = 0;
+    if (live && live.d < 0) { var m = st.scr[st.stack.length]; y = m && m.fn === top ? m.y : 0; }
+    else if (!live || live.d === 0) y = st.pk && st.pk.key === key ? oldY : 0;
+    // A screen restored by back that first paints a short loading state: its next paint still goes to the kept place.
+    if (st.want && st.want.key === key && Date.now() - st.want.t < 2000 && (!live || live.d === 0)) y = Math.max(y, st.want.y);
+    var ghost = null;
+    if (old && live && live.d !== 0 && !st.navKey) {
+      // Outside the overlay (so the new screen's text, ids and queries are the only ones in #smdPrep), fixed over the
+      // body's place, in the overlay's styles. Sizes in CSS px: the app may zoom html (text size), so divide by it.
+      var ob = old.getBoundingClientRect(), z = (old.offsetWidth ? ob.width / old.offsetWidth : 1) || 1;
+      ghost = D.createElement("div"); ghost.className = "pn-root pn-ghost"; ghost.setAttribute("aria-hidden", "true"); ghost.inert = true;
+      ghost.style.cssText = "left:" + (ob.left / z) + "px;top:" + (ob.top / z) + "px;width:" + (ob.width / z) + "px;height:" + (ob.height / z) + "px";
+      old.parentNode.removeChild(old);
+      Array.prototype.forEach.call(old.querySelectorAll("[id]"), function (n) { n.removeAttribute("id"); });
+      old.removeAttribute("id");
+      ghost.appendChild(old);
+    }
+    root.innerHTML = html;
+    var nb = bodyOf(root);
+    if (nb) { nb.scrollTop = y; if (y && nb.scrollTop < y - 1) settleScroll(nb, y); }
+    st.want = nb && y && nb.scrollTop < y - 1 ? { key: key, y: y, t: Date.now() } : null;
+    st.pk = { key: key, depth: st.stack.length, fn: top };
+    if (ghost) {
+      D.body.appendChild(ghost); old.scrollTop = oldY;
+      var gx = live.d > 0 ? -18 : 18, ga = null;
+      try { ga = ghost.animate([{ opacity: 1, transform: "translateX(0px)" }, { opacity: 0, transform: "translateX(" + (reducedMo() ? 0 : gx) + "px)" }], { duration: reducedMo() ? 140 : 200, easing: "cubic-bezier(.23, 1, .32, 1)", fill: "forwards" }); } catch (e) {}
+      var drop = function () { if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost = null; };
+      if (ga) ga.onfinish = drop;
+      G.setTimeout(drop, 450);
+    }
+    if (live && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, live.d); } catch (e) {} }
     var f = focusSel ? root.querySelector(focusSel) : root.querySelector(".pn-bar .pn-ib");
-    try { if (f) f.focus(); } catch (e) {}
+    try { if (f) f.focus({ preventScroll: true }); } catch (e) {}
+    lessonZoomToViewer();
+  }
+  function reducedMo() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
+  // A screen that fills in after its paint (a list read from storage) is not yet tall enough for the kept position:
+  // try again on the next frames for up to 600 ms, and stop as soon as the student scrolls.
+  function settleScroll(el, y) {
+    var t0 = Date.now(), moved = false, mark = function () { moved = true; };
+    el.addEventListener("touchstart", mark, { once: true, passive: true }); el.addEventListener("wheel", mark, { once: true, passive: true });
+    (function again() {
+      if (moved || !el.isConnected || Date.now() - t0 > 600) return;
+      if (el.scrollTop < y - 1 && el.scrollHeight - el.clientHeight >= y - 1) { el.scrollTop = y; return; }
+      if (el.scrollTop < y - 1) G.requestAnimationFrame(again);
+    })();
+  }
+  /* The lesson reader (prep-lessons.js) draws its own enlarged image (.pn-zoom#pnZoom) inside the screen. It is shown in
+     the one shared viewer (prep-viewer.js) instead; closing the viewer presses the lesson's own close, so the lesson's
+     state stays its own. */
+  function lessonZoomToViewer() {
+    var z = root && root.querySelector(":scope > #pnZoom.pn-zoom, :scope > .pn-zoom#pnZoom");
+    if (!z || !G.PREP_VIEWER || G.PREP_VIEWER.isOpen()) return;
+    var im = z.querySelector("img"), cap = z.querySelector(".pn-zoom-top p");
+    if (!im) return;
+    z.hidden = true;
+    var from = root.querySelector("[data-act=l-zoom]");
+    G.PREP_VIEWER.open({ src: im.getAttribute("src"), alt: im.getAttribute("alt"), caption: cap ? cap.textContent : "", from: from,
+      onClose: function () { var u = root && root.querySelector("#pnZoom [data-act=l-unzoom]"); if (u) u.click(); } });
   }
   function push(view) { st.stack.push(view); nav(1); view(); }
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
     if (G.PREP_ASK && G.PREP_ASK.back()) return true;   // the Ask MaiK sheet (prep-ask.js) closes first
     if (G.PrepPro && G.PrepPro.back && G.PrepPro.back()) return true;   // PrepNucleus Pro: the limit sheet closes first
     if (G.PREP_SETUP && G.PREP_SETUP.back()) return true;   // the practice setup sheet (prep-setup.js)
@@ -714,6 +786,7 @@
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
     root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "PrepNucleus");
     D.body.appendChild(root); D.body.style.overflow = "hidden";
+    D.documentElement.classList.add("pn-open");   // prep.css: the document under the overlay never scrolls or rubber-bands
     try { if (G.PREP_MOTION) G.PREP_MOTION.attach(root); } catch (e) {}
     root.addEventListener("click", onClick);
     bindSheetDrag();
@@ -766,11 +839,14 @@
     try { if (G.PREP_SETUP) G.PREP_SETUP.leave(); } catch (e) {}
     try { if (G.PREP_ASK) G.PREP_ASK.leave(); } catch (e) {}
     try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
+    try { if (G.PREP_VIEWER && G.PREP_VIEWER.isOpen()) G.PREP_VIEWER.close(); } catch (e) {}
+    D.documentElement.classList.remove("pn-open");
+    st.scr = {}; st.pk = null;
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
     D.body.style.overflow = st.prevOverflow;
-    try { if (st.prevFocus && st.prevFocus.isConnected) st.prevFocus.focus(); } catch (e) {}
+    try { if (st.prevFocus && st.prevFocus.isConnected) st.prevFocus.focus({ preventScroll: true }); } catch (e) {}
   }
 
   /* ---------- home ---------- */
@@ -1060,9 +1136,10 @@
       (shown && !own ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     var clk = r.limit || r.qsec ? clockHtml(r) : "";
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
-    var fb = "";
+    var fb = "", revealFb = false;
     if (shown) {
       var ok = chosen === it.a, fresh = r.fresh === r.i;
+      revealFb = fresh;
       r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
       // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
       // per option (r: PYQ and deck items), why each other option is wrong, the student's pick first.
@@ -1101,8 +1178,19 @@
     st.swipeIn = 0;
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
       '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+    if (revealFb) revealFeedback();
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
+  }
+  /* A fresh answer: the page stays where the finger was. When the verdict card starts below the fold, the body glides
+     just far enough to show its first lines (never up, never past the card's top), 280 ms, instant under reduced motion. */
+  function revealFeedback() {
+    var body = bodyOf(root), fbEl = body && body.querySelector(".pn-fb");
+    if (!fbEl) return;
+    var br = body.getBoundingClientRect(), fr = fbEl.getBoundingClientRect(), want = fr.top - br.top - Math.max(80, br.height * 0.45);
+    if (fr.top < br.bottom - 120 || want <= 0) return;
+    var to = Math.min(body.scrollTop + want, body.scrollHeight - body.clientHeight);
+    try { body.scrollTo({ top: to, behavior: reducedMo() ? "auto" : "smooth" }); } catch (e) { body.scrollTop = to; }
   }
   /* Swipe (touch and pen; the mouse has the buttons): left goes to the next question once this one is answered (or any
      time in a timed test), right goes back in a timed test. The page follows the finger 1:1, resists where it cannot
@@ -1789,7 +1877,7 @@
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
     // Practise the whole set again in the same order; a saved set keeps its place and gets the new answers.
     if (a === "retryall") { var r5 = st.run; st.stack.pop(); return runQuestions(r5.items.slice(), "study", r5.title, r5.psId ? { psId: r5.psId } : r5.save ? { save: r5.save } : {}); }
-    if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus(); } return; }
+    if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus({ preventScroll: true }); } return; }
     if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
     if (a === "bookmarks") return push(renderBookmarks);

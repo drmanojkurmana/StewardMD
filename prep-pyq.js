@@ -270,7 +270,13 @@
     var p = it.pyq && it.pyq[0], what = p ? (EXAM_LABEL[p.exam] || p.exam) + " " + p.year + " recall question (memory-based, not an official paper)" : "Recall question";
     return what + ".";
   }
-  function zoomOpen(host, f, u) {
+  // Tap to enlarge: the shared viewer (prep-viewer.js: pinch, pan, double tap, swipe down to close). The older in-screen
+  // enlargement below stays only for a build without prep-viewer.js.
+  function zoomOpen(host, f, u, from) {
+    if (G.PREP_VIEWER) {
+      var im = from && from.querySelector ? from.querySelector("img") : null;
+      return G.PREP_VIEWER.open({ src: u || imgSrc(host, f), alt: im ? im.getAttribute("alt") : "Question image", caption: from && from.closest && from.closest(".pn-xfig") ? "Explanation image" : "Question image", from: from });
+    }
     zoomClose();
     var root = host.root(), e = host.esc, el = G.document.createElement("div");
     el.className = "pn-zoom"; el.id = "pnYqZoom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Image, enlarged");
@@ -300,7 +306,7 @@
     if (a === "y-ssub") return setupPaper(host, v, b.getAttribute("data-s"));
     if (a === "y-mstart" && G.PREP_SETUP && G.PREP_SETUP.enabled()) return setupModulePyq(host, b.getAttribute("data-s"), b.getAttribute("data-m"), b.getAttribute("data-k"));
     if (a === "y-mstart") return startModulePyq(host, b.getAttribute("data-s"), b.getAttribute("data-m"), b.getAttribute("data-k"));
-    if (a === "y-zoom") return zoomOpen(host, v, b.getAttribute("data-u"));
+    if (a === "y-zoom") return zoomOpen(host, v, b.getAttribute("data-u"), b);
     if (a === "y-zoom2") { var big = b.classList.toggle("big"); b.setAttribute("aria-pressed", String(big)); return; }
     if (a === "y-unzoom") return zoomClose();
   }

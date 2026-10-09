@@ -1388,3 +1388,57 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-again .pn-btn.pri { flex-basis: 100%; }
 .pn-root .pn-missed .pn-rv-ok small { color: var(--pn-ok); }
 .pn-root .pn-missed .pn-rv-no small { color: var(--pn-bad); }
+
+/* ---- Image viewer (prep-viewer.js): one full-screen viewer for every enlarged image ----
+   Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
+   none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
+   out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
+.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #eef4f6; touch-action: none; overscroll-behavior: contain;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
+.pv:focus { outline: none; }
+.pv-scrim { position: absolute; inset: 0; background: #05090c; }
+.pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
+  padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
+.pv.pv-zoomed .pv-stage { cursor: grab; }
+.pv-img { display: block; flex: 0 0 auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; background: #fff;
+  transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; pointer-events: none; }
+.pv-top, .pv-bot { position: absolute; left: 0; right: 0; z-index: 1; display: flex; align-items: center; gap: 12px; pointer-events: none; transition: opacity 180ms ease-out; }
+.pv-top { top: 0; padding: calc(8px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) 8px calc(16px + env(safe-area-inset-left, 0px));
+  background: linear-gradient(180deg, rgba(5, 9, 12, .85), rgba(5, 9, 12, 0)); }
+.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(5, 9, 12, .85), rgba(5, 9, 12, 0)); }
+.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3d1d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pv-b { pointer-events: auto; flex: 0 0 auto; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 22px; background: rgba(255, 255, 255, .14); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
+.pv-b:active { transform: scale(.92); background: rgba(255, 255, 255, .24); }
+.pv-b:focus-visible { outline: 2px solid #63f0db; outline-offset: 2px; }
+.pv-x { width: 44px; padding: 0; }
+.pv-zb { display: inline-flex; gap: 8px; pointer-events: auto; }
+.pv-pct { min-width: 72px; }
+.pv-hint { margin: 0; font-size: 12px; color: #9fb0ba; text-align: center; }
+.pv.pv-zoomed .pv-hint { opacity: 0; }
+@media (hover: hover) and (pointer: fine) { .pv-b:hover { background: rgba(255, 255, 255, .22); } }
+@media (prefers-reduced-motion: reduce) { .pv-b, .pv-top, .pv-bot { transition: none; } }
+
+/* ---- App shell (mobile-native pass, 2026-10-09) ----
+   The overlay is the app: it never moves, nothing behind it scrolls, only the screen body (.pn-body) scrolls, and only
+   up and down. overflow-y: auto alone made overflow-x auto too, so a wide table, a long word or an image a pixel too
+   wide let the whole screen slide sideways; the body now clips the x axis and wide pieces scroll inside their own box.
+   html.pn-open (prep.js) stops the document's own rubber band and pull-to-refresh while PrepNucleus is open. */
+html.pn-open, html.pn-open body { overflow: hidden; overscroll-behavior: none; }
+.pn-root { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+.pn-root .pn-body { overflow-x: hidden; overscroll-behavior-x: none; overscroll-behavior-y: contain; scroll-padding-top: 12px; }
+.pn-root .pn-body img, .pn-root .pn-body svg, .pn-root .pn-body video, .pn-root .pn-body canvas { max-width: 100%; }
+.pn-root .pn-body .pn-q, .pn-root .pn-body .pn-opt, .pn-root .pn-body p, .pn-root .pn-body li { overflow-wrap: break-word; }
+/* Screen chrome that never scrolls: a drag on it moves nothing (no rubber band of the whole overlay). */
+.pn-root > .pn-bar, .pn-root > .pn-qprog { touch-action: none; }
+.pn-root > .pn-tabs, .pn-root > .pn-filters { touch-action: pan-x; overscroll-behavior-x: contain; }
+/* Controls: no long-press callout, no selection; links and chips answer on press like a native control. */
+.pn-root a, .pn-root [role=button], .pn-root [role=tab], .pn-root label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.pn-root button, .pn-root [role=button], .pn-root [role=tab] { -webkit-touch-callout: none; }
+.pn-root input, .pn-root textarea, .pn-root select { font-size: max(16px, 1em); }
+/* The screen that is leaving (prep.js keeps it for one cross-fade so a push or pop never flashes an empty frame): over the
+   new body, outside #smdPrep, fading out while the new body fades in under it. */
+.pn-root.pn-ghost { position: fixed; inset: auto; z-index: 886; padding: 0; background: none; pointer-events: none; overflow: hidden; contain: strict; }
+.pn-root.pn-ghost > .pn-body { height: 100%; overflow: hidden; }

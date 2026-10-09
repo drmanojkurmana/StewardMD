@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep37" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep38" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet
@@ -382,7 +382,7 @@ try {
   ok(/(X-ray|smear) shown/.test(await text("#smdPrep .pn-q")), "the stem refers to the image");
   await shots("deck-image-question");
   await click("#smdPrep .pn-yq-fig [data-act=y-zoom]");
-  ok(await until(`var z=document.querySelector("#pnYqZoom img"); return !!z && /^data:image\\//.test(z.getAttribute("src"));`, 3000), "tap to enlarge works on a deck image");
+  ok(await until(`var z=document.querySelector(".pv .pv-img"); return !!z && /^data:image\\//.test(z.getAttribute("src"));`, 3000), "tap to enlarge works on a deck image (shared viewer)");
   await ev(`PREP.back(); return 1;`);
 
   ok(api.other.every((u) => /\/api\//.test(u)), "every other /api/ request was answered locally (" + api.other.length + ")");

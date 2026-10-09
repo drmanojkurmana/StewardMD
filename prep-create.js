@@ -1197,6 +1197,12 @@
     if (h) resume(h);
   });
 
+  function readsImage(st) {
+    var t = String(st || "");
+    return /\b(table|tabulated|tabular|chart|flow ?chart|list(?:ed)?|text|notes?|box(?:ed)?|written|printed|mentioned|stated|caption|heading|bullet)\b[^.?]{0,40}\b(image|picture|figure|slide|shown|provided|given|above|below)\b/i.test(t) ||
+      /\b(image|picture|figure|slide)\b[^.?]{0,40}\b(table|tabulated|list(?:s|ed)?|text|notes?|written|printed)\b/i.test(t) ||
+      /\b(based on|according to|as per|refer(?:ring)? to|using) the (table|text|notes?|information|data|list|chart|box)\b/i.test(t);
+  }
   /* ---------- practise, cards, delete ---------- */
   function practise(host, deckId, mode) {
     Promise.all([DK.getDeck(deckId), DK.items(deckId), DK.imgs ? DK.imgs(deckId).then(null, function () { return []; }) : []]).then(function (a) {
@@ -1204,6 +1210,9 @@
       attachImages(items, a[2]);
       // An image question restored from the account has no picture on this phone: it is left out.
       items = items.filter(function (it) { return !it.imgId || it.img; });
+      // An image question made before 2026-10-09 from a page of text ("Based on the table provided in the image...") is
+      // left out: its picture is a page of notes, not a figure (functions/_prep-core.js imageStemReads, same rule).
+      items = items.filter(function (it) { return !it.imgId || !readsImage(it.q); });
       if (!m || !items.length) return host.toast("This deck has no questions yet.");
       items.forEach(function (it) { it._s = "deck"; it._m = "deck-" + deckId; });
       // The practice setup sheet (prep-setup.js): type, count, new or repeat, difficulty, mode, timer. Bookmarks do not apply.

@@ -488,11 +488,50 @@
     }
     return out;
   }
-  /* pickImages(pages) where pages = [{ p, view: [x0, y0, x1, y1], imgs: imageBoxes() }] -> [{ p, id, w, h, box, k }].
+  /* Owner bug 2026-10-09: a scanned page of notes (one picture the size of the page) was cut out whole and became the
+     "image" of a question ("Based on the table provided in the image..."). A question image must be a real figure: a
+     radiograph, a photo, a micrograph, a tracing or a diagram, never a page, a table or a block of text. So:
+     - an image covering 55% or more of its page is a page scan, never a candidate itself (scanPages + figureRegions below
+       look for a figure inside it instead, and find none on a page of text);
+     - an image with the page's own text over it (a text layer: an OCR'd scan, a slide with text on a picture) is out
+       when that text is more than 40 characters or covers a fifth of it (a few labels on a diagram stay);
+     - after it is cut, its pixels must read as a picture or a diagram (classifyPixels), not text in lines, not blank. */
+  var SCAN_SHARE = 0.55, TXT_CHARS = 40, TXT_COVER = 0.2;
+  function boxArea(b) { return Math.max(0, b[2] - b[0]) * Math.max(0, b[3] - b[1]); }
+  function pageShare(x, view) { return boxArea(x.box) / (boxArea([Math.min(view[0], view[2]), Math.min(view[1], view[3]), Math.max(view[0], view[2]), Math.max(view[1], view[3])]) || 1); }
+  function isPageScan(x, view) { return pageShare(x, view) >= SCAN_SHARE; }
+  /* textBoxes(items) -> [{ box, n }] from pdf.js getTextContent() items: where each run of text sits, in PDF user space. */
+  function textBoxes(items) {
+    var out = [];
+    (items || []).forEach(function (it) {
+      var str = String(it && it.str || "").replace(/\s+/g, ""), m = it && it.transform;
+      if (!str || !m || m.length < 6) return;
+      var hgt = Math.abs(it.height) || Math.hypot(m[2], m[3]) || Math.abs(m[3]) || 0, wid = Math.abs(it.width) || 0;
+      if (!hgt) return;
+      out.push({ box: [m[4], m[5], m[4] + (wid || hgt * 0.5 * str.length), m[5] + hgt], n: str.length });
+    });
+    return out;
+  }
+  /* textInBox(texts, box) -> { chars, cover }: the characters whose run's centre lies in the box, and the share of the box
+     those runs cover. */
+  function textInBox(texts, box) {
+    var chars = 0, area = 0, A = boxArea(box) || 1;
+    (texts || []).forEach(function (t) {
+      var cx = (t.box[0] + t.box[2]) / 2, cy = (t.box[1] + t.box[3]) / 2;
+      if (cx < box[0] || cx > box[2] || cy < box[1] || cy > box[3]) return;
+      chars += t.n;
+      area += boxArea([Math.max(box[0], t.box[0]), Math.max(box[1], t.box[1]), Math.min(box[2], t.box[2]), Math.min(box[3], t.box[3])]);
+    });
+    return { chars: chars, cover: Math.min(1, area / A) };
+  }
+  function textHeavy(texts, box) { var t = textInBox(texts, box); return t.chars > TXT_CHARS || t.cover > TXT_COVER; }
+  /* pickImages(pages) where pages = [{ p, view: [x0, y0, x1, y1], imgs: imageBoxes(), text?: textBoxes() }] ->
+     [{ p, id, w, h, box, k }].
      Kept: at least 200 x 200 pixels of its own; at least 12% of the page's width and of its height on the page (smaller
      ones are icons and bullets); no more than 4:1 either way (rules and banners); not drawn on two or more pages (a logo
-     or a running header, by its object id, or by the same size at the same place). In page order, top to bottom, the
-     first 20. k is the image's key in this document. */
+     or a running header, by its object id, or by the same size at the same place); not a page scan (55% of the page or
+     more); not under more than a few words of the page's text. In page order, top to bottom, the first 20. k is the
+     image's key in this document. */
   function pickImages(pages, cap) {
     cap = cap || IMG_CAP;
     var byId = {}, byPos = {}, pos = function (x) { return [x.w, x.h].concat(x.box.map(function (v) { return Math.round(v / 4); })).join(","); };
@@ -511,6 +550,8 @@
         if (x.w < IMG_MIN || x.h < IMG_MIN) return false;
         if (bw < vw * IMG_MIN_PAGE || bh < vh * IMG_MIN_PAGE) return false;
         if (bw / bh > IMG_MAX_ASPECT || bh / bw > IMG_MAX_ASPECT) return false;
+        if (isPageScan(x, pg.view)) return false;
+        if (pg.text && textHeavy(pg.text, x.box)) return false;
         if (byId[x.id] > 1 || byPos[pos(x)] > 1 || here[x.id]) return false;
         here[x.id] = 1;
         return true;
@@ -520,6 +561,109 @@
     });
     return out.slice(0, cap);
   }
+  /* scanPages(pages) -> [{ p, id, w, h, box }]: the pages drawn as one big picture (a scan or a phone photo of a page),
+     the largest such picture on each. figureRegions looks inside these for a real figure. */
+  function scanPages(pages) {
+    var out = [];
+    (pages || []).forEach(function (pg) {
+      var best = null;
+      (pg.imgs || []).forEach(function (x) { if (x.w >= IMG_MIN && x.h >= IMG_MIN && isPageScan(x, pg.view) && (!best || boxArea(x.box) > boxArea(best.box))) best = x; });
+      if (best) out.push({ p: pg.p, id: best.id, w: best.w, h: best.h, box: best.box });
+    });
+    return out;
+  }
+
+  /* ---------- pixels: is this a figure or a page of text? ----------
+     All on a grey image (0 black .. 255 white), w x h, a few hundred pixels across. Paper is the bright end (bg, the
+     95th percentile); ink is anything 50 or more darker than the paper.
+     - text and tables print in lines: the rows with ink (2% of the row or more, so a table's column rules do not join
+       its rows) form thin bands with blank rows between them: 4 or more holding most of the inked rows, or 8 or more
+       anywhere (a page with a dark box or a ruled table in it) (textBands);
+     - a radiograph, CT, photo or micrograph is mostly not paper (ink 35% or more) and is not one flat colour (the most
+       common shade under 70%; a coloured box of text is mostly its fill);
+     - a diagram is line work on paper without the rhythm of text lines.
+     classifyPixels -> { kind: "picture" | "diagram" | "text" | "blank", ink, bands, cover, top }. */
+  function toGray(rgba, w, h) {
+    var g = new Uint8Array(w * h);
+    for (var i = 0, j = 0; i < g.length; i++, j += 4) {
+      var a = rgba[j + 3] / 255;   // transparent reads as white paper
+      g[i] = Math.round((0.299 * rgba[j] + 0.587 * rgba[j + 1] + 0.114 * rgba[j + 2]) * a + 255 * (1 - a));
+    }
+    return g;
+  }
+  function histo(g, x0, y0, x1, y1, w) {
+    var h = new Uint32Array(256), n = 0;
+    for (var y = y0; y < y1; y++) for (var x = x0; x < x1; x++) { h[g[y * w + x]]++; n++; }
+    return { h: h, n: n };
+  }
+  function pct(H, q) { var t = H.n * q, c = 0; for (var v = 0; v < 256; v++) { c += H.h[v]; if (c >= t) return v; } return 255; }
+  function topBin(H) { var best = 0; for (var v = 0; v < 256; v += 16) { var c = 0; for (var k = v; k < v + 16; k++) c += H.h[k]; if (c > best) best = c; } return H.n ? best / H.n : 1; }
+  function textBands(rowInk, H) {
+    var bands = 0, inked = 0, banded = 0, run = 0, runInk = 0;
+    var lo = Math.max(2, Math.round(H * 0.004)), hi = Math.max(lo + 1, Math.round(H * 0.09));
+    var end = function () {
+      if (!run) return;
+      inked += run;
+      if (run >= lo && run <= hi && runInk / run < 0.4) { bands++; banded += run; }
+      run = 0; runInk = 0;
+    };
+    for (var r = 0; r < rowInk.length; r++) { if (rowInk[r] > 0.02) { run++; runInk += rowInk[r]; } else end(); }
+    end();
+    return { bands: bands, cover: inked ? banded / inked : 0 };
+  }
+  function classifyRect(g, w, x0, y0, x1, y1, bgIn) {
+    var H = histo(g, x0, y0, x1, y1, w), bg = bgIn == null ? pct(H, 0.95) : bgIn, thr = bg - 50, ink = 0, rows = [], rw = x1 - x0;
+    for (var y = y0; y < y1; y++) {
+      var c = 0;
+      for (var x = x0; x < x1; x++) if (g[y * w + x] < thr) c++;
+      rows.push(c / (rw || 1)); ink += c;
+    }
+    var inkF = H.n ? ink / H.n : 0, tb = textBands(rows, y1 - y0), top = topBin(H), out = { ink: inkF, bands: tb.bands, cover: tb.cover, top: top, bg: bg };
+    if (bg < 100) out.kind = top < 0.85 ? "picture" : "blank";   // a dark image (a film on black): no paper to read text on
+    else if (inkF < 0.01) out.kind = "blank";
+    else if (((tb.bands >= 4 && tb.cover >= 0.55) || tb.bands >= 8) && inkF < 0.4) out.kind = "text";
+    else if (inkF >= 0.35) out.kind = top < 0.7 ? "picture" : "text";   // one flat fill: a coloured box of text
+    else out.kind = inkF >= 0.015 ? "diagram" : "blank";
+    return out;
+  }
+  function classifyPixels(g, w, h) { return classifyRect(g, w, 0, 0, w, h); }
+  /* figureRegions(g, w, h) -> [{ x, y, w, h }] in pixels: the picture-like areas of a page image. The page is cut in
+     blocks about 1/48 of its long side; a block is dense when half its pixels are ink against the page's paper. Touching
+     dense blocks (8 neighbours, one block of slack) make one region; a region is kept when it is 6% to 98% of the page,
+     at most 4:1, at least 45% dense, and its pixels read as a picture (classifyRect). The largest first, at most 3. */
+  function figureRegions(g, w, h) {
+    var bg = pct(histo(g, 0, 0, w, h, w), 0.95), thr = bg - 50, B = Math.max(6, Math.round(Math.max(w, h) / 48));
+    var cols = Math.ceil(w / B), rows = Math.ceil(h / B), dense = new Uint8Array(cols * rows);
+    for (var by = 0; by < rows; by++) for (var bx = 0; bx < cols; bx++) {
+      var c = 0, n = 0;
+      for (var y = by * B; y < Math.min(h, (by + 1) * B); y++) for (var x = bx * B; x < Math.min(w, (bx + 1) * B); x++) { n++; if (g[y * w + x] < thr) c++; }
+      dense[by * cols + bx] = n && c / n >= 0.5 ? 1 : 0;
+    }
+    var seen = new Uint8Array(cols * rows), out = [];
+    for (var i = 0; i < dense.length; i++) {
+      if (!dense[i] || seen[i]) continue;
+      var q = [i], k = 0, x0 = cols, y0 = rows, x1 = -1, y1 = -1, cnt = 0;
+      seen[i] = 1;
+      while (k < q.length) {
+        var cur = q[k++], cx = cur % cols, cy = (cur - cx) / cols;
+        cnt++; x0 = Math.min(x0, cx); y0 = Math.min(y0, cy); x1 = Math.max(x1, cx); y1 = Math.max(y1, cy);
+        for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) {
+          var nx = cx + dx, ny = cy + dy, ni = ny * cols + nx;
+          if (nx < 0 || ny < 0 || nx >= cols || ny >= rows || seen[ni] || !dense[ni]) continue;
+          seen[ni] = 1; q.push(ni);
+        }
+      }
+      var bwB = x1 - x0 + 1, bhB = y1 - y0 + 1, share = (bwB * bhB) / (cols * rows), fill = cnt / (bwB * bhB);
+      if (share < 0.06 || share > 0.98 || fill < 0.45 || bwB / bhB > 4 || bhB / bwB > 4) continue;
+      var r = { x: x0 * B, y: y0 * B, w: Math.min(w, (x1 + 1) * B) - x0 * B, h: Math.min(h, (y1 + 1) * B) - y0 * B };
+      var k2 = classifyRect(g, w, r.x, r.y, r.x + r.w, r.y + r.h, bg);
+      if (k2.kind === "picture") { r.kind = k2.kind; out.push(r); }
+    }
+    return out.sort(function (a, b) { return b.w * b.h - a.w * a.h; }).slice(0, 3);
+  }
+  // A figure the student may use: a picture or a diagram (a crop of an embedded image); a scan region must be a picture.
+  function figureOk(kind, fromScan) { return kind === "picture" || (!fromScan && kind === "diagram"); }
+
   /* nearSents(sents, p, maxChars) -> the numbered sentences sent with an image on page p: a caption first ("Figure 2",
      "Fig.", "X-ray", "shows"), then the rest of the page in order, then the pages either side when the page has fewer
      than 3 sentences; at most 12 sentences and about 1,500 characters. */
@@ -539,6 +683,8 @@
 
   var PURE = {
     IMG_MIN: IMG_MIN, IMG_CAP: IMG_CAP, IMG_MAX_PX: IMG_MAX_PX, imageBoxes: imageBoxes, pickImages: pickImages, nearSents: nearSents, cropScale: cropScale,
+    SCAN_SHARE: SCAN_SHARE, isPageScan: isPageScan, pageShare: pageShare, textBoxes: textBoxes, textInBox: textInBox, scanPages: scanPages,
+    toGray: toGray, classifyPixels: classifyPixels, figureRegions: figureRegions, figureOk: figureOk,
     PAGE_CAP: PAGE_CAP, CHARS_CAP: CHARS_CAP, MIN_CHARS: MIN_CHARS, CHUNK_TOK: CHUNK_TOK, SCANNED_CHARS: SCANNED_CHARS,
     fixText: fixText, fontSize: fontSize, itemsToLines: itemsToLines, bodySize: bodySize, isHeadingBySize: isHeadingBySize, markHeadings: markHeadings,
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
@@ -625,35 +771,84 @@
     if (/^data:image\/webp/.test(w)) return { data: w, mime: "image/webp" };
     return { data: cv.toDataURL("image/jpeg", 0.84), mime: "image/jpeg" };
   }
-  function renderBox(page, x) {
+  // The grey pixels of a canvas, scaled down to at most max px on the long side (enough to see lines of text).
+  function grayOf(cv, max) {
+    var k = Math.min(1, (max || 480) / Math.max(cv.width, cv.height)), w = Math.max(1, Math.round(cv.width * k)), h = Math.max(1, Math.round(cv.height * k));
+    var c2 = G.document.createElement("canvas"); c2.width = w; c2.height = h;
+    var x = c2.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, w, h); x.drawImage(cv, 0, 0, w, h);
+    var g = toGray(x.getImageData(0, 0, w, h).data, w, h); c2.width = 0; c2.height = 0;
+    return { g: g, w: w, h: h };
+  }
+  // renderBox, then classify the cut: { e (encoded), kind }. The canvas is released either way.
+  function renderBoxChecked(page, x) {
     var sc = cropScale(x), vp = page.getViewport({ scale: sc }), r = vp.convertToViewportRectangle(x.box);
     var left = Math.floor(Math.min(r[0], r[2])), top = Math.floor(Math.min(r[1], r[3])), cw = Math.max(1, Math.ceil(Math.abs(r[2] - r[0]))), ch = Math.max(1, Math.ceil(Math.abs(r[3] - r[1])));
     var cv = G.document.createElement("canvas"), cx = cv.getContext("2d");
     cv.width = cw; cv.height = ch;
     cx.fillStyle = "#fff"; cx.fillRect(0, 0, cw, ch);
-    return page.render({ canvasContext: cx, viewport: vp, transform: [1, 0, 0, 1, -left, -top] }).promise.then(function () { var e = encode(cv); e.w = cw; e.h = ch; cv.width = 0; cv.height = 0; return e; });
+    return page.render({ canvasContext: cx, viewport: vp, transform: [1, 0, 0, 1, -left, -top] }).promise.then(function () {
+      var px = grayOf(cv, 480), c = classifyPixels(px.g, px.w, px.h), e = figureOk(c.kind, !!x.scan) ? encode(cv) : null;
+      if (e) { e.w = cw; e.h = ch; }
+      cv.width = 0; cv.height = 0;
+      return { e: e, kind: c.kind };
+    });
   }
+  /* A page scan: the page rendered about 720 px on the long side, its figure regions (figureRegions) mapped back to
+     PDF space as candidates; a region under the page's own text layer (an OCR'd scan) is out like any other image. */
+  var SCAN_CAP = 40;
+  function scanFigures(page, sp, text) {
+    var vp1 = page.getViewport({ scale: 1 }), sc = Math.min(2, 720 / Math.max(vp1.width, vp1.height)), vp = page.getViewport({ scale: sc });
+    var cv = G.document.createElement("canvas"), cx = cv.getContext("2d");
+    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+    cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height);
+    return page.render({ canvasContext: cx, viewport: vp }).promise.then(function () {
+      var px = grayOf(cv, 720), k = cv.width / px.w, regs = figureRegions(px.g, px.w, px.h);
+      cv.width = 0; cv.height = 0;
+      return regs.map(function (r, j) {
+        var a = vp.convertToPdfPoint(r.x * k, r.y * k), b = vp.convertToPdfPoint((r.x + r.w) * k, (r.y + r.h) * k);
+        var box = [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[0], b[0]), Math.max(a[1], b[1])];
+        var fw = (box[2] - box[0]) / ((sp.box[2] - sp.box[0]) || 1), fh = (box[3] - box[1]) / ((sp.box[3] - sp.box[1]) || 1);
+        return { p: sp.p, id: sp.id + "#r" + j, w: Math.max(1, Math.round(sp.w * fw)), h: Math.max(1, Math.round(sp.h * fh)), box: box, k: sp.p + ":" + sp.id + "#r" + j, scan: true };
+      }).filter(function (x) { return !(text && textHeavy(text, x.box)); });
+    });
+  }
+  /* extractImages(doc, pageList, onStep?) -> Promise([{ p, k, w, h, data (data: URL), mime }]). Reads each page's operator
+     list and text, picks the images (pickImages) and the figures inside page scans (scanFigures), renders each one's area
+     of the page at its own size (at most 1280 px on the long side, on white), keeps it only when its pixels read as a
+     figure (classifyPixels), and encodes it: WebP where the browser can, else JPEG. Rendering the area keeps arrows and
+     labels drawn over the picture. A page that fails is skipped. */
   function extractImages(doc, pageList, onStep) {
     var pages = [], got = {}, i = 0;
     function scan() {
       if (i >= pageList.length) return Promise.resolve();
       var p = pageList[i++];
       return doc.getPage(p).then(function (page) {
-        return page.getOperatorList().then(function (ol) {
+        return Promise.all([page.getOperatorList(), page.getTextContent().then(null, function () { return { items: [] }; })]).then(function (r) {
           got[p] = page;
-          pages.push({ p: p, view: page.view, imgs: imageBoxes(ol.fnArray, ol.argsArray, G.pdfjsLib.OPS) });
+          pages.push({ p: p, view: page.view, imgs: imageBoxes(r[0].fnArray, r[0].argsArray, G.pdfjsLib.OPS), text: textBoxes(r[1].items) });
         });
       }).then(null, function () {}).then(function () { if (onStep) onStep(i, pageList.length, "scan"); return scan(); });
     }
     return scan().then(function () {
-      var picks = pickImages(pages), out = [], k = 0;
-      function next() {
-        if (k >= picks.length) return Promise.resolve(out);
-        var x = picks[k++];
-        return renderBox(got[x.p], x).then(function (e) { out.push({ p: x.p, k: x.k, w: e.w, h: e.h, data: e.data, mime: e.mime }); }, function () {})
-          .then(function () { if (onStep) onStep(k, picks.length, "cut"); return next(); });
+      var picks = pickImages(pages, IMG_CAP * 2), scans = scanPages(pages).slice(0, SCAN_CAP), textOf = {};
+      pages.forEach(function (pg) { textOf[pg.p] = pg.text; });
+      var s = 0;
+      function regions() {
+        if (s >= scans.length) return Promise.resolve();
+        var sp = scans[s++];
+        return scanFigures(got[sp.p], sp, textOf[sp.p]).then(function (list) { picks = picks.concat(list); }, function () {}).then(regions);
       }
-      return next();
+      return regions().then(function () {
+        picks.sort(function (a, b) { return a.p - b.p || b.box[3] - a.box[3] || a.box[0] - b.box[0]; });
+        var out = [], k = 0;
+        function next() {
+          if (k >= picks.length || out.length >= IMG_CAP) return Promise.resolve(out);
+          var x = picks[k++];
+          return renderBoxChecked(got[x.p], x).then(function (r) { if (r.e) out.push({ p: x.p, k: x.k, w: r.e.w, h: r.e.h, data: r.e.data, mime: r.e.mime }); }, function () {})
+            .then(function () { if (onStep) onStep(k, picks.length, "cut"); return next(); });
+        }
+        return next();
+      });
     });
   }
 
