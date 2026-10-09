@@ -60,3 +60,17 @@ test("subjectLessons: modules with lessons, in module order, own lesson first", 
   assert.deepEqual(L.subjectLessons({ modules: {} }, [{ id: "m1" }]), []);
   assert.deepEqual(L.subjectLessons(null, null), []);
 });
+
+/* ss-radiology (bank v6 to v10) has no search.json; the app builds the same index from the module files on a 404. */
+test("buildSearch: the index built in the app finds items like search.json, flagged items left out", () => {
+  const BANK = require("../specialty-bank.js");
+  {
+    const sx = P.buildSearch([
+      { id: "srd-a", items: [{ id: "a1", q: "Berry aneurysm of the anterior communicating artery is seen on", o: ["CT angiography", "MRI", "X-ray", "USG"], a: 0 }, { id: "a2", q: "Flagged aneurysm item", o: ["a", "b", "c", "d"], a: 1, flags: ["key"] }] },
+      { id: "srd-b", items: [{ id: "b1", q: "Moyamoya disease shows a puff of smoke on angiography", o: ["ICA", "MCA", "ACA", "PCA"], a: 0 }] },
+    ], BANK);
+    assert.deepEqual(sx.ids, ["a1", "b1"]);
+    assert.deepEqual(BANK.searchIndex(sx, "aneurysm", 10).map((h) => h.id + ":" + h.t), ["a1:srd-a"]);
+    assert.deepEqual(BANK.searchIndex(sx, "angiography", 10).map((h) => h.t), ["srd-a", "srd-b"]);
+  }
+});

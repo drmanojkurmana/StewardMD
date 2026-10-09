@@ -418,7 +418,7 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
-  var PURE = { pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { buildSearch: buildSearch, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -586,8 +586,32 @@
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
       if (hit && hit.sx) return (st.mem[p] = hit.sx);
-      return getJSON(API + p).then(function (sx) { st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() }); return sx; });
+      return getJSON(API + p).then(function (sx) { st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() }); return sx; }, function (e) {
+        // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
+        // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
+        if (!e || e.status !== 404) throw e;
+        return loadIndex(sid).then(function (ix) {
+          var ts = (ix.topics || []).filter(function (t) { return t.group !== "mixed" && (t.count || 0) + (t.ov || 0) > 0; });
+          return Promise.all(ts.map(function (t) { return loadModule(sid, t.id).then(function (items) { return { id: t.id, items: items }; }, function () { return { id: t.id, items: [] }; }); }));
+        }).then(function (topics) { return (st.mem[p] = buildSearch(topics)); });
+      });
     });
+  }
+  /* buildSearch([{ id, items }]) -> the search.json shape (tools/tokos-build-mcq-search.mjs, same tokeniser and preview,
+     no document-frequency cut: a subject built here is small). */
+  function buildSearch(topics, bank) {
+    var BANK = bank || (G.SPECIALTY && G.SPECIALTY.BANK), ids = [], pv = [], start = [], post = {}, w = {};
+    topics.forEach(function (t) {
+      start.push(ids.length);
+      t.items.forEach(function (it) {
+        if (!usable(it, null) || !it.id || !it.o) return;
+        var o = ids.length, q = String(it.q || "").replace(/\s+/g, " ").trim(), cut = q.slice(0, 80), sp = cut.lastIndexOf(" ");
+        ids.push(it.id); pv.push(q.length <= 80 ? q : (sp > 45 ? cut.slice(0, sp) : cut) + "\u2026");
+        BANK.tokens(it.q + " " + it.o.join(" ")).forEach(function (k) { (post[k] = post[k] || []).push(o); });
+      });
+    });
+    Object.keys(post).sort().forEach(function (k) { var prev = 0; w[k] = post[k].map(function (o) { var d = o - prev; prev = o; return d.toString(36); }).join(","); });
+    return { v: 1, deck: "mcq", n: ids.length, topics: topics.map(function (t) { return t.id; }), start: start, ids: ids, p: pv, w: w };
   }
 
   /* ---------- shell ---------- */

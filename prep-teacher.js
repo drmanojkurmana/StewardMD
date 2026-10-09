@@ -40,7 +40,31 @@
   function clip(s, n) { s = str(s).replace(/\s+/g, " ").trim(); return s.length > n ? s.slice(0, n - 3).replace(/\s+\S*$/, "") + "..." : s; }
   function keyOf(item) { var a = item && item.a; return typeof a === "number" && a >= 0 && item.o && a < item.o.length ? a : -1; }
   function letter(k) { return LETTERS[k] || "?"; }
-  function reasons(item) { return item && item.r && item.r.length ? item.r : null; }
+  /* Structured explanations (bank v5 "x": { key, notes, others: { A..D }, pearl }) are what the question screen shows
+     (prep.js explainOf / whyHtml), and many items have x with an empty exp. The teacher reads the same text: expOf is x
+     (key + notes, markdown made plain) when x is whole, else exp; kpOf is kp, else x.pearl; reasons come from r, else
+     from x (the key's reason is x.key). Before this, Ask MaiK grounded such items on the stem alone and its fallback
+     said "No explanation is stored" under a question that showed one. */
+  var XL = ["A", "B", "C", "D", "E"];
+  function xOf(item) { var x = item && item.x; return x && typeof x === "object" && typeof x.key === "string" && x.key.trim() ? x : null; }
+  function plainMd(t) {
+    return str(t).replace(/\r\n?/g, "\n").split("\n").map(function (l) {
+      l = l.trim();
+      if (/^\|?\s*:?-{2,}/.test(l)) return "";                       // table rule
+      if (/^\|.*\|$/.test(l)) l = l.replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }).filter(Boolean).join(", ");
+      return l.replace(/^#+\s*/, "").replace(/\*\*|__/g, "").replace(/\x60/g, "");
+    }).filter(function (l) { return l; }).join("\n");
+  }
+  // Old bank text marks bullets with " *" (prep.js legacyExp draws them as a list); here they become lines.
+  function legacyPlain(t) { t = str(t).trim(); var re = /(^|\s)\*(?!\*)(?=[^\s*])/g, hits = t.match(re); return (hits && hits.length >= 2 ? t.replace(re, "\n").trim() : t).replace(/\*+/g, ""); }
+  function expOf(item) { var x = xOf(item); return x ? plainMd(x.key + (x.notes ? "\n" + x.notes : "")) : legacyPlain(item && item.exp); }
+  function kpOf(item) { var x = xOf(item); return str(item && item.kp).trim() ? str(item.kp) : x && x.pearl ? plainMd(x.pearl) : ""; }
+  function reasons(item) {
+    if (item && item.r && item.r.length) return item.r;
+    var x = xOf(item), a = keyOf(item);
+    if (!x || !x.others || !item.o) return null;
+    return item.o.map(function (o, k) { return k === a ? x.key : str(x.others[XL[k]]); });
+  }
   // Source sentences: an array of strings or of { n, tx } records (prep-src).
   function sentText(s) { return typeof s === "string" ? s : s && (s.tx || s.text) || ""; }
 
@@ -52,9 +76,10 @@
     (item.o || []).forEach(function (o, i) { out.push({ k: "o", text: letter(i) + ". " + clip(o, LIM.o) }); });
     if (a >= 0) out.push({ k: "key", text: "Correct answer: " + letter(a) + ". " + clip(item.o[a], LIM.o) });
     if (r && chosen >= 0 && chosen !== a && r[chosen]) out.push({ k: "r", text: "Why " + letter(chosen) + " is wrong: " + clip(r[chosen], LIM.r) });
-    if (item.exp) out.push({ k: "exp", text: "Explanation: " + clip(item.exp, LIM.exp) });
-    if (r && a >= 0 && r[a] && clip(r[a], LIM.r) !== clip(item.exp, LIM.r)) out.push({ k: "r", text: "Why " + letter(a) + " is right: " + clip(r[a], LIM.r) });
-    if (item.kp) out.push({ k: "kp", text: "Exam pearl: " + clip(item.kp, LIM.kp) });
+    var exp = expOf(item), kp = kpOf(item);
+    if (exp) out.push({ k: "exp", text: "Explanation: " + clip(exp, LIM.exp) });
+    if (r && a >= 0 && r[a] && clip(r[a], LIM.r) !== clip(exp, LIM.r) && clip(exp, LIM.exp).indexOf(clip(r[a], LIM.r)) < 0) out.push({ k: "r", text: "Why " + letter(a) + " is right: " + clip(r[a], LIM.r) });
+    if (kp) out.push({ k: "kp", text: "Exam pearl: " + clip(kp, LIM.kp) });
     if (r) r.forEach(function (x, i) { if (x && i !== a && i !== chosen) out.push({ k: "r", text: "About " + letter(i) + ": " + clip(x, LIM.r) }); });
     (sents || []).slice(0, LIM.sents).forEach(function (s) { var t = clip(sentText(s), LIM.sent); if (t) out.push({ k: "src", text: "Source: " + t }); });
     return out;
@@ -74,7 +99,7 @@
   function teachable(item, sents) {
     if (!item || !item.o || keyOf(item) < 0) return false;
     var r = reasons(item);
-    return !!(str(item.exp).trim() || str(item.kp).trim() || (r && r.some(function (x) { return str(x).trim(); })) || (sents && sents.length));
+    return !!(expOf(item).trim() || kpOf(item).trim() || (r && r.some(function (x) { return str(x).trim(); })) || (sents && sents.length));
   }
   /* promptFor(item, chosen, ground) -> the user turn. chosen < 0 or the key: why the key is right. */
   function promptFor(item, chosen, ground) {
@@ -185,7 +210,7 @@
   /* What the fallback shows: the stored text, as written. */
   function fallbackFor(item, chosen) {
     var a = keyOf(item), r = reasons(item);
-    return { key: a >= 0 ? letter(a) + ". " + str(item.o[a]) : "", exp: str(item && item.exp), kp: str(item && item.kp),
+    return { key: a >= 0 ? letter(a) + ". " + str(item.o[a]) : "", exp: expOf(item), kp: kpOf(item),
       why: r && chosen >= 0 && chosen !== a && r[chosen] ? str(r[chosen]) : "", chosen: chosen >= 0 ? letter(chosen) : "" };
   }
   var NOTES = {
@@ -341,7 +366,7 @@
     return { topic: topic, prefill: clip(head + (sum ? " " + sum : ""), 900) + "\n\nMy next doubt: " };
   }
 
-  var PURE = { SYSTEM: SYSTEM, LIM: LIM, NOTES: NOTES, groundParts: groundParts, groundingText: groundingText, promptFor: promptFor, teachable: teachable,
+  var PURE = { SYSTEM: SYSTEM, LIM: LIM, NOTES: NOTES, expOf: expOf, kpOf: kpOf, plainMd: plainMd, groundParts: groundParts, groundingText: groundingText, promptFor: promptFor, teachable: teachable,
     numbersIn: numbersIn, sourceNumbers: sourceNumbers, missingNumbers: missingNumbers, lexMap: lexMap, drugsIn: drugsIn, capsTerms: capsTerms,
     check: check, cleanAnswer: cleanAnswer, fallbackFor: fallbackFor, teach: teach, stepGround: stepGround, teachStep: teachStep, STEP_SYSTEM: STEP_SYSTEM,
     CHAT_SYSTEM: CHAT_SYSTEM, CHAT_LIM: CHAT_LIM, CHAT_NOTES: CHAT_NOTES, userCount: userCount, canAsk: canAsk, summarise: summarise,

@@ -256,3 +256,26 @@ test("app: an unchecked answer is never painted; the stored explanation shows wi
   assert.ok(seen.every((x) => !x.includes("amlodipine is the real cause")), "never on screen, not even mid-way");
   assert.deepEqual(s.net, { fetch: 0, xhr: 0, ai: 0 });
 });
+
+/* Structured explanations (bank v5 x): the item from the live sur-wound-healing module had x and an empty exp, and Ask MaiK
+   grounded it on the stem alone ("No explanation is stored" under a question that showed one). */
+test("teacher reads the structured explanation (x) when exp is empty", () => {
+  const P = T._pure || T;
+  const item = { id: "x1", q: "Management of stage 2 pressure sore, clean ulcer without cellulitis is", o: ["Protective dressing", "Moist dressing", "Absorbent dressing", "Topical antibiotics"], a: 1, exp: "",
+    x: { key: "Moist dressing is correct because it keeps the wound moist for epithelialization.", notes: "## Stages\n- **Stage 2**: partial-thickness loss.\n| Dressing | Use |\n|---|---|\n| Moist | Stage 2 |",
+      others: { A: "Protective dressings are for Stage 1.", C: "Absorbent dressings are for heavy exudate.", D: "Topical antibiotics only for infected wounds." }, pearl: "Stage 2 needs a **moist** environment." } };
+  assert.equal(P.teachable(item, []), true);
+  const g = P.groundingText(item, 0, []);
+  assert.match(g, /Explanation: Moist dressing is correct/);
+  assert.match(g, /Moist, Stage 2/);
+  assert.doesNotMatch(g, /\*\*|##|\|---/);
+  assert.match(g, /Why A is wrong: Protective dressings are for Stage 1\./);
+  assert.match(g, /Exam pearl: Stage 2 needs a moist environment\./);
+  const f = P.fallbackFor(item, 0);
+  assert.match(f.exp, /^Moist dressing is correct/);
+  assert.equal(f.why, "Protective dressings are for Stage 1.");
+  // exp-only items are unchanged
+  const old = { q: "Q?", o: ["a", "b", "c", "d"], a: 2, exp: "Because c.", kp: "Pearl." };
+  assert.equal(P.fallbackFor(old, -1).exp, "Because c.");
+  assert.match(P.groundingText(old, -1, []), /Explanation: Because c\.\nExam pearl: Pearl\./);
+});
