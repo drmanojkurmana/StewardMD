@@ -1,0 +1,52 @@
+{
+  "id": "mullerian", "kind": "drill", "level": "mbbs", "review": "ai_drafted", "timeLimitSec": 300,
+  "title": { "en": "Mullerian anomaly drill: repeated early losses", "hi": "मुलेरियन विसंगति ड्रिल: बार-बार शुरुआती गर्भपात" },
+  "scenario": {
+    "en": "A 28-year-old woman has had two pregnancy losses in the first trimester. Her pelvic examination is normal and she has no symptoms of an outflow block. Work through the likely cause, the class of the anomaly and the imaging. Teaching scenario, not a real patient.",
+    "hi": "28 वर्षीय महिला को पहली तिमाही में दो बार गर्भपात हो चुका है। उसकी pelvic जाँच सामान्य है और रक्त-निकास रुकावट (outflow block) का कोई लक्षण नहीं है। संभावित कारण, विसंगति का वर्ग और इमेजिंग पर काम करें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "ESHRE/ESGE consensus on the classification of female genital tract congenital anomalies (Human Reproduction, 2013), PMC3712660", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3712660/" }
+  ],
+  "stages": [
+    { "id": "cause", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Two first-trimester losses and a normal examination. Which structural cause should you think of first?", "hi": "पहली तिमाही में दो गर्भपात और सामान्य जाँच। सबसे पहले किस संरचनात्मक कारण पर सोचेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "class",
+          "text": { "en": "A uterine septum (a wall dividing the cavity), which is a Mullerian anomaly.", "hi": "गर्भाशय में बँटवारे की दीवार (septum), जो एक मुलेरियन विसंगति है।" },
+          "feedback": { "en": "Repeated first-trimester losses point to a uterine septum. Check the uterine cavity.", "hi": "पहली तिमाही में बार-बार गर्भपात गर्भाशय के septum की ओर इशारा करते हैं। गर्भाशय की गुहा (cavity) जाँचें।" } },
+        { "id": "b", "correct": false, "next": "class",
+          "text": { "en": "Hormone tablets for a month, then review.", "hi": "एक महीने के लिए हार्मोन की गोलियाँ, फिर दोबारा जाँच।" },
+          "feedback": { "en": "Treatment before imaging delays the diagnosis. Check the uterine cavity first.", "hi": "इमेजिंग से पहले इलाज निदान में देरी करता है। पहले गर्भाशय की गुहा जाँचें।" } },
+        { "id": "c", "correct": false, "next": "class",
+          "text": { "en": "Clotting blood tests only.", "hi": "सिर्फ़ खून के जमने (clotting) की जाँच।" },
+          "feedback": { "en": "A clotting test does not show the shape of the uterus.", "hi": "खून के जमने की जाँच गर्भाशय का आकार नहीं दिखाती।" } }
+      ] },
+    { "id": "class", "src": 0, "timeSec": 60,
+      "prompt": { "en": "The outer shape of the uterus is normal, but a wall divides the cavity. Which class is this?", "hi": "गर्भाशय का बाहरी आकार सामान्य है, पर एक दीवार गुहा को बाँटती है। यह कौन-सा वर्ग है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "imaging",
+          "text": { "en": "Septate uterus (U2): the indentation at the top of the cavity is more than half the wall thickness.", "hi": "Septate uterus (U2): गुहा के ऊपरी हिस्से का खाँचा दीवार की मोटाई के आधे से अधिक है।" },
+          "feedback": { "en": "ESHRE/ESGE: a normal outline with an internal indentation at the fundal midline that exceeds 50% of the uterine wall thickness is septate (U2).", "hi": "ESHRE/ESGE: सामान्य बाहरी आकार और फंडस की मध्य रेखा पर भीतरी खाँचा, जो गर्भाशय की दीवार की मोटाई के 50% से अधिक हो, वह septate (U2) है।" } },
+        { "id": "b", "correct": false, "next": "imaging",
+          "text": { "en": "Bicorporeal uterus (U3), with the outer top indented.", "hi": "Bicorporeal uterus (U3), जिसका बाहरी ऊपरी हिस्सा खाँचेदार हो।" },
+          "feedback": { "en": "An outer indentation at the top points to a two-horned uterus. Here the outline is normal, so the wall inside the cavity is the clue.", "hi": "ऊपर की बाहरी खाँच दो सींग वाले गर्भाशय की ओर इशारा करती है। यहाँ बाहरी आकार सामान्य है, इसलिए गुहा के अंदर की दीवार ही सुराग है।" } },
+        { "id": "c", "correct": false, "next": "imaging",
+          "text": { "en": "Agenesis (U5): no uterus at all.", "hi": "Agenesis (U5): गर्भाशय बिल्कुल नहीं।" },
+          "feedback": { "en": "Agenesis means no uterus. Here the uterus is present, so it is not agenesis.", "hi": "Agenesis का अर्थ है गर्भाशय का न होना। यहाँ गर्भाशय मौजूद है, इसलिए यह agenesis नहीं है।" } }
+      ] },
+    { "id": "imaging", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Which imaging gives an objective estimate of the uterine anatomy for the diagnosis?", "hi": "निदान के लिए गर्भाशय की बनावट का वस्तुनिष्ठ (objective) अनुमान कौन-सी इमेजिंग देती है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Ultrasound and/or MRI.", "hi": "अल्ट्रासाउंड और/या MRI।" },
+          "feedback": { "en": "ESHRE/ESGE: modern imaging (ultrasound and/or MRI) can give an objective estimate of uterine anatomy, which helps the differential diagnosis.", "hi": "ESHRE/ESGE: आधुनिक इमेजिंग (अल्ट्रासाउंड और/या MRI) गर्भाशय की बनावट का वस्तुनिष्ठ अनुमान देती है, जिससे अंतर-निदान (differential diagnosis) में मदद मिलती है।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "A karyotype alone.", "hi": "सिर्फ़ karyotype (गुणसूत्र जाँच)।" },
+          "feedback": { "en": "A karyotype tests chromosomes, not the shape of the uterus.", "hi": "Karyotype गुणसूत्रों की जाँच है, गर्भाशय के आकार की नहीं।" } },
+        { "id": "c", "correct": false, "next": "end",
+          "text": { "en": "A plain abdominal X-ray.", "hi": "सादा पेट का X-ray।" },
+          "feedback": { "en": "An X-ray does not show the inside of the uterus. Use ultrasound or MRI.", "hi": "X-ray गर्भाशय के अंदर नहीं दिखाता। अल्ट्रासाउंड या MRI का उपयोग करें।" } }
+      ] }
+  ]
+}
