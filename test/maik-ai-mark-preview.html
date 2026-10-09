@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MaiK AI mark</title>
-<!-- Visual check of assets/maik-ai-mark.svg through maik-ai-mark.js: every variant at its sizes, light and dark.
+<!-- Visual check of assets/maik-ai-mark.svg through maik-ai-mark.js: every variant at its sizes, light and dark, and the MaiK wordmark in labels.
      Served by test/serve.mjs (node test/serve.mjs . 8799, then /test/maik-ai-mark-preview.html). -->
 <style>
   body { margin: 0; font: 14px/1.4 -apple-system, system-ui, sans-serif; background: #f6f7f5; color: #10201f; }
@@ -18,7 +18,12 @@
   var M = window.SMD_MAIK_MARK, rows = [["full", [28, 40, 64, 128]], ["mark", [16, 20, 24]], ["tile", [28, 34, 44, 64, 120]]];
   var h = "";
   rows.forEach(function (r) { h += '<div class="row"><span class="lbl">' + r[0] + "</span>" + r[1].map(function (s) { return M.html(r[0], { size: s }); }).join("") + "</div>"; });
-  h += '<div class="row"><span class="lbl">button</span><span class="btn">' + M.html("auto", { size: 20 }) + "Ask MaiK</span></div>";
+  h += '<div class="row"><span class="lbl">button</span><span class="btn">' + M.html("auto", { size: 20 }) + M.label("Ask MaiK") + "</span></div>";
+  // The MaiK wordmark in labels (label()), 12 to 20 px, regular and bold, and a narrow column so it wraps.
+  [12, 14, 16, 18, 20].forEach(function (px) {
+    h += '<div class="row" style="font-size:' + px + 'px"><span class="lbl" style="font-size:14px">' + px + " px</span><span>" + M.label("Ask MaiK about this step") + "</span><b>" + M.label("Ask MaiK") + '</b><span class="btn">' + M.html("mark", { size: 18 }) + M.label("Ask MaiK") + "</span></div>";
+  });
+  h += '<div class="row"><span class="lbl">wraps</span><span style="width:150px;font-size:16px;border:1px dashed #9aa">' + M.label("Why is C wrong? Ask MaiK about this answer") + "</span></div>";
   document.getElementById("out").innerHTML = h;
   if (/dark/.test(location.hash)) document.body.classList.add("dark");
 </script>

@@ -35,7 +35,7 @@
       (title ? ' role="img" aria-label="' + title + '"' : ' aria-hidden="true"') + ' focusable="false"><use href="#mkai-' + v + '"></use></svg>';
   }
   function word() {
-    return '<span class="mkai-w"><svg class="mkai-word" viewBox="0 0 358 106" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>';
+    return '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>';
   }
   function label(text) {
     return '<span class="mkai-l">' + String(text == null ? "" : text).replace(/(^|[^A-Za-z0-9])MaiK(?![A-Za-z0-9])/g, function (m, pre) { return pre + word(); }) + "</span>";
@@ -72,7 +72,13 @@
     return loading;
   }
   // The sprite is in: the wordmark shows and its text becomes visually hidden (see word()).
-  function ready() { var r = D.documentElement; if (r && r.classList) r.classList.add("mkai-ok"); }
+  // The wordmark shows only when the sprite really holds mkai-word; its width follows the symbol's own viewBox.
+  function ready() {
+    var r = D.documentElement, w = D.getElementById("mkai-word"), vb = w && (w.getAttribute("viewBox") || "").split(/[\s,]+/);
+    if (!r || !r.classList) return;
+    r.classList.add("mkai-ok");
+    if (vb && vb.length === 4 && +vb[2] > 0 && +vb[3] > 0) { r.style.setProperty("--mkai-wr", String(+vb[2] / +vb[3])); r.classList.add("mkai-wok"); }
+  }
   // CSS that every variant needs (sizing and the accent token); one small rule set, injected once.
   function css() {
     if (D.getElementById("mkaiCss")) return;
@@ -81,12 +87,12 @@
     s.textContent = ".mkai{display:inline-block;flex:0 0 auto;vertical-align:middle;overflow:visible;stroke:none!important}" +
       ":root{--mkai-accent:#1f9e92}body.dark,body.v3-dark{--mkai-accent:#4fd6c6}" +
       // The wordmark: sized in em with !important, because icon rules elsewhere size every svg inside a button.
-      // 0.75 em tall with the viewBox's 106 units gives a 0.71 em cap height, about the app font's; the bottom 2.3
-      // units are the round letters' overshoot below the baseline, hence the small negative vertical-align.
+      // 0.75 em tall (the symbol's viewBox is fitted to the word, i dot to baseline) puts its cap height near the app
+      // font's; the round letters' overshoot sits just under the baseline, hence the small negative vertical-align.
       ".mkai-w{white-space:nowrap}" +
-      "svg.mkai-word{display:none;width:2.533em!important;height:.75em!important;min-width:0!important;margin:0!important;padding:0!important;vertical-align:-.016em!important;overflow:visible;stroke:none!important;flex:none}" +
-      "html.mkai-ok svg.mkai-word{display:inline-block}" +
-      "html.mkai-ok .mkai-wt{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}";
+      "svg.mkai-word{display:none;width:calc(.75em * var(--mkai-wr,3.4))!important;height:.75em!important;min-width:0!important;margin:0!important;padding:0!important;vertical-align:-.016em!important;overflow:visible;stroke:none!important;flex:none}" +
+      "html.mkai-wok svg.mkai-word{display:inline-block}" +
+      "html.mkai-wok .mkai-wt{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}";
     (D.head || D.documentElement).appendChild(s);
   }
   function start() { css(); ensure(); }

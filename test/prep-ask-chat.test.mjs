@@ -194,10 +194,11 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
 test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or raster", () => {
   const svg = readFileSync(join(ROOT, "assets/maik-ai-mark.svg"), "utf8");
   for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-mark", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
+  assert.match(svg, /<symbol id="mkai-word" viewBox="0 0 [\d.]+ [\d.]+"/, "the MaiK wordmark symbol, its viewBox fitted to the word");
   assert.doesNotMatch(svg, /<script|<image|<foreignObject|href="(?!#)/i);
   assert.doesNotMatch(svg, /\sfill="/, "fills are inline styles so page icon CSS cannot repaint the mark");
   assert.match(svg, /var\(--mkai-accent/);
-  assert.ok(svg.length < 8000, "small: " + svg.length);
+  assert.ok(svg.length < 14000, "small: " + svg.length);
   const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
   assert.match(js, /\/assets\/maik-ai-mark\.svg\?v=/);
   assert.doesNotMatch(js, /=>|`|\blet\s|\bconst\s|^\s*class\s/m, "ES5");
@@ -206,16 +207,56 @@ test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or ra
   assert.match(readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8"), /cp assets\/maik-ai-mark\.svg/, "shipped in the native bundle");
 });
 
+test("maik-ai-mark: the MaiK wordmark in Ask MaiK labels; text stays for screen readers; MaiKnowledge untouched", () => {
+  const w = M.word();
+  assert.equal(w, '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>');
+  assert.equal(M.label("Ask MaiK"), '<span class="mkai-l">Ask ' + w + "</span>");
+  assert.equal(M.label("Why is B wrong? Ask MaiK"), '<span class="mkai-l">Why is B wrong? Ask ' + w + "</span>");
+  assert.equal(M.label("MaiK से पूछें"), '<span class="mkai-l">' + w + " से पूछें</span>", "the Hindi label too");
+  assert.equal(M.label("Open MaiKnowledge"), '<span class="mkai-l">Open MaiKnowledge</span>', "only the standalone word");
+  assert.equal(M.label('Ask MaiK about &quot;x&quot;'), '<span class="mkai-l">Ask ' + w + ' about &quot;x&quot;</span>', "escaped text stays escaped");
+  // the text without tags reads "Ask MaiK ..." for screen readers, find and copy
+  assert.equal(M.label("Ask MaiK about this card").replace(/<[^>]+>/g, ""), "Ask MaiK about this card");
+  const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
+  assert.match(js, /html\.mkai-wok svg\.mkai-word\{display:inline-block\}/, "the wordmark shows only once the sprite holds mkai-word");
+  assert.match(js, /svg\.mkai-word\{display:none;width:calc\(\.75em \* var\(--mkai-wr,[\d.]+\)\)!important;height:\.75em!important/, "em-sized, so it follows the label's font size; width from the symbol's viewBox");
+});
+
+test("every Ask MaiK label draws MaiK as the wordmark", () => {
+  const src = (f) => readFileSync(join(ROOT, f), "utf8");
+  // [file, the text that must sit inside a SMD_MAIK_MARK.label(...) call (or the local helper that calls it)]
+  const LABELS = [
+    ["prep.js", "G.SMD_MAIK_MARK.label(label)"], ["prep-flash.js", 'G.SMD_MAIK_MARK.label("Ask MaiK about this card")'],
+    ["prep-ask.js", 'M.label("Ask MaiK")'], ["surgx-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["clinix-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK about this step")'], ["clinix-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK to review this answer")'],
+    ["opd-emr.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["thorex-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["icu.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</h3>'],
+    ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</button>"'], ["ophthalmos.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["specialty-shell.js", 'window.SMD_MAIK_MARK.label(s("askMaik"))'], ["workspaces.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["reasoning.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["ward.js", 'window.SMD_MAIK_MARK.label(wTH("ward.ask-maik-to-explain-this-verdict"'],
+    ["search.js", 'G.SMD_MAIK_MARK.label(esc(it.title))'], ["home.js", 't.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt)'],
+  ];
+  for (const [f, needle] of LABELS) assert.ok(src(f).indexOf(needle) >= 0, f + ": " + needle);
+  const ask = src("prep-ask.js");
+  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">' + askLbl() + '</h2>") > 0 && ask.indexOf("avatar(36) + '<h2 id=\"paT\">' + askLbl() + '</h2>'") > 0, "both sheet headers");
+  // no visible "Ask MaiK" label is left as plain text next to the mark (the aria-labels and fallbacks keep plain text)
+  for (const f of ["surgx-screens.js", "ophthalmos.js", "workspaces.js"]) assert.doesNotMatch(src(f), /\) \+ ["'] Ask MaiK<\/button>/, f);
+  const home = src("home.js");
+  const shell = home.slice(home.indexOf("function maikShellHTML"), home.indexOf("function maikShellHTML") + 6000);
+  assert.ok(shell.length > 1000 && !/mkai|SMD_MAIK_MARK/.test(shell), "the MaiK assistant's own shell and logo are unchanged");
+  assert.equal((home.match(/SMD_MAIK_MARK/g) || []).length, 2, "home.js uses the wordmark only on the Ask MaiK tile title");
+});
+
 test("every Ask MaiK entry point across the app carries the mark; the MaiK assistant and the footer keep their logos", () => {
   const src = (f) => readFileSync(join(ROOT, f), "utf8");
   // [file, the label right after the icon]: the icon markup just before the label must come from SMD_MAIK_MARK.
   const ENTRIES = [
     ["prep.js", "function askBtn("], ["prep-flash.js", "Ask MaiK about this card"], ["prep-lessons.js", 'aria-label="Ask MaiK about this step">'],
     ["prep-ask.js", "function mark(size)"], ["prep-teacher.js", "function avatar()"],
-    ["surgx-screens.js", '" Ask MaiK</button>"'], ["clinix-screens.js", '"Ask MaiK about this step</button>"'], ["clinix-screens.js", '"Ask MaiK to review this answer</button>"'],
-    ["opd-emr.js", '<span class="oe-maik-ico">'], ["thorex-screens.js", '<span class="tx-maik-ico">'], ["icu.js", '" Ask MaiK</button>"'],
-    ["icu.js", '" Ask MaiK about this patient</h3>'], ["icu.js", '" Ask MaiK about this patient</button>"'], ["ophthalmos.js", '" Ask MaiK</button>"'],
-    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", "' Ask MaiK</button>'"], ["reasoning.js", "'<span>Ask MaiK</span>'"],
+    ["surgx-screens.js", 'data-sgx="ask"'], ["clinix-screens.js", 'label("Ask MaiK about this step")'], ["clinix-screens.js", 'label("Ask MaiK to review this answer")'],
+    ["opd-emr.js", '<span class="oe-maik-ico">'], ["thorex-screens.js", '<span class="tx-maik-ico">'], ["icu.js", 'data-icu-act="asksend"'],
+    ["icu.js", '"Ask MaiK about this patient") + "</h3>'], ["icu.js", 'data-icu-act="askmaik"'], ["ophthalmos.js", 'class="oph-btn sec oph-maik"'],
+    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", 'data-poc="maik"'], ["reasoning.js", 'label("Ask MaiK")'],
     ["ward.js", '"Ask MaiK to explain this verdict"'], ["search.js", '<span class="us-row-ico">'],
   ];
   for (const [f, label] of ENTRIES) {
@@ -225,7 +266,7 @@ test("every Ask MaiK entry point across the app carries the mark; the MaiK assis
     assert.match(win, /SMD_MAIK_MARK/, f + " near " + label);
   }
   const ask = src("prep-ask.js");
-  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">Ask MaiK</h2>") > 0 && ask.indexOf("avatar(36) + '<h2 id=\"paT\">Ask MaiK</h2>") > 0, "the sheet's two headers use the mark");
+  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">'") > 0 && ask.indexOf("avatar(36) + '<h2 id=\"paT\">'") > 0, "the sheet's two headers use the mark");
   const home = src("home.js");
   assert.match(home, /act: "askai", ic: "auto_awesome", anim: "maikai"/, "the Home Ask MaiK tile");
   assert.match(home, /maikai: '<svg class="mkai mkai-mark"[^']*<use href="#mkai-mark"><\/use><\/svg>'/);
