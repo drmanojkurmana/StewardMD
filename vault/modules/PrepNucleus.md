@@ -870,7 +870,7 @@ Owner request 2026-10-09 (with his answers). Layer C contract otherwise as [[pla
   (steps, 500-page picker, cap, 10 at a time to 50, deck screen, restore after IndexedDB is cleared; SHOTS at 390, 820,
   1180 dark and light; deletes its Chrome profile).
 
-## Native feel, one image viewer, real figures only (2026-10-09, branch `fix/prep-native-feel`)
+## Native feel, one image viewer, real figures only (2026-10-09, branch `fix/prep-native-feel`, prep38)
 Owner bug report (iPad screenshot): a deck question showed a whole page of notes as its "image" ("Based on the table
 provided in the image..."), tap to enlarge was stuck, and screens jumped up on every tap.
 
