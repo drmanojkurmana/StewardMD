@@ -235,10 +235,13 @@
   function draw(focusSel) {
     var sh = sheet(); if (!sh) return;
     var body = sh.querySelector(".pa-body"), y = body ? body.scrollTop : 0;
-    sh.innerHTML = S.view === "choose" ? chooseHtml() : chatHtml();
+    // Patched in place (native pass 2): the thread keeps its node and its scroll; a view change (choose, chat) rebuilds.
+    var html = S.view === "choose" ? chooseHtml() : chatHtml(), same = sh.getAttribute("data-view") === S.view;
+    if (same && sh.firstChild && G.PREP_DOM) G.PREP_DOM.patch(sh, html); else sh.innerHTML = html;
+    sh.setAttribute("data-view", S.view);
     sh.classList.toggle("pa-chat", S.view !== "choose");
     body = sh.querySelector(".pa-body");
-    if (body) body.scrollTop = y;
+    if (body && !same) body.scrollTop = y;
     if (focusSel) { var f = sh.querySelector(focusSel); if (f) try { f.focus({ preventScroll: false }); } catch (e) {} }
     if (S.phase === "done" && body) { var ans = sh.querySelector(".pt-ans-b"); if (ans && ans.scrollIntoView) try { ans.scrollIntoView({ block: "nearest" }); } catch (e) {} }
   }

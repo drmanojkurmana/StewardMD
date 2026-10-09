@@ -910,3 +910,31 @@ Tests: `test/prep-figures.test.mjs`, `test/prep-viewer.test.mjs`, `test/prep-imc
 CDP `Input.dispatchTouchEvent`, deck crops on the six fixture pages).
 Real-device checks left: pinch and swipe-down feel in iOS WKWebView and Android WebView, rubber band of the overlay on
 iOS, keyboard over inputs.
+
+## Native feel pass 2: patch, never rebuild (2026-10-09, branch `fix/prep-native-feel2`, prep39)
+Owner iPhone screen recording after OTA v244: in the "Set up practice" sheet every chip tap jumped the sheet to the top,
+a scroll bar showed on its edge, scrolling stuttered, and it opened on "Incorrect before (0)" with Start disabled.
+Headless Chrome never showed it. **Verify feel in WebKit**: `test/run-prep-webkit-ui.mjs` (Playwright WebKit, iPhone 15
+profile, real touch taps; serves the repo through a route on `https://prep.test` because index.html's CSP upgrades
+`http://localhost` in WebKit; service workers blocked so routes apply; `FRAMES=<dir>` saves a frame strip).
+Root causes and fixes:
+- **Rebuilds.** `prep-setup.js draw_()` set the whole sheet's innerHTML, so `.su-body` (the scroller) was a new node at
+  scrollTop 0. Same class of bug in `paint()` for every inner scroller (a subject's filter row lost its sideways
+  scroll). Now `PREP_DOM` (prep.js): `patch(el, html)` morphs the live tree (same tag + id + `data-key` at the same
+  place = same node; attributes/text updated; a focused input keeps its value; nodes with `__pnKeep` such as motion
+  sparkles, confetti and the lessons' Learn button are left alone). `paint()` patches when the screen key and view are
+  the same and nothing navigates; the setup sheet, the plan settings sheet, the Ask sheet (same view) and the sync box
+  patch too. Code that wires a node after a paint must use `PREP_DOM.on(el, site, type, fn)` (binds once, swaps the
+  handler) or guard itself (`bindRunSwipe` uses `body.__pnSwipe`), else a surviving node gets a second listener.
+- **The tapped chip stays under the finger** (`prep-setup.js anchored`): the scroller moves by however far the chip
+  moved. The three timer panels share one grid cell (`.su-tstack`, hidden ones `inert`), so switching the timer never
+  changes the sheet's height (at the bottom a shorter panel clamped the scroll).
+- **Stutter.** The sheet scroller had a CSS mask (WebKit paints masked scrollers on the main thread): now a sticky fade.
+  The sheet drag's non-passive `touchmove` sat on the whole overlay (iOS then waits for JS before every scroll): now on
+  each `.pn-sheet-wrap` (armed by a MutationObserver), marker `wrap.__pnTouch`.
+- **Scroll bars.** `scrollbar-width: none` + `::-webkit-scrollbar { display: none }` for everything in `.pn-root`/`.pv`.
+- **Page behind.** Scrim and the setup sheet's head and action bar are `touch-action: none` (a drag there pans nothing).
+- **Defaults.** `PURE.fit(lists, sel, ctx, rows)` after the pool loads: a chosen option with 0 questions opens its row
+  (All; Mix for difficulty), row by row. Options with 0 questions are `disabled` (faded, no press); arrow keys skip them.
+Not verifiable here: real finger scrolling and momentum (Playwright mobile WebKit has no wheel or touch drag; the suite
+scrolls in steps), the WKWebView rubber band, and the iOS scroll indicator itself. No iOS simulator runtime is installed.

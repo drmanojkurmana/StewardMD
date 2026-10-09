@@ -154,7 +154,7 @@ try {
       ok(await ev(`return !document.querySelector("#smdPrep .pn-prov") && !/MedMCQA|AI-generated|Source:/.test(document.querySelector("#smdPrep .pn-fb").textContent);`) === true, "no source or authorship line under the explanation (owner rule: credits live in Terms)");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
       ok(await ev(`var it=PREP._st.run.items[PREP._st.run.i], a=document.querySelector("#smdPrep .pn-fb .pn-ans"); return !!a && a.textContent.indexOf(it.o[it.a])>=0 && a.querySelector("small").textContent==="Right answer" && a.querySelector(".pn-l").textContent===String.fromCharCode(65+it.a);`) === true, "round 7: the answer sits on its own line under the verdict");
-      ok(await ev(`var d=document.querySelectorAll("#smdPrep .pn-opt[aria-disabled=true]:not(.right):not(.wrong)"); return d.length>=2 && getComputedStyle(d[0]).opacity<1;`) === true, "round 7: the options that are neither the key nor the pick step back");
+      ok(await until(`var d=document.querySelectorAll("#smdPrep .pn-opt[aria-disabled=true]:not(.right):not(.wrong)"); return d.length>=2 && getComputedStyle(d[0]).opacity<1;`, 1500) === true, "round 7: the options that are neither the key nor the pick step back");
       ok(await ev(`var n=document.querySelector("#smdPrep .pn-qw > .pn-fb + .pn-navrow"); return !!n && getComputedStyle(n).position==="sticky";`) === true, "round 7: Next stays in reach (sticky row)");
       await shot("feedback");
       const wrong = await ev(`return !!document.querySelector("#smdPrep .pn-fb.no");`);

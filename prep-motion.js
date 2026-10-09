@@ -64,7 +64,7 @@
   // Decorative layer for finish screens and the lobby: five sparkles. Paused off screen (IntersectionObserver).
   function fx(el) {
     if (el.querySelector(":scope > .pn-fx")) return;
-    var s = D.createElement("span"); s.className = "pn-fx"; s.setAttribute("aria-hidden", "true"); s.innerHTML = "<i></i><i></i><i></i><i></i><i></i>";
+    var s = D.createElement("span"); s.className = "pn-fx"; s.setAttribute("aria-hidden", "true"); s.__pnKeep = 1; s.innerHTML = "<i></i><i></i><i></i><i></i><i></i>";
     el.insertBefore(s, el.firstChild);
     if (io) io.observe(el);
   }
@@ -215,7 +215,7 @@
   // Confetti: 28 pieces burst up from the figure and fall away in about 1.6 s, then the layer is removed.
   var HUES = ["#63f0db", "#ffc35c", "#ff8fa3", "#9fb8ff", "#ffffff", "#b6f58c"];
   function confetti(host) {
-    var box = D.createElement("span"); box.className = "pn-confetti"; box.setAttribute("aria-hidden", "true");
+    var box = D.createElement("span"); box.className = "pn-confetti"; box.setAttribute("aria-hidden", "true"); box.__pnKeep = 1;
     var pieces = [];
     for (var i = 0; i < 28; i++) { var p = D.createElement("i"); p.style.background = HUES[i % HUES.length]; box.appendChild(p); pieces.push(p); }
     host.appendChild(box);
@@ -244,7 +244,7 @@
       inner.style.backgroundColor = BHUES[i % BHUES.length];
       b.appendChild(inner); box.appendChild(b); made.push([b, inner]);
     }
-    host.appendChild(box);
+    box.__pnKeep = 1; host.appendChild(box);
     var rise = h + 120;
     made.forEach(function (p, i) {
       var dx = (Math.random() * 2 - 1) * 26, y = function (f) { return "translate3d(" + (dx * f).toFixed(1) + "px, " + (-rise * f).toFixed(1) + "px, 0)"; };
@@ -292,7 +292,9 @@
   // in (240 ms, strong ease-out); the title and tabs travel 12 px. A tab or filter: the body cross-fades (180 ms).
   // Reduced motion: every case is a 160 ms cross-fade, no travel. WAAPI only (compositor), so it needs no Motion build.
   // The first paint after the overlay opens is not animated: the overlay itself just arrived.
-  function wa(el, kf, o) { try { return el.animate(kf, o); } catch (e) { return null; } }
+  // A patched screen keeps its body node (prep.js paint): a transition still running on it from the last navigation is
+  // ended first, so the new one starts from the settled state instead of stacking on it.
+  function wa(el, kf, o) { try { if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === "pn-nav") a.cancel(); }); var a = el.animate(kf, o); a.id = "pn-nav"; return a; } catch (e) { return null; } }
   function nav(r, d) {
     if (!r || r !== root || Date.now() - attachedAt < 450) return;
     var pick = function (s) { return Array.prototype.slice.call(r.querySelectorAll(s)); };
