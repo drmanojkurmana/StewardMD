@@ -118,3 +118,15 @@ pneumonia pages (see [[StewardMD Edge]]). Headless check: `test/run-kb-nav-askma
   still renders everything. Legacy tables/algorithms/diagrams are placed by title/content.
 - The reader no longer shows the "Know more" Harrison panel; IDSA/Sanford viewers sit in Management.
 - Tests: `node test/run-kb-reader-mobile-ui.mjs` (390/360, zoom 0.95 and 1, order, homes, chips, dark, ?kbv2=0).
+
+## Search upgrade and Related topics (2026-10-10, branch kb-search-upgrade-b)
+
+- `kb-search.js` (window.SMD_KBSEARCH, pure ES5, loaded before reasoning.js) is the one disease-search core: `kbBuildIndex`, `kbSearch` (global search) and `kbPaintLibrary` (Discover) call it; the old scoring stays in reasoning.js as a fallback if the script is missing.
+- Spelling: haem/hem, ae/oe to e, tumour/tumor, labour/labor collapse on both sides; plurals are stemmed; apostrophes and accents dropped.
+- Abbreviations: curated table in kb-search.js (`ABBR`, with the best core id per abbreviation and plain phrases like "heart attack"), plus `window.MAIK_AMBIG` (kb/ai/ambig-abbrev.js, read lazily), plus initialisms built from each entry name (lowest tier).
+- Typos: only tokens of 5+ letters that are not a vocabulary word or prefix; 1 edit (5 to 7 letters), 2 edits (8+); a swap counts once; first letter must match.
+- Ranking: exact name 1000, exact alias 900, name prefix 800, name phrase 700, all tokens in name 600, alias word 520, initialism 500, typo 350, partly body 250, body 100. Ties: core (not referenceOnly) first, shorter name, A-Z.
+- Speed: the index builds names and aliases only (about 110 ms desktop); the 16 MB of clinical text is normalised later in 8 ms idle slices (`SMD_KBSEARCH.warm`). Until an entry is warmed its body is matched raw.
+- Related topics: `kbRelatedHTML()` at the end of `kbReaderBodyHTML` (no jump chip). `related()` picks 3 to 6: crossLinks, diseases that list each other in their differentials (parsed from additionalDifferentials and the two mimic lists), one-way differential links, then same system and class. Back from a related page returns to the page you came from (`opts.onBack`, `opts.backLabel`).
+- The Protocols tab search (kb-protocols.js) uses the same spelling normaliser and a typo fallback when nothing matches.
+- Tests: `test/kb-search.test.mjs` (79 query to top-result cases + ranking, related, speed) and `node test/run-kb-search-ui.mjs`.

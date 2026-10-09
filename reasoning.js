@@ -4507,7 +4507,37 @@
       chips += '<button type="button" class="kbr-chip" data-jump="kbr-' + key + '">' + L[1] + '</button>';
     });
     var jump = chips ? '<nav class="kbr-jump" aria-label="Jump to section"><div class="kbr-jump-in">' + chips + '</div></nav>' : "";
+    if (body) body += kbRelatedHTML(id);   // no chip: it sits at the very end, after References
     return { glance: glance, body: body, jump: jump };
+  }
+  // "Related topics" (3 to 6): crossLinks, diseases that list each other in their differentials, then the same
+  // system and class. Picked by kb-search.js related(); empty when it is not loaded.
+  function kbRelatedHTML(id) {
+    try {
+      var KS = window.SMD_KBSEARCH, H = window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId;
+      if (!KS || !H || !H[id]) return "";
+      var idx = kbBuildIndex(), ids = idx && idx.byId ? KS.related(idx, H, id, 6) : [];
+      if (!ids.length) return "";
+      return '<section class="dx-reader-sec kbr-sec kbr-sec--related" id="kbr-related" tabindex="-1"><h3>Related topics</h3><ul class="kbr-related">' +
+        ids.map(function (rid) {
+          var e = idx.byId[rid];
+          return '<li><button type="button" class="kbr-rel" data-kbrel="' + esc(rid) + '"><span>' + esc(e.name) + (e.sys ? '<small>' + esc(e.sys) + '</small>' : '') + '</span><i aria-hidden="true"></i></button></li>';
+        }).join("") + '</ul></section>';
+    } catch (e) { return ""; }
+  }
+  // One delegated listener per reader element; Back from a related page returns to the page it came from.
+  function H0() { return window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId; }
+  function kbWireRelated(el, id, opts) {
+    el.__kbRel = { id: id, opts: opts };
+    if (el.__kbRelWired) return;
+    el.__kbRelWired = true;
+    el.addEventListener("click", function (ev) {
+      var b = ev.target && ev.target.closest ? ev.target.closest("[data-kbrel]") : null, s = el.__kbRel;
+      if (!b || !s || !window.DX || !DX.openRef) return;
+      var from = s.opts || {};
+      var cur = H0() && H0()[s.id] ? H0()[s.id].name : "";
+      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur.length > 24 ? cur.slice(0, 23) + "…" : cur || "Back"), onBack: function () { DX.openRef(s.id, from); } });
+    });
   }
   // Section chips: scroll the reader body (never the pinned panel) and mark the section in view.
   function kbWireJump(el) {
@@ -4618,6 +4648,7 @@
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
+    if (opts && opts.backLabel) backLabel = opts.backLabel;
     var rd = kbReaderBodyHTML(id, H, { reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
@@ -4633,6 +4664,7 @@
       '</div>';
     kbDedupeReader(el);
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
+    try { kbWireRelated(el, id, opts); } catch (e) {}
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
@@ -5424,6 +5456,14 @@
     if (_kbIdx && _kbIdx.length) return _kbIdx;   // never cache an empty index (KB script may still be loading)
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || {};
     var arr = [];
+    // kb-search.js (aliases, abbreviations, spelling variants, typo tolerance, ranking): build once, then
+    // normalise the long clinical text in idle slices. The loop below is the fallback if it did not load.
+    var KS = window.SMD_KBSEARCH;
+    if (KS) {
+      arr = KS.buildIndex(H, { branch: kbBranch });
+      if (arr.length) { _kbIdx = arr; KS.warm(arr); }
+      return arr;
+    }
     for (var id in H) {
       var d = H[id];
       var know = [].concat(d.clinicalPearls || [], d.pathophysiology || [], d.additionalDifferentials || [],
@@ -5438,6 +5478,7 @@
   }
   function kbSearch(q, limit) {
     q = (q || "").toLowerCase().trim(); if (q.length < 2) return [];
+    if (window.SMD_KBSEARCH) return window.SMD_KBSEARCH.search(kbBuildIndex(), q, { limit: limit || 40 }).map(function (x) { return x.d; });
     var out = kbBuildIndex().filter(function (d) { return d.text.indexOf(q) >= 0; });
     out.sort(function (a, b) {
       var an = a.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1, bn = b.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1;
@@ -5759,21 +5800,28 @@
     var grid = document.getElementById("kblibGrid"); if (!grid) return;
     var q = _libState.q.toLowerCase().trim();
     var searching = q.length >= 2;
-    var variants = searching ? kbQueryVariants(q) : null;
+    var KS = window.SMD_KBSEARCH, ksOn = !!(KS && searching);
+    var variants = searching && !ksOn ? kbQueryVariants(q) : null;
     var all = kbBuildIndex();
     var scored = [];
-    all.forEach(function (d) {
-      if (_libState.cls !== "all" && d.cls !== _libState.cls) return;
-      if (_libState.src === "ref" && !d.ref) return;
-      if (_libState.src === "dx" && d.ref) return;
-      if (_libState.branch !== "all" && d.branch !== _libState.branch) return;
+    var keep = function (d) {
+      if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
+      if (_libState.src === "ref" && !d.ref) return false;
+      if (_libState.src === "dx" && d.ref) return false;
+      if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
+      return true;
+    };
+    // kb-search.js ranks exact name, alias, prefix, name word, then body; it returns best first.
+    if (ksOn) scored = KS.search(all, q, { filter: keep });
+    else all.forEach(function (d) {
+      if (!keep(d)) return;
       var s = 0;
       if (searching) { s = kbRelevance(d, variants); if (s < 0) return; }
       scored.push({ d: d, s: s });
     });
     // Relevance-rank when searching (title matches first, clinical-detail matches last),
     // tie-broken alphabetically; with no query keep the alphabetical index order.
-    if (searching) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
+    if (searching && !ksOn) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
     var res = scored.map(function (x) { return x.d; });
     var shown = Math.min(_libState.limit, res.length);
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';

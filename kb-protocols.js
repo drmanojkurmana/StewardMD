@@ -31,7 +31,13 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
-  function norm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+  // Spelling variants (haem/hem, oedema/edema, tumour/tumor) collapse via kb-search.js when it is loaded;
+  // the same function runs on the query and on the catalogue, so both sides agree either way.
+  function norm(s) {
+    var K = G.SMD_KBSEARCH;
+    if (K && K.norm) return K.norm(s);
+    return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  }
   function flagOn() { try { return !G.SMD_KBPROTO_FLAGS || G.SMD_KBPROTO_FLAGS.on(); } catch (e) { return true; } }
   function ico(n) { try { return (G.ICONS && G.ICONS.get) ? G.ICONS.get(n) : ""; } catch (e) { return ""; } }
 
@@ -76,7 +82,38 @@
       out.push({ p: p, s: s, i: i });
     });
     out.sort(function (a, b) { return (b.s - a.s) || (a.i - b.i); });
+    if (!out.length && q && !fixing) {   // nothing matched: try the query with small typos corrected
+      var fixed = typoFix(index, q);
+      if (fixed && fixed !== norm(q)) { fixing = true; try { return searchIndex(index, fixed, subject, basis); } finally { fixing = false; } }
+    }
     return out.map(function (x) { return x.p; });
+  }
+  // Typo tolerance for words of 5+ letters: replace each unknown word by the closest title/alias word
+  // (1 edit up to 7 letters, 2 edits from 8). Needs kb-search.js; returns "" when nothing changed.
+  var fixing = false;
+  function typoFix(index, q) {
+    var K = G.SMD_KBSEARCH; if (!K || !K.dist || !index || !index.protocols) return "";
+    if (!index.__vocab) {
+      var v = {}, list = [];
+      index.protocols.forEach(function (p) {
+        norm(p.title + " " + (p.aliases || []).join(" ")).split(" ").forEach(function (w) { if (w.length >= 4 && !v[w]) { v[w] = 1; list.push(w); } });
+      });
+      index.__vocab = v; index.__vocabList = list;
+    }
+    var changed = false, toks = norm(q).split(" ").map(function (t) {
+      if (t.length < 5 || index.__vocab[t]) return t;
+      var max = t.length >= 8 ? 2 : 1, best = null, bd = max + 1, i, w, d;
+      for (i = 0; i < index.__vocabList.length; i++) {
+        w = index.__vocabList[i];
+        if (w.charAt(0) !== t.charAt(0)) continue;
+        if (w.lastIndexOf(t, 0) === 0) return t;   // an unfinished word, not a typo
+        d = K.dist(t, w, max);
+        if (d < bd) { bd = d; best = w; }
+      }
+      if (best) { changed = true; return best; }
+      return t;
+    });
+    return changed ? toks.join(" ") : "";
   }
 
   /* ---- state + data ---------------------------------------------------------------------------- */
