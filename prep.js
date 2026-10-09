@@ -1184,7 +1184,9 @@
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
     return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
   }
-  function askBtn(act, label, attrs) { return '<button type="button" class="pn-btn pa-ask" data-act="' + act + '"' + (attrs || "") + '><span class="pt-av" aria-hidden="true"></span><span>' + label + "</span></button>"; }
+  // The MaiK AI mark (maik-ai-mark.js, one SVG for every Ask MaiK entry); without it, the old avatar picture.
+  function mkAv(size) { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: size || 34 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
+  function askBtn(act, label, attrs) { return '<button type="button" class="pn-btn pa-ask" data-act="' + act + '"' + (attrs || "") + '>' + mkAv(32) + '<span>' + label + "</span></button>"; }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
@@ -1483,7 +1485,7 @@
     var pick = pickLine(st.lines, ids, ml[probe.key] || 0);
     ml[probe.key] = (ml[probe.key] || 0) + 1; save();
     st.mlShown = true; try { G.sessionStorage.setItem(ML_SS, "1"); } catch (e) {}
-    return (holder.ml = '<p class="pn-maikline" role="status"><span class="pt-av" aria-hidden="true"></span><span>' + esc(pick.text) + "</span></p>");
+    return (holder.ml = '<p class="pn-maikline" role="status">' + mkAv(32) + '<span>' + esc(pick.text) + "</span></p>");
   }
   /* Review every question of the set under a filter (All, Wrong, Correct, Skipped or Time up, Bookmarked), with counts;
      Wrong first when there is any. A filter with nothing in it stays visible but disabled. */
@@ -1973,8 +1975,8 @@
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") return push(renderMocks);
-    if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], side: true }, HOST); return; }
-    if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], side: true }, HOST); return; }
+    if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], side: true, topic: rt4.title }, HOST); return; }
+    if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], side: true, topic: rt5.title }, HOST); return; }
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));

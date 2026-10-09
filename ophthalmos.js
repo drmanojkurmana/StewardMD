@@ -22,7 +22,7 @@
   // in, and the learner sends it: MaiK's own engine choice, quota and local-only policy all apply.
   function maikBtn(q) {
     if (!G.SMD_askMaik) return "";
-    return '<button class="oph-btn sec oph-maik" data-act="maik" data-q="' + esc(q) + '">' + ico("ai") + " Ask MaiK</button>";
+    return '<button class="oph-btn sec oph-maik" data-act="maik" data-q="' + esc(q) + '">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : ico("ai")) + " Ask MaiK</button>";
   }
   function maikOpen() { try { return G.document.body.classList.contains("maik-open"); } catch (e) { return false; } }
   function haptic(k) { try { if (G.SMD_HAPTICS && G.SMD_HAPTICS[k]) G.SMD_HAPTICS[k](); } catch (e) {} }

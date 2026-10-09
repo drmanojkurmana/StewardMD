@@ -452,3 +452,27 @@ row shows "Engine: <name>" under its description. `smd_edge` "0" brings back the
 Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay mounts on `<body>`, outside
 `#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
 
+
+## MaiK AI mark: the "Ask MaiK" icon (owner, 2026-10-09 evening, branch `feat/prep-maik-chat`)
+The owner's new MaiK AI logo (white geometric M of two chevron brackets, a four-point star, small teal "AI" lower
+right) is still being finalised, so it lives in ONE file: `assets/maik-ai-mark.svg`. It was traced from the owner's
+raster JPGs (IMG_2666/2670/2672/2673/2675/2676; they have a fake checkerboard background and are not used directly).
+- Symbols (viewBox 0 0 100 100): `mkai-full` (with "AI", 28 px and up), `mkai-mark` (no "AI", small sizes),
+  `mkai-tile` (dark teal app-icon tile, 40 px and up), `mkai-tile-mark` (the tile without "AI"); `mkai-m` (the M and
+  the star) and `mkai-tile-bg-s` are shared parts. M and star = currentColor; "AI" = `--mkai-accent`; fills are inline
+  styles so icon CSS that strokes or unfills every svg (Home badges, search rows) cannot repaint it.
+- `maik-ai-mark.js` (loaded before home.js; `SMD_MAIK_MARK.html(variant, { size, cls, color, title })`) fetches the
+  SVG once and injects it as a zero-size inline sprite (never display:none: Chrome drops its gradients); icons are
+  `<svg><use href="#mkai-..."/></svg>`. `scripts/build-www.sh` copies the file into the native bundle.
+- **To swap in the final artwork:** replace the shapes inside the symbols of `assets/maik-ai-mark.svg`, keep the ids and
+  the viewBox, bump `?v=` in `maik-ai-mark.js` URL. Nothing else changes. Visual checks:
+  `test/maik-ai-mark-preview.html`, `test/maik-ai-mark-badge-preview.html` (serve with `node test/serve.mjs . 8799`).
+- Used on: PrepNucleus Ask MaiK buttons (answer, review, lesson step, flashcard), the Ask sheet headers and MaiK's chat
+  avatars (prep.js, prep-ask.js, prep-flash.js, prep-lessons.js, prep-teacher.js, the MaiK line after a set), the
+  Home "Ask MaiK" tile (home.js `ANIM_ICON.maikai`), search's "Ask MaiK about ..." row, SURGX, CliniX (step and viva),
+  OPD assessment and Thorex "Ask MaiK" banners, ICU "Ask MaiK about this patient", Ophthalmós, the specialty shell
+  (Tokós, Narkē), Workspaces point-of-care, Knowledge reader (reasoning.js), Ward pharmacy verdict.
+- NOT used (owner): the MaiK logo inside the main MaiK assistant (home.js maikShellHTML, maik-logo*.png) and the
+  footer MaiKnowledge logo (`.v4-maik-logo`). `test/prep-ask-chat.test.mjs` guards both.
+- `window.SMD_askMaikHandoff({ topic, prefill })` (home.js): opens MaiK with a topic chip and the text typed in; used by
+  PrepNucleus Ask MaiK's hand-off after 10 messages.

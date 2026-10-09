@@ -5243,7 +5243,7 @@
   function maikExplainBlock(state, pickedOrder) {
     var ex = (state.pharmacy && state.pharmacy.explain) || null;
     if (!ex || ex.orderId !== pickedOrder.orderId) {
-      return '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="maikexplain">' + ms("neurology") +
+      return '<div class="w-maik-acts"><button class="w-btn ghost" data-w-act="maikexplain">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ms("neurology")) +
         wTH("ward.ask-maik-to-explain-this-verdict", "Ask MaiK to explain this verdict") + "</button></div>";
     }
     if (ex.busy) return "<p class=\"w-empty\">" + wTH("ward.asking-maik", "Asking MaiK&hellip;") + "</p>";

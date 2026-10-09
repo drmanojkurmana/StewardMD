@@ -2180,7 +2180,7 @@
     { act: "agentconnect", ic: "hub", tt: "AgentConnect", sub: "Connect your hospital's EMR", defOn: true },
     { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
     { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Differential", defOn: false },
-    { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
+    { act: "askai", ic: "auto_awesome", anim: "maikai", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
     { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
     { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
     // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it.
@@ -2319,6 +2319,8 @@
   // Live animated icons for the AI tiles (dark badge). CSS in redesign-system.css animates these
   // (eye blink · ECG sweep · lesion pulse · X-ray beam); reduced-motion disables the motion.
   var ANIM_ICON = {
+    // The MaiK AI mark (assets/maik-ai-mark.svg via maik-ai-mark.js's sprite), white on the dark badge: the "Ask MaiK" tile.
+    maikai: '<svg class="mkai mkai-mark" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true" focusable="false"><use href="#mkai-mark"></use></svg>',
     eye: '<svg class="ai-anim ai-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3.1"/></svg>',
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
     derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',
@@ -10028,6 +10030,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
   // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
   window.SMD_askMaik = function (q) { try { openAskAi(q); } catch (e) {} };
+  // PrepNucleus Ask MaiK hand-off (prep-ask.js, after 10 messages in one chat): MaiK opens with the topic chip and a
+  // short summary of that chat typed in; the student reviews it and sends.
+  window.SMD_askMaikHandoff = function (o) { try { o = o || {}; openAskAi(String(o.prefill || ""), o.topic ? { topic: { id: null, name: String(o.topic).slice(0, 80) } } : undefined); return true; } catch (e) { return false; } };
   // Knowledge page "Ask MaiK": open MaiK with that disease as the topic (chip in the composer).
   window.SMD_askMaikTopic = function (id, name) { try { openAskAi("", { topic: { id: id, name: name } }); } catch (e) {} };
   // Open MaiK and immediately begin dictation (used by the "Dictate" home tile).

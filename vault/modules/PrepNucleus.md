@@ -990,3 +990,21 @@ best way of learning."
   from Commons; lesson 650692 step text corrected (tardus parvus is seen downstream of a stenosis). Veto keys are the
   full lesson id with its slug.
 - Spend $4.04 (plan $2.58 across gemini-2.5-flash and gemini-3.6-flash, locate $1.46); votes by Haiku subagents.
+
+## Ask MaiK is a short chat + the MaiK AI mark (2026-10-09 evening, branch `feat/prep-maik-chat`, prep43)
+- After the first answer the Ask MaiK sheet has a follow-up box. Each doubt goes the same place (on this phone via
+  `PREP_TEACHER.localGenerate`, or online `POST /api/ai/prep-teach` kind `chat`) with the same grounding, the newest 6
+  turns (4 on the phone) and an extractive summary of older ones (`prep-teacher.js chatContext`, caps `CHAT_LIM`),
+  and the same check against the grounding only. MaiK Tokens show under every online answer.
+- 10 student messages per thread (the first ask counts); then "Continue this in MaiK Assistant" opens the main MaiK
+  (home.js `SMD_askMaikHandoff`) with the set title as topic and a short summary + "My next doubt: " typed in.
+  "Not covered" answers offer the same hand-off at once; a failed answer offers Try again (not a new message).
+- Threads: per item (`threadKey`: MCQ id, step/card text), in memory and localStorage `smd_prep_ask_v1`
+  (`pruneThreads`: 12 threads, 24 turns, 1,200 chars, 7 days). A started thread reopens (no new call); the place
+  choice rule is unchanged ("Don't ask again" still skips the question).
+- Server `functions/api/ai/_prep-teach.js`: kind `chat` { base, ground, turn 1..10, messages [{r:u|m,t}] (<= 8, user
+  <= 400, MaiK <= 1,200, total <= 4,000, last is the student's), summary <= 800, idem }; every string `prepScrub`bed;
+  turn > 10 = 400 `turns`; size = 413; `CHAT_SYSTEM` (same text as the client); one usage record per call, feature
+  `prep:teach-chat`, counter `prep.teach.chat`.
+- Tests: `test/prep-ask-chat.test.mjs`, `test/prep-teach-server.test.mjs` (chat part), `test/run-prep-ask-chat-ui.mjs`.
+- Icon: see vault/modules/MaiK.md "MaiK AI mark".

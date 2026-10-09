@@ -242,3 +242,89 @@ test("emergency pause: 503 paused with MaiK wording, no model call", async () =>
   assert.equal(r.json.message, "Ask MaiK online is paused for a short while. The stored explanation is above.");
   assert.equal(calls.length, 0); noAI(r.json);
 });
+
+/* ---- chat follow-ups (Ask MaiK as a short chat, owner 2026-10-09 evening) ---- */
+const chat = (extra) => Object.assign({ kind: "chat", base: "mcq", ground: GROUND, turn: 2, messages: [{ r: "u", t: "Why is A wrong?" }, { r: "m", t: "Y is first line." }, { r: "u", t: "And X?" }] }, extra || {});
+const msgs = (n, len) => Array.from({ length: n }, (_, i) => ({ r: i % 2 ? "m" : "u", t: "x".repeat(len || 10) })).concat([{ r: "u", t: "last?" }]);
+
+test("readTeachRequest chat: valid, scrubbed, summary kept", () => {
+  const r = T.readTeachRequest(chat({ summary: "Earlier: asked about X.", idem: "ck-chat-0001" }));
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.deepEqual([r.req.kind, r.req.base, r.req.turn, r.req.messages.length, r.req.summary], ["chat", "mcq", 2, 3, "Earlier: asked about X."]);
+  const s = T.readTeachRequest(chat({ base: "step", messages: [{ r: "u", t: "Call 9876543210 or doc@example.com?" }], summary: "mail doc@example.com" }));
+  assert.equal(s.ok, true);
+  assert.equal(/9876543210|doc@example\.com/.test(JSON.stringify(s.req)), false, JSON.stringify(s.req));
+});
+
+test("readTeachRequest chat: the messages array and its size limits", () => {
+  const L = T.CHAT_LIMITS;
+  assert.deepEqual([L.msgs, L.user, L.model, L.total, L.summary, L.turns], [8, 400, 1200, 4000, 800, 10]);
+  const cases = [
+    [chat({ base: "essay" }), "base", 400], [chat({ base: undefined }), "base", 400],
+    [chat({ turn: 0 }), "turn", 400], [chat({ turn: "2" }), "turn", 400], [chat({ turn: undefined }), "turn", 400],
+    [chat({ turn: 11 }), "turns", 400],
+    [chat({ messages: [] }), "messages", 400], [chat({ messages: "x" }), "messages", 400], [chat({ messages: undefined }), "messages", 400],
+    [chat({ messages: msgs(8) }), "messages", 413],
+    [chat({ messages: [{ r: "u", t: "x".repeat(401) }] }), "message", 413],
+    [chat({ messages: [{ r: "m", t: "x".repeat(1201) }, { r: "u", t: "q" }] }), "message", 413],
+    [chat({ messages: [{ r: "u", t: "x".repeat(400) }, { r: "m", t: "x".repeat(1200) }, { r: "u", t: "x".repeat(400) }, { r: "m", t: "x".repeat(1200) }, { r: "u", t: "x".repeat(400) }, { r: "m", t: "x".repeat(1200) }, { r: "u", t: "q" }] }), "messages", 413],
+    [chat({ messages: [{ r: "u", t: "q" }, { r: "m", t: "a" }] }), "messages", 400],
+    [chat({ messages: [{ r: "x", t: "q" }] }), "messages", 400], [chat({ messages: [{ r: "u", t: 5 }] }), "messages", 400], [chat({ messages: [null] }), "messages", 400],
+    [chat({ messages: [{ r: "u", t: "   " }] }), "messages", 400],
+    [chat({ summary: "s".repeat(801) }), "summary", 413], [chat({ summary: 5 }), "summary", 400],
+    [chat({ ground: "" }), "ground", 400],
+  ];
+  for (const [b, reason, status] of cases) { const r = T.readTeachRequest(b); assert.equal(r.ok, false, reason + " " + JSON.stringify(b).slice(0, 80)); assert.equal(r.reason, reason, JSON.stringify(r)); assert.equal(r.status, status, reason); }
+  assert.equal(T.readTeachRequest(chat({ turn: 10, messages: msgs(6, 100) })).ok, true, "10th message, 7 sent, within the caps");
+});
+
+test("buildTeachPrompt chat: the chat system prompt, the lines in order, the summary block only when sent", () => {
+  const p = T.buildTeachPrompt(T.readTeachRequest(chat({ summary: "Asked about X." })).req);
+  assert.equal(p.system, T.CHAT_SYSTEM); assert.equal(p.system, PURE.CHAT_SYSTEM);
+  assert.equal(p.maxOut, T.CHAT_LIMITS.maxOut);
+  assert.equal(p.user, "GROUNDING:\n" + GROUND + "\n\nEARLIER IN THIS CHAT (summary):\nAsked about X.\n\nCHAT:\nStudent: Why is A wrong?\nMaiK: Y is first line.\nStudent: And X?\n\nTASK: Answer the student's last message using only the grounding.");
+  assert.equal(T.buildTeachPrompt(T.readTeachRequest(chat()).req).user.indexOf("EARLIER"), -1);
+});
+
+test("chat: guest 401 sign-in, model not called", async () => {
+  const env = envFor(); calls = [];
+  const r = await post(env, chat(), { token: null });
+  assert.equal(r.status, 401); assert.equal(r.json.reason, "sign-in");
+  assert.equal(calls.length, 0); noAI(r.json);
+});
+
+test("chat: 200 with MaiK Tokens, one usage record per call, the chat counter, nothing stored", async () => {
+  const env = envFor(); calls = [];
+  const one = await post(env, chat({ messages: [{ r: "u", t: "Why is A wrong?" }] , turn: 1 }));
+  const two = await post(env, chat());
+  for (const r of [one, two]) {
+    assert.equal(r.status, 200, JSON.stringify(r.json));
+    assert.ok(r.json.usage.mt > 0 && r.json.usage.mt === inrToMt(r.json.usage.inr));
+  }
+  assert.equal(calls.length, 2);
+  assert.equal(calls[1].body.systemInstruction.parts[0].text, PURE.CHAT_SYSTEM);
+  assert.match(calls[1].body.contents[0].parts[0].text, /\nCHAT:\nStudent: Why is A wrong\?\nMaiK: Y is first line\.\nStudent: And X\?\n\nTASK: /);
+  assert.equal(recs(env).length, 1); assert.equal(recs(env)[0][1], "2", "one usage record per model call");
+  assert.equal(env.UPDATES_DB.counters.get(DAY + "|prep.teach.chat"), 2);
+  assert.equal(env.UPDATES_DB.counters.get(DAY + "|prep.teach.calls"), 2);
+  for (const [k, v] of env.MAIK_KV.m) assert.equal(/Why is A wrong|And X\?/.test(v), false, "student text stored in " + k);
+  noAI(two.json);
+});
+
+test("chat: turn 11, too many messages and oversize never reach the model", async () => {
+  const env = envFor(); calls = [];
+  assert.deepEqual([(await post(env, chat({ turn: 11 }))).json.reason], ["turns"]);
+  const r = await post(env, chat({ messages: msgs(8) }));
+  assert.equal(r.status, 413); assert.equal(r.json.error, "too-large");
+  assert.equal((await post(env, chat({ summary: "s".repeat(801) }))).status, 413);
+  assert.equal(calls.length, 0);
+  assert.equal(recs(env).length, 0, "nothing metered");
+});
+
+test("chat: idempotent replay is free", async () => {
+  const env = envFor(); calls = [];
+  const b = chat({ idem: "ck-replay-0001" });
+  const one = await post(env, b), two = await post(env, b);
+  assert.equal(two.replay, "1"); assert.equal(two.json.text, one.json.text);
+  assert.equal(calls.length, 1); assert.equal(recs(env)[0][1], "1");
+});

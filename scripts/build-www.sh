@@ -82,6 +82,8 @@ if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$W
 # assets/kb-diagrams/, referenced as /assets/kb-diagrams/<name>.svg). Small vector files, so they
 # ship in the bundle and render offline; without this the reader's <img> 404s on-device.
 if [ -d assets/kb-diagrams ]; then mkdir -p "$WWW/assets/kb-diagrams"; cp assets/kb-diagrams/*.svg "$WWW/assets/kb-diagrams/" 2>/dev/null || true; fi
+# The MaiK AI mark (maik-ai-mark.js injects it as a sprite for every "Ask MaiK" icon): one SVG, replaceable in place.
+[ -f assets/maik-ai-mark.svg ] && mkdir -p "$WWW/assets" && cp assets/maik-ai-mark.svg "$WWW/assets/"
 # Knowledge Base real clinical images (authentic X-rays, CTs, ECGs, photographs under assets/kb-real-images/)
 if [ -d assets/kb-real-images ]; then mkdir -p "$WWW/assets/kb-real-images"; cp assets/kb-real-images/* "$WWW/assets/kb-real-images/" 2>/dev/null || true; fi
 # Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)

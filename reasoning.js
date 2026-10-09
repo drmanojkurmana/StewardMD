@@ -4521,7 +4521,7 @@
     if (typeof window.SMD_askMaikTopic === "function") {
       var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-favourite dx-reader-askmaik";
       askMk.setAttribute("aria-label", "Ask MaiK about " + name);
-      askMk.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span>Ask MaiK</span>';
+      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>Ask MaiK</span>';
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
