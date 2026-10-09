@@ -938,7 +938,7 @@ Root causes and fixes:
   (All; Mix for difficulty), row by row. Options with 0 questions are `disabled` (faded, no press); arrow keys skip them.
 Not verifiable here: real finger scrolling and momentum (Playwright mobile WebKit has no wheel or touch drag; the suite
 scrolls in steps), the WKWebView rubber band, and the iOS scroll indicator itself. No iOS simulator runtime is installed.
-## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep40)
+## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep41)
 Owner 2026-10-09: radiology lessons "don't have images as much as needed ... make it interesting, interactive and the
 best way of learning."
 - **Reader (`prep-lessons.js` + `prep-lx.css`, loader CSS list):** new optional parts, all drawn from data:
