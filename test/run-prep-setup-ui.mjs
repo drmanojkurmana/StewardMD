@@ -382,7 +382,7 @@ try {
   ok(/(X-ray|smear) shown/.test(await text("#smdPrep .pn-q")), "the stem refers to the image");
   await shots("deck-image-question");
   await click("#smdPrep .pn-yq-fig [data-act=y-zoom]");
-  ok(await until(`var z=document.querySelector("#pnYqZoom img"); return !!z && /^data:image\\//.test(z.getAttribute("src"));`, 3000), "tap to enlarge works on a deck image");
+  ok(await until(`var z=document.querySelector(".pv .pv-img"); return !!z && /^data:image\\//.test(z.getAttribute("src"));`, 3000), "tap to enlarge works on a deck image (shared viewer)");
   await ev(`PREP.back(); return 1;`);
 
   ok(api.other.every((u) => /\/api\//.test(u)), "every other /api/ request was answered locally (" + api.other.length + ")");
