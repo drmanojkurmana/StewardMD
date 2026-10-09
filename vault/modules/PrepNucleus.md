@@ -1047,3 +1047,13 @@ best way of learning."
   transparent at the half-way point (opacity, so the back can take focus at once). Not yet seen on a real iPhone.
 - **Harness note.** The round-1 "app.js:19 TypeError" is the helper removing `#accountGate` before DOMContentLoaded,
   not an app bug (the journey harness, which waits for load, sees no error).
+- **Lesson figures cut at the source.** Crack the Core (620 live figures) and radbook (581) lesson media checked for ink
+  or text touching the crop edge. 163 re-cropped from the private PDFs with a margin and shipped under new names
+  (`rb-ctc-<id>-m1.webp`, 4 at `-m2`, 10 radbook `-m1`), e.g. `rb-ctc-p0127-1-m1.webp` now reads "Pars Nervosa" and
+  "Jugular Spine". 133 changed lessons moved to a new revision path (`r` 3 or 4 in `v1/lessons/index.json`, files at
+  `v<r>/lessons/<key>.json`; a lesson file is cached for good under its path), spot-the-sign boxes remapped into the
+  new crops. Left: 142 drawings whose strokes run into the next drawing, 20 where the label sits under the scan's OCR
+  text, 9 still partly cut, notes 1 not checked (its PDF is not on this Mac). In 6 interactions the full printed label
+  the student must find is now visible (ctcbook-100001 s3, -150101 s1, -450501 s4, -600650 s0, radbook-141315 s2): owner
+  to decide. `tools/prep-ctc-figs.py grow_box` adds the margin on future runs; `tools/prep-radlx.mjs indexWith` keeps a
+  later revision. The radnotes and radmax cutters were not changed.
