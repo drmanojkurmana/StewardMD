@@ -157,6 +157,12 @@
     if (u.indexOf("/api/prep/bank/") === 0 && bankApi) u = bankApi + u.slice("/api/prep/bank/".length);
     return u.indexOf("/api/") === 0 && apiBase ? apiBase + u : u;
   }
+  /* lessonImages(les) -> the image srcs of a lesson's steps, in order, each once. */
+  function lessonImages(l) {
+    var out = [];
+    ((l && l.steps) || []).forEach(function (s) { var v = s && s.vis; if (v && v.kind === "image" && v.src && out.indexOf(v.src) < 0) out.push(v.src); });
+    return out;
+  }
   function pickQuiz(items, ids) { var by = {}; (items || []).forEach(function (it) { by[it.id] = it; }); return (ids || []).map(function (id) { return by[id]; }).filter(Boolean); }
 
   /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
@@ -170,7 +176,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonsFor: lessonsFor, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl };
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -298,6 +304,11 @@
     var api = (host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/", base = G.SMD_API_BASE || "";
     if (/^v\d{1,3}\//.test(str(src).replace(/^\/+/, ""))) { var u = lessonImgUrl(src, api); return u.charAt(0) === "/" && base ? base + u : u; }
     return imgUrl(src, api, base);
+  }
+  // Every figure of a lesson is fetched when it opens (not only as the reader reaches it), so a lesson opened once
+  // online keeps its X-rays offline: figures are immutable and served with a one-year cache.
+  function warm(les) {
+    try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.src = imgSrc(src); }); } catch (e) {}
   }
   function imageHtml(v) {
     return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '" loading="lazy" decoding="async"></button>' +
@@ -489,7 +500,7 @@
       if (host.stackTop() !== loading) return;   // left while loading
       var s = store(), p = s.ls[key];
       L.les = les; L.i = p && !p.done && p.i < les.steps.length ? p.i : 0; L.dir = 0;
-      save();
+      save(); warm(les);
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
     }, function () {
