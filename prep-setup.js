@@ -305,7 +305,7 @@
     var body = seg("su-timer", "Timer", opts, t, null);
     if (t === "q") {
       body += '<div class="su-nrow">' + seg("su-qs", "Seconds a question", QSECS.map(function (x) { return [x, x + " s"]; }), QSECS.indexOf(sel.qs) >= 0 ? sel.qs : -1, null) + stepper("su-qdec", "su-qinc", sel.qs + " s", "Custom seconds", 10, 600, sel.qs, "5 seconds less", "5 seconds more") + "</div>";
-      sub = sel.mode === "exam" ? "When the time is up the test moves on; that question stays unanswered." : "A ring shows the time for each question. Nothing moves on by itself.";
+      sub = "Each question has its own time, counted only while it is on screen and never reset. When it runs out the question locks and the set moves on.";
     } else if (t === "set") {
       var m = sel.mins || Math.max(1, n);
       body += '<div class="su-nrow">' + seg("su-mins", "Time for the set", [["0", "Exam pace"]], sel.mins ? -1 : "0", null) + stepper("su-mdec", "su-minc", m + " min", "Custom minutes", 1, 600, m, "Fewer minutes", "More minutes") + "</div>";
