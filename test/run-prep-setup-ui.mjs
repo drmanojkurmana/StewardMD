@@ -42,6 +42,7 @@ function moduleFile() {
     const x = { id: "bp-" + i, q: "Which root forms nerve " + i + "?", o: ["C5", "C6", "C7", "C8"], a: i % 4, exp: "Fixture explanation " + i + ".", t: "ana-brachial-plexus", d: (i % 3) + 1, prov: "LIC" };
     if (i % 5 === 0) Object.assign(x, { q: "The radiograph shown is of a shoulder after a fall. Which nerve is at risk?", img: ["fx-2025-r1-2-1.webp"], imgPlace: "stem" });
     else if (i % 2) x.q = "A " + (20 + i) + "-year-old man presents with weakness of the arm after a fall. Which nerve is injured?";
+    if (i === 7 || i === 13 || i === 23) Object.assign(x, { d: 3, vh: true });   // very hard (level 4 in the app)
     items.push(x);
   }
   return { topic: "ana-brachial-plexus", items };
@@ -129,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep29" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep29, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep30" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep30, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet
@@ -142,7 +143,11 @@ try {
   ok(/40\s*questions match/.test(await text("#suStatus")), "the pool is counted: " + await text("#suStatus"));
   ok(await count("type", "img") === 8 && await count("type", "case") === 16 && await count("type", "line") === 16 && await count("type", "all") === 40, "type counts: 8 image, 16 scenario, 16 one-liner");
   ok(await count("seen", "new") === 40 && await count("seen", "bm") === 0 && await count("seen", "due") === 0, "repeat counts on a fresh store");
-  ok(await count("d", "1") + await count("d", "2") + await count("d", "3") === 40, "difficulty counts add up");
+  ok(await count("d", "1") + await count("d", "2") + await count("d", "3") + await count("d", "4") === 40 && await count("d", "4") === 3, "difficulty counts add up; the 3 vh items count as Very hard");
+  ok(await text('#pnSetup [data-act=su-d][data-v="4"] span') === "Very hard", "a Very hard choice");
+  await click('#pnSetup [data-act=su-d][data-v="4"]');
+  ok(/3\s*questions match/.test(await text("#suStatus")), "Very hard: 3 match: " + await text("#suStatus"));
+  await click('#pnSetup [data-act=su-d][data-v=mix]');
   ok(await ev(`return document.querySelector('#pnSetup [data-act=su-mode][data-v=study]').getAttribute("aria-checked");`) === "true", "Practice mode preselected from the button");
   ok(await small("#pnSetup") === "", "every sheet button is at least 44 px tall " + await small("#pnSetup"));
   ok(!DASH.test(await screenText()), "no em or en dash");

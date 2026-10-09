@@ -22,7 +22,10 @@
 //       the book text), 02-solve (blind), 03-review, 04-rewrite (once, with the reason) + gates, 05-solve2, 06-review2,
 //       07-explain (Marrow x), 08-explain-redo (once). Resumable: state in <dir>/work/run/state.json.
 //   node tools/prep-medcov.mjs checks-prep  files for the Haiku duplicate and fact checks (work/checks/in-*.json)
-//   node tools/prep-medcov.mjs assemble     out/overlay/<subject>/<module>.json (set "medcov") + summary
+//   node tools/prep-medcov.mjs plan3        plan topics that ended with no item -> work/plan3.json (run --plan plan3.json --work run3)
+//   node tools/prep-medcov.mjs tidy [--dry-run]   off-topic note lines picked by the model (line numbers only, no new
+//       text) -> work/tidy/decisions.json; assemble drops them through code gates and cuts the "X is correct because" opener
+//   node tools/prep-medcov.mjs assemble     out/overlay/<subject>/<module>.json (set "medcov", R2 folder OUT_SET) + summary
 //   node tools/prep-medcov.mjs upload [--dry-run]   R2 (wrangler --remote), then SHA-256 over https://stewardmd.in
 // Cost rows: $CLAUDE_JOB_DIR/tmp/medfacts/log.tsv (else <dir>/work/log.tsv).
 import fs from "node:fs";
@@ -38,10 +41,13 @@ import {
 } from "../functions/_prep-core.js";
 import { createVertex, requestBody, costUsd, vertexConfig } from "./prep-vertex.mjs";
 import { stage } from "./prep-lessons.mjs";
-import { readX, gateX } from "./prep-radnotes.mjs";
+import { readX, gateX, keyAgrees } from "./prep-radnotes.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const SET = "medcov";
+// The R2 folder of this release: overlay/<OUT_SET>/<subject>/<module>.json. Files are immutable and phones keep them,
+// so a changed release goes to a new folder (medcov2 holds rounds 1 to 3 with the tidied explanations).
+export const OUT_SET = "medcov2";
 const L = ["A", "B", "C", "D"];
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
 const writeJson = (p, o, pretty) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, pretty ? JSON.stringify(o, null, 1) : JSON.stringify(o)); };
@@ -384,6 +390,123 @@ export function finalItem(it, x) {
 }
 
 // =====================================================================================================================
+// Tidy (explanations only; keys, options and stems are never touched)
+// =====================================================================================================================
+const cap1 = (s) => s.replace(/^[a-z]/, (c) => c.toUpperCase());
+const OPENER = /^(.{2,200}?)\s+(?:is|are)\s+(?:the\s+)?(?:correct|right|best)(?:\s+[a-z-]+){0,2}?\s*,?\s+(?:because|as|since)\s+(.{8,})$/i;
+const OPENER2 = /^the\s+(?:correct|right|best)\s+(?:answer|option|choice)\s+is\s+(.{2,200}?)\s*,?\s+(?:because|as|since)\s+(.{8,})$/i;
+/* keyOpener(key, it) -> the key line without the "X is correct because" opener ("X: reason"), or the key as it was
+ * when the pattern does not match or the result would no longer name the answer. */
+export function keyOpener(key, it) {
+  const k = String(key || "").trim(), m = k.match(OPENER) || k.match(OPENER2);
+  if (!m) return k;
+  const out = cap1(m[1].trim().replace(/[,:;]$/, "")) + ": " + cap1(m[2].trim());
+  return keyAgrees(out, it) ? out : k;
+}
+/* noteLines(notes) -> [{ t, kind }]: h heading, b bullet, n numbered step, th/ts table head and separator, tr table
+ * row, p plain, e empty. Only b, n, tr and p lines can be dropped. */
+export function noteLines(notes) {
+  const lines = String(notes || "").split("\n"), out = [];
+  for (let i = 0; i < lines.length; i++) {
+    const t = lines[i], x = t.trim();
+    let kind = !x ? "e" : /^#{1,6}\s/.test(x) ? "h" : /^[-*]\s/.test(x) ? "b" : /^\d+\.\s/.test(x) ? "n" : "p";
+    if (/^\|/.test(x)) { const prev = out[out.length - 1]; kind = !prev || !/^t/.test(prev.kind) ? "th" : prev.kind === "th" && /^\|[\s|:-]+\|?$/.test(x) ? "ts" : "tr"; }
+    out.push({ t, kind });
+  }
+  return out;
+}
+export const DROPPABLE = new Set(["b", "n", "tr", "p"]);
+/* applyDrops(notes, drops) -> the notes without the dropped lines, or null when the gates fail: only lines that end
+ * their block (a run of list lines or of table rows) go, so a line in the middle stays; at most 45% of the
+ * words go, at least 50 words stay, nothing but whole lines goes (no new text). Headings left with nothing under them
+ * go, a table left with no rows goes, numbered steps are renumbered. */
+export function applyDrops(notes, drops) {
+  const L0 = noteLines(notes), asked = new Set((drops || []).filter((d) => Number.isInteger(d) && L0[d] && DROPPABLE.has(L0[d].kind)));
+  // only trailing lines go: within each block (a run of list lines or of table rows), the asked lines that end it
+  const set = new Set(), fam = (k) => (k === "tr" ? "t" : DROPPABLE.has(k) ? "l" : "");
+  for (let i = L0.length - 1; i >= 0; i--) {
+    const f = fam(L0[i].kind); if (!f) continue;
+    let j = i; while (j >= 0 && fam(L0[j].kind) === f) j--;
+    const tail = []; for (let k = i; k > j && asked.has(k); k--) tail.push(k);
+    // a comparison table keeps at least one row
+    if (!(f === "t" && tail.length === i - j)) tail.forEach((k) => set.add(k));
+    i = j + 1;
+  }
+  if (!set.size) return null;
+  let keep = L0.filter((l, i) => !set.has(i));
+  // a table header and separator with no row left go too
+  keep = keep.filter((l, i) => !(l.kind === "th" && !(keep[i + 2] && keep[i + 2].kind === "tr")) && !(l.kind === "ts" && !(keep[i + 1] && keep[i + 1].kind === "tr")));
+  // a heading with nothing under it before the next heading or the end goes
+  keep = keep.filter((l, i) => { if (l.kind !== "h") return true; for (let j = i + 1; j < keep.length; j++) { if (keep[j].kind === "e") continue; return keep[j].kind !== "h"; } return false; });
+  // numbered steps renumbered within each run
+  let n = 0;
+  keep = keep.map((l) => { if (l.kind !== "n") { if (l.kind !== "e") n = 0; return l; } n++; return { ...l, t: l.t.replace(/^(\s*)\d+\./, "$1" + n + ".") }; });
+  const out = keep.map((l) => l.t).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  const w = (s) => words(String(s).replace(/[#*|-]/g, " "));
+  if (w(out) < 50 || w(out) < w(notes) * 0.55) return null;
+  return out;
+}
+/* tidyItem(it, dec) -> a copy with the key line's opener cut and the dropped note lines gone; exp and the right
+ * option's reason follow the key line. Answer key, options, stem and the other reasons are untouched. */
+export function tidyItem(it, dec) {
+  const out = JSON.parse(JSON.stringify(it)), x = out.x, oldKey = x.key;
+  x.key = keyOpener(x.key, it);
+  if (x.key !== oldKey) { if (out.exp === oldKey) out.exp = x.key; if (Array.isArray(out.r) && out.r[out.a] === oldKey) out.r[out.a] = x.key; }
+  const notes = dec && dec.drop && dec.drop.length ? applyDrops(x.notes, dec.drop) : null;
+  if (notes) x.notes = notes;
+  return out;
+}
+const TIDY_SCHEMA = OB({ r: SO("ARRAY", { items: OB({ i: SO("INTEGER"), drop: SO("ARRAY", { items: SO("INTEGER") }) }, ["i", "drop"]) }) }, ["r"]);
+export function tidyPrompt(items) {
+  const system = [
+    "You edit topic notes shown under Indian postgraduate entrance MCQs in internal medicine. Each item gives the question, its options, the correct answer and the notes as numbered lines.",
+    "Return, for each item, the numbers of the lines that are off the topic: a line about a different disease, drug, organ or concept than the one the question tests, or a side fact that does not help a student answer this question or a close variation of it.",
+    "Keep every line about the tested condition or concept: its features, diagnosis, treatment, mechanism, look-alikes and the distinctions the options test. Never list a heading or a table header. When unsure, keep the line. Most items need no change: then return an empty list.",
+    DATA_RULE,
+  ].join("\n");
+  const user = "<items>\n" + items.map((it, k) => [`Item ${k}`, `Question: ${untag(cleanText(it.q, 1500))}`, ...it.o.map((o, j) => `${L[j]}. ${untag(cleanText(o, 300))}`), `Correct: ${L[it.a]}`, "Notes:",
+    ...noteLines(it.x.notes).map((l, i) => (l.kind === "e" ? "" : DROPPABLE.has(l.kind) ? `[${i}] ` : `(${i}, keep) `) + untag(l.t)).filter(Boolean)].join("\n")).join("\n\n") + "\n</items>";
+  return { op: "tidy", system, user, schema: TIDY_SCHEMA, maxOut: 64 + items.length * 60, temperature: 0 };
+}
+export function readTidy(text, n) {
+  const j = parseModelJson(text), out = Array.from({ length: n }, () => null);
+  for (const r of (j && Array.isArray(j.r) ? j.r : [])) if (Number.isInteger(r.i) && r.i >= 0 && r.i < n && !out[r.i]) out[r.i] = { drop: (Array.isArray(r.drop) ? r.drop : []).filter(Number.isInteger).slice(0, 12) };
+  return out;
+}
+const TPER = 8;
+/* tidy: one Batch over the items with no decision yet (work/tidy/decisions.json); --dry-run prints the cost only. */
+async function tidyRun(dir, args) {
+  const td = path.join(dir, "work/tidy"), decFile = path.join(td, "decisions.json"), dec = readJson(decFile, {});
+  const items = runItems(dir).filter((it) => !dec[it.id]);
+  const groups = []; for (let i = 0; i < items.length; i += TPER) groups.push({ key: "t" + i, list: items.slice(i, i + TPER) });
+  const lines = groups.map((g) => ({ key: g.key, request: requestBody(tidyPrompt(g.list)) }));
+  const model = vertexConfig(process.env).model;
+  const est = lines.reduce((a, l) => a + costUsd({ inTok: Math.ceil(JSON.stringify(l.request).length / 4), outTok: l.request.generationConfig.maxOutputTokens * 0.5 }, model, { batch: true }), 0);
+  console.log(`tidy: ${items.length} items in ${lines.length} requests, about $${est.toFixed(4)} at Batch price (spent so far $${spent(dir).toFixed(4)})`);
+  if (args.flags.has("dry-run") || !items.length) { if (items.length) logRow(dir, { stage: "tidy-dry-run", n: 0, inTok: 0, outTok: 0, usd: est, note: "estimate" }); return; }
+  const cap = Number(args.cap || 15);
+  const work = path.join(td, args.work || "t" + Object.keys(dec).length), stFile = path.join(work, "state.json");
+  const state = readJson(stFile, null) || { v: 1, run: "medcov-tidy-" + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ""), stages: {} };
+  if (!(state.stages.tidy && state.stages.tidy.jobId) && spent(dir) + est > cap) throw new Error(`tidy: estimate would pass the $${cap} cap`);
+  const vx = createVertex({});
+  const sctx = { vx, work, state, save: () => writeJson(stFile, state, true), pollMs: (Number(args["poll-sec"]) || 30) * 1000, noWait: args.flags.has("no-wait"), maxWaitMs: 24 * 3600e3, jobPrefix: "medcov", log: console.log };
+  const before = state.stages.tidy && state.stages.tidy.status === "done";
+  const out = await stage(sctx, "tidy", lines, "tidy");
+  const st = state.stages.tidy;
+  if (!before && st && st.usage) logRow(dir, { stage: "tidy", n: lines.length, inTok: st.usage.inTok, outTok: st.usage.outTok + (st.usage.thinkTok || 0), usd: st.usage.usd });
+  let changed = 0, gated = 0;
+  for (const g of groups) readTidy((out.get(g.key) || {}).text || "", g.list.length).forEach((d, k) => {
+    const it = g.list[k]; if (!d) return;
+    const notes = d.drop.length ? applyDrops(it.x.notes, d.drop) : null;
+    if (d.drop.length && !notes) gated++;
+    if (notes) changed++;
+    dec[it.id] = { drop: d.drop };   // the model's pick; applyDrops keeps only the trailing lines that pass the gates
+  });
+  writeJson(decFile, dec, true);
+  console.log(`tidy: decisions ${Object.keys(dec).length}; notes trimmed ${changed}, drops refused by the gates ${gated}`);
+}
+
+// =====================================================================================================================
 // Logging
 // =====================================================================================================================
 export function logPath(dir) { return process.env.CLAUDE_JOB_DIR ? path.join(process.env.CLAUDE_JOB_DIR, "tmp/medfacts/log.tsv") : path.join(dir, "work/log.tsv"); }
@@ -593,6 +716,7 @@ function assemble(dir) {
   const cd = path.join(dir, "work/checks");
   const verdicts = fs.existsSync(cd) ? fs.readdirSync(cd).filter((f) => /^out-\d+\.json$/.test(f)).flatMap((f) => readJson(path.join(cd, f), [])) : [];
   const v = new Map(verdicts.map((x) => [x.id, x]));
+  const tidyDec = readJson(path.join(dir, "work/tidy/decisions.json"), {});
   const review = [], drop = { dupBank: 0, dupRun: 0, fact: 0, unchecked: 0, dash: 0 };
   const keptIds = new Set();
   const items = [];
@@ -604,14 +728,14 @@ function assemble(dir) {
     if (r.keyOk !== true || r.singleBest !== true) { drop.fact++; review.push({ id: it.id, module: it.t, q: it.q, key: it.o[it.a], why: r.why || "" }); continue; }
     if (/[–—]/.test(JSON.stringify(it))) { drop.dash++; continue; }
     keptIds.add(it.id);
-    items.push(it);
+    items.push(tidyItem(it, tidyDec[it.id]));
   }
   const out = path.join(dir, "out"); fs.rmSync(out, { recursive: true, force: true });
   const byMod = {};
   for (const it of items) { const k = it._sid + "/" + it.t; (byMod[k] = byMod[k] || []).push(it); }
   for (const [k, list] of Object.entries(byMod)) {
     const [sid, m] = k.split("/");
-    writeJson(path.join(out, "overlay", sid, m + ".json"), { topic: m, set: SET, v: 1, items: list.map(({ _sid, _tid, ...rest }) => rest) });
+    writeJson(path.join(out, "overlay", sid, m + ".json"), { topic: m, set: SET, v: 2, items: list.map(({ _sid, _tid, ...rest }) => rest) });
   }
   const count = (f) => items.reduce((a, i) => { const k = f(i); a[k] = (a[k] || 0) + 1; return a; }, {});
   const sum = { items: items.length, bySubject: count((i) => i._sid), byModule: Object.fromEntries(Object.entries(byMod).map(([k, l]) => [k, l.length])),
@@ -635,7 +759,7 @@ function put(key, file, dry) {
 }
 async function upload(dir, args) {
   const dry = args.flags.has("dry-run"), out = path.join(dir, "out", "overlay"), plan = [];
-  for (const sid of fs.readdirSync(out)) for (const f of fs.readdirSync(path.join(out, sid))) plan.push({ key: `prep-bank/overlay/${SET}/${sid}/${f}`, file: path.join(out, sid, f) });
+  for (const sid of fs.readdirSync(out)) for (const f of fs.readdirSync(path.join(out, sid))) plan.push({ key: `prep-bank/overlay/${OUT_SET}/${sid}/${f}`, file: path.join(out, sid, f) });
   const manifest = [];
   if (!args.flags.has("verify-only")) for (const p of plan) put(p.key, p.file, dry);
   for (const p of plan) manifest.push({ key: p.key, sha256: sha(fs.readFileSync(p.file)), bytes: fs.statSync(p.file).size });
@@ -711,6 +835,18 @@ export async function main(argv = process.argv.slice(2)) {
     console.log(`plan2: ${topics.length} topics, ${n} slots`);
     return;
   }
+  if (cmd === "plan3") {
+    // a third round: the plan topics that ended with no item in the overlay (every try failed a gate or a check);
+    // topics left out of the plan for too little grounding stay out
+    const plan = readJson(path.join(dir, "work/plan.json"), null), tidOf = new Map(runItems(dir).map((i) => [i.id, i._tid]));
+    const od = path.join(dir, "out/overlay"), have = new Set();
+    for (const sid of fs.existsSync(od) ? fs.readdirSync(od) : []) for (const f of fs.readdirSync(path.join(od, sid))) for (const it of readJson(path.join(od, sid, f), { items: [] }).items) have.add(tidOf.get(it.id));
+    const topics = plan.topics.filter((t) => !have.has(t.tid));
+    writeJson(path.join(dir, "work/plan3.json"), { v: 1, topics }, false);
+    console.log(`plan3: ${topics.length} topics, ${topics.reduce((a, t) => a + t.slots.length, 0)} slots`);
+    return;
+  }
+  if (cmd === "tidy") return tidyRun(dir, args);
   if (cmd === "dry-run") return dryRun(dir, args);
   if (cmd === "run") return runAll(dir, args);
   if (cmd === "checks-prep") return checksPrep(dir, args);

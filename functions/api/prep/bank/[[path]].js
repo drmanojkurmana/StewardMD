@@ -32,7 +32,8 @@ const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
 // overlays overlay/radnotes/<subject>/<module>.json (both immutable: a new run writes new names or a new version).
 const RADNOTES_RE = /^(?:img\/radnotes\/rn-[a-z0-9-]{2,80}\.webp|overlay\/radnotes\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
-const MEDCOV_RE = /^overlay\/medcov\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// A new release goes to a new folder (medcov2, medcov3, ...) so phones that cached the old file fetch the new one.
+const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
