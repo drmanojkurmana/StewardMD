@@ -692,15 +692,15 @@
     pct = Math.max(0, Math.min(100, Math.round(pct || 0)));
     return '<span class="pn-mring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg><b>" + label + "</b></span>";
   }
-  // Round 5: a list screen's hero band. Painted art (prep/art/<art>.webp) fading into the deep hero surface, one large
-  // figure and its label laid over it, an optional line under them. Decorative art; the text is the content.
+  // A list screen's figure card (2026-10-10: plain card, no painted art): one large figure and its label, an optional
+  // line under them. The art key stays as a class for older styles.
   function hband(art, fig, label, sub) {
     return '<section class="pn-hband pn-hb-' + art + '"><p class="pn-hbt"><b class="pn-hbn">' + fig + '</b> <span class="pn-hbl">' + label + "</span></p>" + (sub ? '<p class="pn-hbs">' + sub + "</p>" : "") + "</section>";
   }
   function bar(title, sub, left, right) {
     var isPN = title === "PrepNucleus";
     var tHtml = isPN
-      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo" src="/prep/art/logo-icon-96.webp" alt="" width="22" height="22" decoding="async"><span>' + title + "</span></h1>"
+      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo pn-lg-l" src="/prep/art/logo-icon-96.webp" alt="" width="24" height="24" decoding="async"><img class="pn-bar-logo pn-lg-d" src="/prep/art/logo-mark-dark-96.webp" alt="" width="24" height="24" decoding="async"><span>' + title + "</span></h1>"
       : "<h1>" + title + "</h1>";
     return '<header class="pn-bar' + (isPN ? " pn-bar-brand" : "") + '"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t">' + tHtml + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
@@ -972,14 +972,21 @@
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
     var nb = Object.keys(s.bm).length;
-    paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
+    // Back on home with every index already read: the subject rows and Solve next draw complete in the first paint, so
+    // nothing above the kept scroll position grows after it is restored (no anchoring jump).
+    var known = subs.every(function (sb) { return !!st.ix[sb.id]; }), nx0 = known ? solveNext(subs, st.ix, s, today(), s.exam) : null;
+    var you = (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
+      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
+      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "");
+    /* Quiet home (2026-10-10, owner brief): the brand is the mark and the name in the bar (no banner, no painted sky).
+       Top down: readiness and days to the exam, today's next task and the rest of the plan, practice, subjects, then
+       the secondary figures (streak, today, level) and Compete. */
+    paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus"></div>' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      (arena ? '<p class="pn-eb" aria-hidden="true">Live, with other students</p><h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
-      '<p class="pn-eb" aria-hidden="true">On your own time</p><h2 class="pn-h">Practise</h2>' +
-      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT"></b></span>' + ico("chev") + "</button>" +
+      '<h2 class="pn-h">Practise</h2>' +
+      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
       '<div class="pn-group">' +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
@@ -991,11 +998,13 @@
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
-      (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
-      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
-      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "") + "</div>" +
+      "</div>" +
       psHomeHtml(s) +
-      '<p class="pn-eb" aria-hidden="true">' + subs.length + (subs.length === 1 ? " subject" : " subjects") + '</p><h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
+      (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
+      (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
+      (arena ? '<h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
     if (arena) G.PREP_ARENA.homeMounted(HOST);
@@ -1006,9 +1015,10 @@
       if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
       var nx = solveNext(subs, st.ix, s, today(), s.exam), el = root.querySelector("#pnNext");
       if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
-      if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
+      if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = nextLabel(nx); }
     });
   }
+  function nextLabel(nx) { return (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
   function tile(sb, ix) {
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });

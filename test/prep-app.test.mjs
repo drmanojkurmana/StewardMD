@@ -332,10 +332,14 @@ test("PrepNucleus 4K logo icon and banner assets ship and are wired", () => {
 
   const prepJs = read("prep.js");
   assert.match(prepJs, /pn-bar-logo/, "prep.js must render the logo icon in the header");
-  assert.match(prepJs, /pn-brand-banner/, "prep.js must render the brand banner in renderHome");
+  // Quiet home (2026-10-10, owner): no oversized banner on home; the brand is the mark beside the name in the bar, a
+  // flat teal mark on dark (logo-mark-dark-96.webp) and the dark green one on light.
+  assert.doesNotMatch(prepJs, /pn-brand-banner/, "home no longer renders the brand banner");
+  assert.match(prepJs, /logo-mark-dark-96\.webp/, "the dark theme bar uses the flat teal mark");
+  assert.ok(fs.existsSync(path.join(ROOT, "prep/art/logo-mark-dark-96.webp")), "logo-mark-dark-96.webp must exist");
 
   const prepCss = read("prep.css");
-  assert.match(prepCss, /\.pn-brand-banner/, "prep.css must style pn-brand-banner");
+  assert.doesNotMatch(prepCss, /pn-sky|hero-dark\.webp|banner-dark\.webp/, "prep.css draws no painted sky or banner");
   assert.match(prepCss, /\.pn-bar-logo/, "prep.css must style pn-bar-logo");
 
   const homeJs = read("home.js");
