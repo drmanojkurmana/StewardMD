@@ -12,7 +12,7 @@
    The M and the star use currentColor, the "AI" uses --mkai-accent (default #2fb3a6), the tile has fixed colours. */
 (function (G) {
   "use strict";
-  var URL = "/assets/maik-ai-mark.svg?v=mkai1", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
+  var URL = "/assets/maik-ai-mark.svg?v=mkai2", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
   function variantFor(v, size) {
     if (v === "tile" && (size || 20) < 40) return "tile-mark";
     if (VARIANTS[v]) return v;
