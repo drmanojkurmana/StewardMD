@@ -1,0 +1,176 @@
+{
+  "id": "hysfluid",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Hysteroscopy fluid deficit: know the limit and correct sodium slowly",
+    "hi": "hysteroscopy (बच्चेदानी के अंदर दूरबीन से सर्जरी) में fluid की कमी: limit पहचानें, sodium धीरे सुधारें"
+  },
+  "scenario": {
+    "en": "Three women have operative hysteroscopy, which is surgery inside the uterus through a scope. The fluid deficit is recorded throughout each procedure. Teaching scenario, not real patients.",
+    "hi": "तीन महिलाओं की operative hysteroscopy (बच्चेदानी के अंदर दूरबीन से सर्जरी) हो रही है। हर सर्जरी के दौरान fluid की कमी लगातार नापी जाती है। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "BSGE/ESGE guideline on management of fluid distension media in operative hysteroscopy. Gynecol Surg 2016 (PMC5133285), fluid overload thresholds and management of hyponatraemia",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5133285/"
+    }
+  ],
+  "stages": [
+    {
+      "id": "healthy",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1 is a healthy woman of reproductive age. Monopolar resection is done with 1.5% glycine, a hypotonic fluid. The fluid deficit has reached 1,000 mL. What do you do?",
+        "hi": "पहली महिला स्वस्थ है और प्रजनन आयु में है। monopolar resection 1.5% glycine (hypotonic fluid) से हो रहा है। fluid की कमी 1,000 mL तक पहुँच गई है। आप क्या करेंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "frail",
+          "text": {
+            "en": "Stop the procedure. 1,000 mL is the limit for hypotonic fluid in a healthy woman.",
+            "hi": "सर्जरी रोकें। स्वस्थ महिला में hypotonic fluid की सीमा 1,000 mL है।"
+          },
+          "feedback": {
+            "en": "BSGE/ESGE: 1000 mL has traditionally been the threshold at which procedures should be curtailed with hypotonic media in women of reproductive age.",
+            "hi": "BSGE/ESGE: hypotonic media में प्रजनन आयु की महिलाओं के लिए procedure 1000 mL पर रोकने की सीमा परंपरागत रूप से रही है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "frail",
+          "text": {
+            "en": "Continue to 2,500 mL, the isotonic limit, because glycine is well tolerated.",
+            "hi": "2,500 mL (isotonic की सीमा) तक जारी रखें, क्योंकि glycine अच्छी तरह सहन होता है।"
+          },
+          "feedback": {
+            "en": "2,500 mL is the threshold for isotonic solutions. About 1000 mL of 1.5% glycine lowers serum sodium by about 10 mmol/L.",
+            "hi": "2,500 mL isotonic solutions की सीमा है। लगभग 1000 mL के 1.5% glycine से serum sodium लगभग 10 mmol/L गिरता है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "frail",
+          "text": {
+            "en": "Continue until the procedure is finished, with no limit.",
+            "hi": "सर्जरी खत्म होने तक बिना किसी सीमा के जारी रखें।"
+          },
+          "feedback": {
+            "en": "BSGE/ESGE sets 1000 mL as the threshold for hypotonic media in healthy women, so the procedure is curtailed there.",
+            "hi": "BSGE/ESGE स्वस्थ महिलाओं में hypotonic media के लिए 1000 mL की सीमा रखता है, इसलिए procedure वहीं रोका जाता है।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frail",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2 is 72 years old and has heart disease. Bipolar resection is done with normal saline, an isotonic fluid. Which fluid deficit limit applies?",
+        "hi": "दूसरी महिला 72 वर्ष की है और उसे heart disease है। bipolar resection normal saline (isotonic fluid) से हो रहा है। fluid की कौन-सी कमी की सीमा लागू होगी?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "sodium",
+          "text": {
+            "en": "1,500 mL.",
+            "hi": "1,500 mL।"
+          },
+          "feedback": {
+            "en": "BSGE/ESGE: in the elderly or with cardiovascular disease, the suggested upper deficit is 750 mL for hypotonic solutions and 1500 mL for isotonic solutions.",
+            "hi": "BSGE/ESGE: बुज़ुर्गों या cardiovascular disease में सुझाई गई ऊपरी सीमा hypotonic के लिए 750 mL और isotonic के लिए 1500 mL है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "sodium",
+          "text": {
+            "en": "2,500 mL, the standard isotonic limit.",
+            "hi": "2,500 mL, सामान्य isotonic सीमा।"
+          },
+          "feedback": {
+            "en": "2500 mL applies to otherwise healthy fit women. The elderly and women with cardiovascular disease need lower thresholds.",
+            "hi": "2500 mL सामान्य रूप से स्वस्थ और fit महिलाओं के लिए है। बुज़ुर्गों और cardiovascular disease वाली महिलाओं के लिए सीमा कम है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "sodium",
+          "text": {
+            "en": "No limit, because saline is isotonic.",
+            "hi": "कोई सीमा नहीं, क्योंकि saline isotonic है।"
+          },
+          "feedback": {
+            "en": "Isotonic fluid also has a limit. BSGE/ESGE sets 2500 mL for healthy women and lower limits for those with heart disease.",
+            "hi": "isotonic fluid की भी सीमा होती है। BSGE/ESGE स्वस्थ महिलाओं के लिए 2500 mL और heart disease वालों के लिए कम सीमा रखता है।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sodium",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3 had glycine overload. Her serum sodium is 118 mmol/L, with headache and nausea. How should her sodium be corrected?",
+        "hi": "तीसरी महिला में glycine की अधिकता (overload) हुई है। उसका serum sodium 118 mmol/L है, सिरदर्द और मतली है। sodium कैसे सुधारा जाए?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "Slowly, with 3% hypertonic saline in high dependency care, typically 1 to 2 mmol/L per hour.",
+            "hi": "धीरे-धीरे, high dependency care में 3% hypertonic saline से, आमतौर पर 1 से 2 mmol/L प्रति घंटे की दर से।"
+          },
+          "feedback": {
+            "en": "BSGE/ESGE: a slow 3% hypertonic sodium chloride infusion, typically 1 to 2 mmol/L per hour, prevents pontine myelinolysis. It is given in a high dependency or intensive care unit.",
+            "hi": "BSGE/ESGE: 3% hypertonic sodium chloride का धीमा infusion, आमतौर पर 1 से 2 mmol/L प्रति घंटे, pontine myelinolysis से बचाता है। यह high dependency या intensive care unit में दिया जाता है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "A fast normal saline bolus, to restore sodium at once.",
+            "hi": "तुरंत sodium लौटाने के लिए normal saline का तेज़ bolus।"
+          },
+          "feedback": {
+            "en": "The source calls for a slow rise, typically 1 to 2 mmol/L per hour, to prevent pontine myelinolysis.",
+            "hi": "source धीमी बढ़त माँगता है, आमतौर पर 1 से 2 mmol/L प्रति घंटे, ताकि pontine myelinolysis से बचा जाए।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Raise sodium by 10 mmol/L in the first hour.",
+            "hi": "पहले घंटे में sodium 10 mmol/L बढ़ाएँ।"
+          },
+          "feedback": {
+            "en": "The source gives a typical rate of 1 to 2 mmol/L per hour. A 10 mmol/L rise in the first hour is far faster than that.",
+            "hi": "source की आमतौर पर दर 1 से 2 mmol/L प्रति घंटे है। पहले घंटे में 10 mmol/L की बढ़त इससे कहीं तेज़ है।"
+          }
+        }
+      ]
+    }
+  ]
+}
