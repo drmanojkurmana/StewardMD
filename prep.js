@@ -409,9 +409,9 @@
   /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
-     goes to a new folder (medcov2: rounds 1 to 3 with tidied explanations) and the folder named here moves with it.
+     goes to a new folder (medcov3 now; medcov2 and medcov copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"], medicine: ["medcov2"], "ss-pulmonology": ["medcov2"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
   // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {

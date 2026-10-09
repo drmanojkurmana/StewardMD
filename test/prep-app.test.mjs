@@ -113,7 +113,7 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov2"\], "ss-pulmonology": \["medcov2"\]/);
+  assert.match(read("prep.js"), /medicine: \["medcov3"\], "ss-pulmonology": \["medcov3"\]/);
 });
 
 test("fmtTime and examOf", () => {

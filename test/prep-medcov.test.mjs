@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   clusterTopics, coverageOf, gapOf, assignLevels, fmtOk, gateQ, numbersOk, reasoningOrder, finalItem, sanitizeQ, us, kwHit, SET,
-  OUT_SET, keyOpener, noteLines, applyDrops, tidyItem, readTidy, tidyPrompt,
+  OUT_SET, keyOpener, comboKeyAgrees, gateXAll, noteLines, applyDrops, tidyItem, readTidy, tidyPrompt,
 } from "../tools/prep-medcov.mjs";
 
 const g = (sents) => ({ sents: sents.map((tx, n) => ({ n, tx })), text: sents.join(" ") });
@@ -124,9 +124,10 @@ test("tidy: key opener cut only when the line still names the answer; keys, opti
   assert.equal(keyOpener("Cardiac troponin is the correct answer because it is the most specific marker.", it), "Cardiac troponin: It is the most specific marker.");
   assert.equal(keyOpener("Cardiac troponin is the correct marker as it rises in necrosis only.", it), "Cardiac troponin: It rises in necrosis only.");
   assert.equal(keyOpener("The correct answer is cardiac troponin because it is specific to the heart.", it), "Cardiac troponin: It is specific to the heart.");
-  assert.equal(keyOpener("A is correct because it is specific to the heart.", it), "A is correct because it is specific to the heart.", "a bare letter does not name the answer: kept");
+  assert.equal(keyOpener("A is correct because it is specific to the heart.", it), "A (Cardiac troponin): It is specific to the heart.", "a bare letter gets the option text");
+  assert.equal(keyOpener("C is correct because it is specific to the heart.", it), "C is correct because it is specific to the heart.", "a wrong letter: kept");
   assert.equal(keyOpener("Troponin rises within hours of necrosis.", it), "Troponin rises within hours of necrosis.");
-  assert.equal(OUT_SET, "medcov2", "a changed release goes to a new immutable folder");
+  assert.equal(OUT_SET, "medcov3", "a changed release goes to a new immutable folder");
 });
 
 test("tidy: applyDrops removes whole lines only, trailing lines only, headings and empty tables follow, refuses big cuts", () => {
@@ -159,4 +160,22 @@ test("tidy: tidyItem follows the key line into exp and the right option's reason
   assert.deepEqual(readTidy('{"r":[{"i":1,"drop":[3,4]},{"i":9,"drop":[1]}]}', 2), [null, { drop: [3, 4] }]);
   const p = tidyPrompt([it]);
   assert.match(p.user, /\(0, keep\) ## N/); assert.match(p.user, /\[1\] - n/);
+});
+
+test("loose combo key line: letter with the right ka, statement set, matching pairs or the A/R verdict; never for single answers", () => {
+  const m = { fm: "match", o: ["a-1, b-2, c-3, d-4", "a-2, b-1, c-4, d-3", "a-3, b-4, c-1, d-2", "a-4, b-3, c-2, d-1"], a: 1 };
+  assert.ok(comboKeyAgrees("B is correct because the drugs match their effects.", m, "B"));
+  assert.ok(comboKeyAgrees("Option B matches each drug to its effect.", m, "B"));
+  assert.ok(!comboKeyAgrees("B is correct because the drugs match.", m, "C"), "ka must agree");
+  assert.ok(!comboKeyAgrees("C is correct because the drugs match.", m, "C"), "the wrong letter");
+  assert.ok(comboKeyAgrees("The right pairs are d-3, a-2, c-4 and b-1.", m, ""));
+  assert.ok(!comboKeyAgrees("The right pairs are a-2, b-1, c-3, d-4.", m, ""));
+  const t = { fm: "tf", o: ["1 and 2 only", "1 and 3 only", "2 and 3 only", "1, 2 and 3"], a: 1 };
+  assert.ok(comboKeyAgrees("Statements 3 and 1 are correct since both hold.", t, ""));
+  assert.ok(!comboKeyAgrees("Statements 1 and 2 are correct since both hold.", t, ""));
+  const r = { fm: "reasoning", o: ["Both A and R are true, and R explains A", "Both A and R are true, but R does not explain A", "A is true, but R is false", "A is false, but R is true"], a: 2 };
+  assert.ok(comboKeyAgrees("The assertion is true here but the reason is wrong: A is true and R is false.", r, ""));
+  assert.ok(!comboKeyAgrees("Both A and R are true and R explains A.", r, ""));
+  assert.ok(!comboKeyAgrees("B is correct.", { o: ["x", "y", "z", "w"], a: 1 }, "B"), "single-answer formats stay strict");
+  assert.equal(keyOpener("B is the correct match because each drug fits its effect.", m), "B (a-2, b-1, c-4, d-3): Each drug fits its effect.");
 });
