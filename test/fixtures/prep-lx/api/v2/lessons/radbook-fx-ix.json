@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "id": "radbook-fx-ix",
+ "module": "rad-chest",
+ "subject": "radiology",
+ "set": "radbook",
+ "title": "Fixture: interactive chest",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Step one spots a sign. The **bright blob** is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "say": "Step one spots a sign. The bright blob is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rb-fx-ix-a.webp",
+    "alt": "Synthetic film with a bright round blob",
+    "caption": "A bright round blob in the upper right field.",
+    "ar": 0.8,
+    "spot": {
+     "q": "Tap the bright blob",
+     "box": [
+      0.58,
+      0.28,
+      0.2,
+      0.2
+     ],
+     "label": "Bright blob",
+     "why": "It is the only dense round shadow on this synthetic film, high on the right side."
+    }
+   }
+  },
+  {
+   "tx": "Step two labels structures. The **labelled ring** is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "say": "Step two labels structures. The labelled ring is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rb-fx-ix-c.webp",
+    "alt": "Synthetic wide film with a ring and a blob",
+    "caption": "A ring with a lower blob.",
+    "ar": 1.5,
+    "marks": [
+     {
+      "x": 0.35,
+      "y": 0.62,
+      "label": "Lower blob"
+     },
+     {
+      "x": 0.18,
+      "y": 0.5,
+      "label": "Ring edge"
+     },
+     {
+      "x": 0.8,
+      "y": 0.5,
+      "label": "Far ring edge"
+     }
+    ]
+   },
+   "qc": {
+    "q": "The fixture ring is drawn as an outline.",
+    "o": [
+     "True",
+     "False"
+    ],
+    "a": 0,
+    "why": "The ring is a drawn outline, not a filled shape, on this synthetic film."
+   }
+  },
+  {
+   "tx": "Step three compares two films. The **two films** is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "say": "Step three compares two films. The two films is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rb-fx-ix-a.webp",
+    "alt": "Film with a blob",
+    "caption": "Two films of the same shape.",
+    "ar": 0.8,
+    "pair": {
+     "src": "v1/lessons/media/rb-fx-ix-b.webp",
+     "alt": "Film without a blob",
+     "tag": "No blob",
+     "tagA": "Blob",
+     "why": "Only the left film carries the dense round shadow.",
+     "ar": 0.8
+    }
+   },
+   "qc": {
+    "q": "Which film carries the blob?",
+    "o": [
+     "The blob film",
+     "The plain film",
+     "Neither film"
+    ],
+    "a": 0,
+    "why": "The blob sits only on the first film of the pair, as the tags say."
+   }
+  },
+  {
+   "tx": "Step four puts two shapes side by side. The **shape check** is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "say": "Step four puts two shapes side by side. The shape check is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rb-fx-ix-a.webp",
+    "alt": "Tall film",
+    "caption": "A tall film and a wide film.",
+    "ar": 0.8,
+    "pair": {
+     "src": "v1/lessons/media/rb-fx-ix-c.webp",
+     "alt": "Wide film",
+     "tag": "Wide film",
+     "tagA": "Tall film",
+     "ar": 1.5
+    }
+   },
+   "qc": {
+    "q": "This quick check is broken.",
+    "o": [
+     "Only one"
+    ],
+    "a": 3,
+    "why": "Broken on purpose."
+   }
+  },
+  {
+   "tx": "Step five is a table. The **table step** is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "say": "Step five is a table. The table step is the fixture term for this step. film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge film shadow lung border density air fluid edge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Blob",
+      "Dense"
+     ],
+     [
+      "Ring",
+      "Edge"
+     ]
+    ]
+   }
+  }
+ ],
+ "cards": [
+  {
+   "f": "Blob sign",
+   "b": "A dense round shadow on the synthetic film, used to test the cards."
+  },
+  {
+   "f": "Ring sign",
+   "b": "An outline ring on the wide synthetic film."
+  },
+  {
+   "f": "Plain film",
+   "b": "The film with no blob."
+  }
+ ],
+ "keys": [
+  "The **blob** is dense and round.",
+  "The ring is an outline.",
+  "Compare films side by side."
+ ]
+}

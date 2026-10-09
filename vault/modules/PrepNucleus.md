@@ -869,3 +869,32 @@ Owner request 2026-10-09 (with his answers). Layer C contract otherwise as [[pla
   `test/prep-generate.test.mjs` (5/30, 300 calls, deck-full, MT, ai-cost-cap), headless `test/run-prep-create-ui.mjs`
   (steps, 500-page picker, cap, 10 at a time to 50, deck screen, restore after IndexedDB is cleared; SHOTS at 390, 820,
   1180 dark and light; deletes its Chrome profile).
+
+## Interactive lessons + image-rich radiology lessons (2026-10-09, branch `feat/prep-interactive-lessons`, prep38)
+Owner 2026-10-09: radiology lessons "don't have images as much as needed ... make it interesting, interactive and the
+best way of learning."
+- **Reader (`prep-lessons.js` + `prep-lx.css`, loader CSS list):** new optional parts, all drawn from data:
+  spot the sign (`vis.spot { q, box [x,y,w,h] 0..1, label, why }`: tap on the image, hit = in the box or within 4%,
+  miss ring, second miss or "Show me" reveals), labelled figure (`vis.marks [{x,y,label}]`: numbered points, tap a
+  number or Show all, a key list under it), compare (`vis.pair { src, alt, tag, tagA, why, ar }`: a clip-path slider
+  when both shapes are within 12% (`sliderPair`), drag with pointer capture, range input for keys, Show buttons as the
+  single-tap alternative; else side by side, each enlarges), quick check (`step.qc { q, o, a, why }`, true/false when
+  o is ["True","False"]; one tap, in-place feedback), classic signs deck (`lesson.cards [{f,b}]`, flip cards, a page
+  after the steps) and key points (`lesson.keys`, the last page, with the score and best streak). `vis.ar` reserves the
+  figure's shape (and sizes the stage on landscape iPad so overlays stay aligned: never object-fit an overlaid img).
+  XP: 10 a step + 5 a right answer (first finish only). Pages = steps + cards + keys (`pages()`).
+- **Fallback:** a file with every new part still passes the old `checkLesson` (figures stay kind "image"), and
+  `tidyLesson()` drops any malformed optional part instead of failing the lesson. Revised lessons ship at
+  `v2/lessons/<key>.json` and their v1 index entry gets `"r": 2` (same key, progress kept); older readers ignore `r`
+  and keep their v1 copy (files are cached forever per path).
+- **Viewer:** `l-zoom` calls `window.PREP_VIEWER.open({ src, alt, caption, from })` when the shared viewer is loaded,
+  else the reader's own enlarge (now for any figure, the second image of a compare included).
+- **Data (`tools/prep-radlx.mjs`, private data `~/prep-data/radnotes/lx`):** pool (the book's figures for the topic,
+  the strict vote's dropped uses back in as candidates, licensed Open-i / Commons figures when the book has fewer than
+  4 spare; licence from the article's own <permissions> or Commons extmetadata) -> plan (gemini-2.5-flash, images
+  attached, one request a lesson) -> code gates -> two Haiku votes per element with a lesson rubric (labels and arrows
+  on a figure are fine; refuse only wrong for the step, unreadable, identifiers or third-party marks; overlays checked
+  on the figure with the box or numbered dots drawn) -> assemble -> upload (SHA-verified over the route).
+- Tests: `test/prep-radlx.test.mjs`, `test/run-prep-lessons-ix-ui.mjs` (fixture `test/fixtures/prep-lx`, synthetic
+  shapes; W=390|820|1180, PN_LIGHT=1). `test/serve.mjs` serves fixture lesson media immutable like the bank route so
+  the offline check sees the real HTTP cache.
