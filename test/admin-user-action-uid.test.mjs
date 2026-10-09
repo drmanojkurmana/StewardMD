@@ -11,6 +11,7 @@ test("an account id is enough: no email lookup, no not-found", async () => {
   const r = await post({ uid: "u-phone-only", action: "enable" });
   const j = await r.json();
   assert.notEqual(r.status, 404); assert.notEqual(j.error, "not-found");
+  assert.notEqual(r.status, 400, "an id without an email is a valid request"); assert.equal(j.user.uid, "u-phone-only");
 });
 test("neither id nor email is a bad request", async () => {
   const r = await post({ action: "enable" });
