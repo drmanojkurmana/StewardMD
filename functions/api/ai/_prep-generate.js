@@ -23,11 +23,15 @@
  *   502 ai-failed (reason provider | bad-output), 504 ai-timeout. 402 needs-plan is unused (D6).
  *
  * Gate order (6.8): sign-in, size, input, idempotent replay (free), checkQuota type "prep" (breaker and rate
- * limit), gateAndCount("prep", deferRecord) (95 calls a day), then prep's KV counters: decks a day (3) and a
- * month (10), counted once per deck at its first accepted facts call, and the per-deck token cap (200k, checked
- * before the call, fail closed). A mcq, solve or review on a deck that never had an accepted facts call is a
+ * limit), gateAndCount("prep", deferRecord) (300 calls a day; with AI_COST_CAP_ON it also checks the student's MaiK
+ * Token allowance and answers 429 ai-cost-cap), then prep's KV counters: decks a day (5) and a month (30), counted
+ * once per deck at its first accepted facts call (owner 2026-10-09), the per-deck token cap (600k, checked before the
+ * call, fail closed) and the per-deck question guard (60 accepted: the phone stops at 50, made 10 at a time; the
+ * slack covers questions the phone drops as near duplicates after the review), 429 deck-full. A mcq, solve or review on a deck that never had an accepted facts call is a
  * 400 (deck-not-started), so the deck caps cannot be skipped by never calling facts.
  *
+ * MaiK Tokens: usage.mt = inrToMt(inr) for the call (the same unit as Ask MaiK) and, on success, wallet { balanceMt,
+ * costCapOn }, so the phone can show the estimate before "make 10" and what it used after.
  * Metering: after every Gemini call (success or not) exactly one usage record (commit(extra): model, real
  * tokens, cost, feature "prep:<op>", latency, status), the cost fed to the project breaker (addDailyCostInr)
  * and to the console's maik.cost counter. Never _usage.js recordUsage (MaiK rate, MaiK allowance).
@@ -39,9 +43,10 @@
  * the admin override is ignored), thinkingBudget 0 (genBody), responseSchema JSON.
  */
 import { checkQuota, usageKv, identify, usageKeyFor, meterEmail, addDailyCostInr, estTokens } from "../../_usage.js";
-import { gateAndCount, buildUsageRecord, recordAiUsage, estCostInr, envModel, MODEL_HARD_DEFAULT } from "../../_ai_usage.js";
+import { gateAndCount, buildUsageRecord, recordAiUsage, estCostInr, envModel, MODEL_HARD_DEFAULT, poolKeyFor } from "../../_ai_usage.js";
 import { bump, istDay, istNextMidnightMs } from "../../_counters.js";
 import { ownerOK } from "../../_adminauth.js";
+import { getCredits, inrToMt, costCapOn } from "../../_credits.js";
 import {
   PREP_OPS, PREP_LIMITS, getProfile, cleanText, prepScrub, parseModelJson,
   buildFactsPrompt, buildMcqPrompt, buildSolvePrompt, buildReviewPrompt, buildImageMcqPrompt, sanitizeImageMcq, gateImgSupport, imageStemOk, runCodeGates, sha12,
@@ -63,9 +68,10 @@ const RE = { deck: /^gen_[a-f0-9]{12}$/, idem: /^[A-Za-z0-9_-]{8,64}$/, fid: /^f
 const num = (env, k, d) => { const v = Number(env && env[k]); return Number.isFinite(v) && v > 0 ? v : d; };
 export function prepCaps(env) {
   return {
-    decksDay: num(env, "PREP_DECKS_PER_DAY", 3),
-    decksMonth: num(env, "PREP_DECKS_PER_MONTH", 10),
-    deckTok: num(env, "PREP_DECK_TOKEN_CAP", 200000),
+    decksDay: num(env, "PREP_DECKS_PER_DAY", 5),
+    decksMonth: num(env, "PREP_DECKS_PER_MONTH", 30),
+    deckTok: num(env, "PREP_DECK_TOKEN_CAP", 600000),
+    deckQ: num(env, "PREP_DECK_Q_CAP", 60),
     pages: num(env, "PREP_PAGE_CAP", 60),
     chars: num(env, "PREP_CHARS_CAP", 300000),
   };
@@ -284,7 +290,7 @@ function secsToNextIstMonth(now) {
   return Math.max(1, Math.ceil((Date.UTC(t.getUTCFullYear(), t.getUTCMonth() + 1, 1) - IST_MS - now) / 1000));
 }
 const readNum = (s) => Number(s) || 0;
-function readDeck(s) { try { const o = s ? JSON.parse(s) : null; return o && typeof o === "object" ? { tok: Number(o.tok) || 0, pg: Array.isArray(o.pg) ? o.pg : [], ch: Number(o.ch) || 0 } : null; } catch (e) { return null; } }
+function readDeck(s) { try { const o = s ? JSON.parse(s) : null; return o && typeof o === "object" ? { tok: Number(o.tok) || 0, pg: Array.isArray(o.pg) ? o.pg : [], ch: Number(o.ch) || 0, q: Number(o.q) || 0 } : null; } catch (e) { return null; } }
 
 /* handlePrepGenerate({ request, env, body, callGemini, waitUntil, now? }) -> Response.
  * callGemini is the router's (functions/api/ai/[[path]].js), injected to avoid a circular import. */
@@ -333,6 +339,7 @@ export async function handlePrepGenerate(ctx) {
   try {
     const owner = await Promise.resolve(ownerOK(request, env)).catch(() => false);
     const mq = await gateAndCount(env, store, "prep", usageKeyFor(who), "unknown", now, meterEmail(who), ctx.waitUntil, owner, true);
+    if (mq && !mq.ok && mq.reason === "ai-cost-cap") return quota("ai-cost-cap", Math.max(1, Math.ceil(((Number(mq.resetAt) || istNextMidnightMs(now)) - now) / 1000)), { usedMt: mq.usedMt, capMt: mq.capMt, creditsMt: mq.creditsMt });
     if (mq && !mq.ok) return quota("daily-calls", Math.ceil((istNextMidnightMs(now) - now) / 1000), { limit: mq.limit, used: mq.used });
     if (mq && typeof mq.commit === "function") commit = mq.commit;
   } catch (e) { /* fail open like every module counter; the record is still written below */ }
@@ -350,8 +357,9 @@ export async function handlePrepGenerate(ctx) {
     if (op !== "facts") return fail(400, "bad-input", "deck-not-started");
     if (dayDecks >= caps.decksDay) return quota("daily-decks", Math.ceil((istNextMidnightMs(now) - now) / 1000), { dayDecks, monthDecks });
     if (monthDecks >= caps.decksMonth) return quota("month-decks", secsToNextIstMonth(now), { dayDecks, monthDecks });
-    deck = { tok: 0, pg: [], ch: 0 };
+    deck = { tok: 0, pg: [], ch: 0, q: 0 };
   }
+  if ((op === "mcq" || op === "imcq") && deck.q >= caps.deckQ) return quota("deck-full", 0, { deckQ: deck.q, deckCapQ: caps.deckQ });
   if (op === "facts") {
     const pg = new Set(deck.pg.concat(req.pages));
     if (pg.size > caps.pages) return fail(413, "too-large", "pages");
@@ -388,15 +396,21 @@ export async function handlePrepGenerate(ctx) {
   if (seen || newDeck) {
     deck.tok += inTok + outTok + thinkTok;
     if (op === "facts" && payload) { deck.pg = Array.from(new Set(deck.pg.concat(req.pages))); deck.ch += req.chars; }
+    if (op === "review" && payload) deck.q += payload.gates.filter((g) => g.pass).length;
+    if (op === "imcq" && payload) deck.q += payload.items.length;
     writes.push(store.put(tokK, JSON.stringify(deck), { expirationTtl: DECK_TTL_S }));
   }
   if (newDeck) {
     dayDecks += 1; monthDecks += 1;
     writes.push(store.put(dayK, String(dayDecks), { expirationTtl: DAY_TTL_S }), store.put(monK, String(monthDecks), { expirationTtl: MONTH_TTL_S }));
   }
-  const usage = { inTok, outTok, thinkTok, inr, deckTok: deck.tok, deckCapTok: caps.deckTok, dayDecks, monthDecks };
+  const usage = { inTok, outTok, thinkTok, inr, mt: inrToMt(inr), deckTok: deck.tok, deckCapTok: caps.deckTok, dayDecks, monthDecks, deckQ: deck.q || 0 };
   let res, out = null;
-  if (payload) { out = JSON.stringify(Object.assign(payload, { usage })); res = new Response(out, { status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
+  if (payload) {
+    try {   // the wallet is read after the call, best effort (as Ask MaiK)
+      const bal = await getCredits(store, await poolKeyFor(store, usageKeyFor(who)));
+      payload.wallet = { balanceMt: inrToMt(bal), costCapOn: costCapOn(env) };
+    } catch (e) { /* omit wallet */ } out = JSON.stringify(Object.assign(payload, { usage })); res = new Response(out, { status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
   else res = timedOut ? fail(504, "ai-timeout", "ai-timeout", { usage }) : fail(502, "ai-failed", err ? "provider" : "bad-output", { usage });
   if (out) writes.push(idemSeal(uid, canon, out).then((s) => store.put(idemK, s, { expirationTtl: IDEM_TTL_S })));
   try { await Promise.all(writes); } catch (e) { /* KV write failure: the response still stands */ }

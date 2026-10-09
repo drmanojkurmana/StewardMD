@@ -9,7 +9,8 @@
    PDF: pdf.js text layer from the vendored copy (/vendor/pdfjs, the same files icu.js, medlist.js and home.js load),
    loaded only when a PDF is picked. No CDN. Scanned or garbled pages are rendered and read by on-device OCR in the
    app (Phase 3b, readPages below); the web build skips them.
-   Caps: 60 pages, 300,000 characters per deck. prepScrub finds and removes emails, phone numbers, Aadhaar-like
+   Caps: 60 pages, 300,000 characters per deck; the pages are chosen on the page picker (sel* helpers, gridWindow and
+   renderThumb below; prep-create.js draws it), never taken silently. prepScrub finds and removes emails, phone numbers, Aadhaar-like
    12-digit numbers, hospital ids (MRN, UHID, IP or OP no, reg no, bed or ward with a number) and "patient name"
    to the end of the line, keeping every other number and every newline. Nothing in this file sends anything. */
 (function (G) {
@@ -342,6 +343,53 @@
   }
   // pages -> [first, last] for the manifest.
   function pageSpan(pages) { return pages && pages.length ? [pages[0], pages[pages.length - 1]] : null; }
+
+  /* ---------- the page picker (owner 2026-10-09): never a silent "first 60 pages" ----------
+     A selection is a sorted array of page numbers. Every change goes through these, so the 60-page cap holds in one
+     place: a change that would pass the cap is refused whole ({ sel unchanged, error }) and says so in plain words. */
+  function capMsg(cap, want) { return "You can pick up to " + cap + " pages for one deck" + (want ? "; that would make " + want + "." : ".") + " Make another deck for the rest."; }
+  function selNorm(list, total) { var o = {}; (list || []).forEach(function (p) { p = +p; if (p >= 1 && p <= total && p === Math.floor(p)) o[p] = 1; }); return Object.keys(o).map(Number).sort(function (a, b) { return a - b; }); }
+  // Small PDFs start with every page picked; a long one starts with none (the student chooses the chapter).
+  function selInitial(total, cap) { cap = cap || PAGE_CAP; var out = []; if (total <= cap) for (var i = 1; i <= total; i++) out.push(i); return out; }
+  function selToggle(sel, p, total, cap) {
+    cap = cap || PAGE_CAP;
+    var i = sel.indexOf(p);
+    if (i >= 0) return { sel: sel.slice(0, i).concat(sel.slice(i + 1)) };
+    if (p < 1 || p > total) return { sel: sel };
+    if (sel.length >= cap) return { sel: sel, error: capMsg(cap, sel.length + 1) };
+    return { sel: selNorm(sel.concat([p]), total) };
+  }
+  // Add every page from a to b (either order) to the selection.
+  function selRange(sel, a, b, total, cap) {
+    cap = cap || PAGE_CAP;
+    var lo = Math.max(1, Math.min(a, b)), hi = Math.min(total, Math.max(a, b)), add = [];
+    for (var p = lo; p <= hi; p++) if (sel.indexOf(p) < 0) add.push(p);
+    if (sel.length + add.length > cap) return { sel: sel, error: capMsg(cap, sel.length + add.length) };
+    return { sel: selNorm(sel.concat(add), total) };
+  }
+  // A typed range ("120-160, 175") replaces the selection, with the same words as parsePages.
+  function selFromSpec(spec, total, cap) {
+    cap = cap || PAGE_CAP;
+    var r = parsePages(spec, total, 100000);
+    if (r.error) return { error: r.error };
+    if (r.pages.length > cap) return { error: capMsg(cap, r.pages.length) };
+    return { sel: r.pages };
+  }
+  // [1,2,3,7,9,10] -> "1-3, 7, 9-10"
+  function selSpec(sel) {
+    var out = [], s = null, prev = null;
+    (sel || []).forEach(function (p) { if (s != null && p === prev + 1) { prev = p; return; } if (s != null) out.push(s === prev ? String(s) : s + "-" + prev); s = prev = p; });
+    if (s != null) out.push(s === prev ? String(s) : s + "-" + prev);
+    return out.join(", ");
+  }
+  /* Virtual grid: which pages to draw for a scroll position. top = the grid's offset inside the scroller, rowH = one
+     row's height with its gap. -> { from, to } page numbers (1-based, inclusive), with `buf` rows either side. */
+  function gridWindow(scrollTop, viewH, top, rowH, cols, total, buf) {
+    buf = buf == null ? 2 : buf;
+    var rows = Math.ceil(total / cols), y0 = Math.max(0, scrollTop - top), r0 = Math.max(0, Math.floor(y0 / rowH) - buf), r1 = Math.min(rows - 1, Math.floor((y0 + viewH) / rowH) + buf);
+    if (r1 < r0) return { from: 1, to: 0 };
+    return { from: r0 * cols + 1, to: Math.min(total, (r1 + 1) * cols) };
+  }
   // The deck-level checks before anything is sent: enough text, not too much, not too many pages.
   function capCheck(doc, pageCount) {
     var chars = 0;
@@ -495,6 +543,7 @@
     fixText: fixText, fontSize: fontSize, itemsToLines: itemsToLines, bodySize: bodySize, isHeadingBySize: isHeadingBySize, markHeadings: markHeadings,
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
     docFromNotes: docFromNotes, docFromPdfPages: docFromPdfPages, docText: docText, defaultPages: defaultPages, parsePages: parsePages, pageSpan: pageSpan,
+    selInitial: selInitial, selToggle: selToggle, selRange: selRange, selFromSpec: selFromSpec, selSpec: selSpec, gridWindow: gridWindow,
     capCheck: capCheck, estTokens: estTokens, chunkSentences: chunkSentences, chunkOrder: chunkOrder, chunkPayload: chunkPayload,
     scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary,
     OCR_PAGE_CAP: OCR_PAGE_CAP, OCR_PAGE_MS: OCR_PAGE_MS, nonWordRatio: nonWordRatio, textChars: textChars, pageDecision: pageDecision, ocrToLines: ocrToLines,
@@ -535,6 +584,25 @@
     cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
     cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height);
     return page.render({ canvasContext: cx, viewport: vp }).promise.then(function () { var u = cv.toDataURL("image/jpeg", 0.85); cv.width = 0; cv.height = 0; return u; });
+  }
+  /* A page thumbnail for the page picker: rendered on demand (only the rows on screen), w CSS px wide at the screen's
+     pixel ratio (at most 2), JPEG on white; the canvas and the page's render resources are released at once. */
+  function renderThumb(doc, p, w) {
+    return doc.getPage(p).then(function (page) {
+      var vp1 = page.getViewport({ scale: 1 }), dpr = Math.min(2, (G.devicePixelRatio || 1)), sc = Math.max(0.05, (w * dpr) / vp1.width);
+      var vp = page.getViewport({ scale: sc }), cv = G.document.createElement("canvas"), cx = cv.getContext("2d");
+      cv.width = Math.max(1, Math.round(vp.width)); cv.height = Math.max(1, Math.round(vp.height));
+      cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height);
+      return page.render({ canvasContext: cx, viewport: vp }).promise.then(function () {
+        var u = cv.toDataURL("image/jpeg", 0.7); cv.width = 0; cv.height = 0;
+        try { page.cleanup(); } catch (e) {}
+        return u;
+      });
+    });
+  }
+  // Height over width of page 1 (the grid sizes every cell from it); 1.414 (A4) when it cannot be read.
+  function pageAspect(doc) {
+    return doc.getPage(1).then(function (page) { var v = page.getViewport({ scale: 1 }); return v.width ? Math.max(0.5, Math.min(2, v.height / v.width)) : 1.414; }, function () { return 1.414; });
   }
   // On-device OCR through native-bridge.js; null on the web build (no SMD_NATIVE there).
   function nativeOcr() {
@@ -591,6 +659,6 @@
 
   var API = {};
   for (var k in PURE) API[k] = PURE[k];
-  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API._pure = PURE;
+  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API.renderThumb = renderThumb; API.pageAspect = pageAspect; API._pure = PURE;
   G.PREP_SRC = API;
 })(typeof window !== "undefined" ? window : this);

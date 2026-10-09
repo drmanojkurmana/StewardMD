@@ -1,6 +1,6 @@
 ---
 tags: [plan, learning, ai, cost]
-status: frozen reference (2026-10-05). Layer C (student PDF or notes to deck) contract of the PrepNucleus plan. One later change: the caps in 9.3 and the related counters follow the owner's decision of 2026-10-05 (10 decks a month, 3 a day, every signed-in user), see [[PrepNucleus]] D6.
+status: frozen reference (2026-10-05). Layer C (student PDF or notes to deck) contract of the PrepNucleus plan. Later changes: the caps in 9.3 and the related counters follow the owner's decision of 2026-10-05 (10 decks a month, 3 a day, every signed-in user), see [[PrepNucleus]] D6; since 2026-10-09 5 a day, 30 a month, 50 questions a deck made 10 at a time, see [[modules/PrepNucleus]] "Create deck overhaul".
 ---
 > **Frozen copy.** This is the PrepNucleus plan as it stood at commit `c3f3725c` (Opus: 10/10 for Layer C),
 > kept as a file so it survives a squash merge. It is the authoritative Layer C contract (protocol, gates,

@@ -314,16 +314,16 @@ test("mix from the profile: weights 0 to 1 that sum to 1", () => {
 
 test("cap and cost lines from the server's counters", () => {
   const caps = PC.capsFrom({ monthDecks: 7, dayDecks: 2 }, "2026-10-05");
-  assert.equal(PC.capLine(caps, "2026-10-05"), "7 of 10 decks this month, 2 of 3 today");
-  assert.equal(PC.capLine(caps, "2026-10-06"), "7 of 10 decks this month");
+  assert.equal(PC.capLine(caps, "2026-10-05"), "7 of 30 decks this month, 2 of 5 today");
+  assert.equal(PC.capLine(caps, "2026-10-06"), "7 of 30 decks this month");
   assert.equal(PC.capLine(caps, "2026-11-01"), "");
   assert.equal(PC.capsFrom({ inTok: 4 }, "2026-10-05"), null);
-  assert.deepEqual(PC.capsAfterStop(caps, "month-decks", "2026-10-05"), { month: 10, day: 2, at: "2026-10-05" });
-  assert.deepEqual(PC.capsAfterStop(caps, "daily-decks", "2026-10-06"), { month: 7, day: 3, at: "2026-10-06" });
-  assert.deepEqual(PC.capsAfterStop(null, "month-decks", "2026-10-06"), { month: 10, day: null, at: "2026-10-06" });
+  assert.deepEqual(PC.capsAfterStop(caps, "month-decks", "2026-10-05"), { month: 30, day: 2, at: "2026-10-05" });
+  assert.deepEqual(PC.capsAfterStop(caps, "daily-decks", "2026-10-06"), { month: 7, day: 5, at: "2026-10-06" });
+  assert.deepEqual(PC.capsAfterStop(null, "month-decks", "2026-10-06"), { month: 30, day: null, at: "2026-10-06" });
   assert.equal(PC.capsAfterStop(caps, "ai-failed", "2026-10-05"), caps);
-  const cost = PC.addUsage(PC.addUsage({ inTok: 0, outTok: 0, thinkTok: 0, inr: 0 }, { inTok: 1000, outTok: 200, thinkTok: 0, inr: 0.054 }), { inTok: 500, outTok: 100, inr: 0.02 });
-  assert.deepEqual(cost, { inTok: 1500, outTok: 300, thinkTok: 0, inr: 0.074 });
+  const cost = PC.addUsage(PC.addUsage({ inTok: 0, outTok: 0, thinkTok: 0, inr: 0 }, { inTok: 1000, outTok: 200, thinkTok: 0, inr: 0.054 }), { inTok: 500, outTok: 100, inr: 0.02, mt: 40 });
+  assert.deepEqual(cost, { inTok: 1500, outTok: 300, thinkTok: 0, inr: 0.074, mt: 40 }, "MaiK Tokens add up per deck");
   assert.equal(PC.costLine(cost), "Cost so far: Rs 0.07 (1800 tokens)");
   assert.equal(PC.costLine({ inTok: 0, outTok: 0 }), "");
 });
@@ -341,8 +341,11 @@ test("every error code maps to a short plain message; both { error } and { reaso
     const msg = PC.errorMessage(st, body);
     assert.ok(msg && msg.length < 110 && /\.$/.test(msg) && !/[\u2013\u2014]/.test(msg), code + ": " + msg);
   }
-  assert.match(PC.errorMessage(429, { error: "month-decks" }), /10 decks this month/);
-  assert.match(PC.errorMessage(429, { reason: "daily-decks" }), /3 decks today/);
+  assert.match(PC.errorMessage(429, { error: "month-decks" }), /30 decks this month/);
+  assert.match(PC.errorMessage(429, { reason: "daily-decks" }), /5 decks today/);
+  assert.match(PC.errorMessage(429, { reason: "ai-cost-cap" }), /free MaiK Tokens/);
+  assert.match(PC.errorMessage(429, { reason: "deck-full" }), /50 questions/);
+  assert.equal(PC.canRetry("deck-full"), false); assert.equal(PC.canRetry("ai-cost-cap"), false);
   assert.equal(PC.errorCode(400, { error: "bad-input", reason: "deck-not-started" }), "deck-not-started");
   assert.equal(PC.canRetry("deck-not-started"), false);
   assert.equal(PC.canRetry("month-decks"), false);
@@ -475,31 +478,32 @@ function freshJob(text, target, extra) {
 // Small chunks so the loop has several sections to pull facts from.
 const SMALL = (s) => { s.chunks = SR.chunkSentences(s.sents, 130); s.order = SR.chunkOrder(s.chunks); return s; };
 
-test("step loop: facts until 14 unused, mcq x2, solve x2, review x2, regen once (batched), save what passed", async () => {
+test("step loop: facts until 10 unused, mcq x2 (5 each), solve x2, review x2, regen once (batched), save what passed: a round makes at most its 10", async () => {
   const job = SMALL(freshJob());
   const srv = fakeServer({ perChunk: 4, solveFail: ["Serum ferritin"], reviewFail: ["Hypersegmented"] });
   const store = memStore();
   const caps = [];
   const res = await PC.runRound(job, { send: srv.send, store, today: "2026-10-05", onCaps: (c) => caps.push(c) });
-  assert.deepEqual(srv.log, ["facts", "facts", "facts", "facts", "mcq", "mcq", "solve", "solve", "review", "review", "mcq", "solve", "review"]);
+  assert.deepEqual(srv.log, ["facts", "facts", "facts", "mcq", "mcq", "solve", "solve", "review", "review", "mcq", "solve", "review"]);
   assert.equal(res.ok, true);
   const fresh = Object.values(store.s.items);
   assert.equal(res.accepted, fresh.length);
-  assert.equal(fresh.length, 14, "12 first-pass plus 2 regenerated");
+  assert.equal(fresh.length, 10, "8 first-pass plus 2 regenerated: exactly the round's 10");
   assert.ok(fresh.every((it) => it._s === "deck" && it._m === "deck-gen_t" && it.deckId === "gen_t" && it.rv && it.rv.pass && it.o.length === 4));
-  assert.equal(job.m.stats.facts, 14);
-  assert.equal(job.m.stats.generated, 16);
+  assert.equal(job.m.stats.facts, 12);
+  assert.equal(job.m.stats.generated, 12);
   assert.equal(job.m.stats.rejected, 2);
   assert.equal(job.m.stats.regenerated, 2);
-  assert.equal(job.m.stats.accepted, 14);
-  assert.equal(job.m.stats.cards, 14);
-  assert.equal(Object.keys(store.s.cards).length, 14);
+  assert.equal(job.m.stats.accepted, 10);
+  assert.equal(job.m.stats.cards, 12);
+  assert.equal(Object.keys(store.s.cards).length, 12);
   assert.ok(store.s.src.gen_t && store.s.src.gen_t.sents.length === 18, "source sentences saved with the deck");
-  assert.equal(store.s.decks.gen_t.cost.inTok, 1300);
-  assert.equal(DK.questionCount(store.s.decks.gen_t), 14);
+  assert.equal(store.s.decks.gen_t.cost.inTok, 1200);
+  assert.equal(DK.questionCount(store.s.decks.gen_t), 10);
+  assert.equal(store.s.decks.gen_t.run, null, "the finished round leaves the manifest");
   assert.deepEqual(caps.at(-1), { month: 4, day: 1, at: "2026-10-05" });
   const used = Object.values(store.s.facts).filter((f) => f.used).length;
-  assert.equal(used, 14);
+  assert.equal(used, 10, "only the facts the round needed are used; 2 wait for the next 10");
 });
 
 test("step loop: the regen request carries the failed facts and their reasons; the mcq request carries facts, sentences and mix", async () => {
@@ -508,7 +512,7 @@ test("step loop: the regen request carries the failed facts and their reasons; t
   const srv = fakeServer({ perChunk: 4, reviewFail: ["Hypersegmented"] });
   await PC.runRound(job, { send: (b) => { bodies.push(JSON.parse(JSON.stringify(b))); return srv.send(b); }, store: memStore() });
   const mcq = bodies.filter((b) => b.op === "mcq");
-  assert.equal(mcq[0].facts.length, 7);
+  assert.equal(mcq[0].facts.length, 5, "10 wanted: two batches of 5");
   assert.deepEqual(Object.keys(mcq[0].facts[0]).sort(), ["cq", "fi", "fid", "fk", "ft", "h", "p", "sents", "sn", "t"]);
   assert.equal(mcq[0].facts[0].t, "sec-0", "the section id rides along so the server stamps item.t");
   assert.equal(mcq[0].facts[0].sents[0].tx, mcq[0].facts[0].ft);
@@ -530,12 +534,13 @@ test("step loop: a cap error stops with what was saved; resume re-sends the same
   const res = await PC.runRound(job, { send: srv.send, store });
   assert.equal(res.ok, false);
   assert.equal(res.code, "month-decks");
-  assert.match(res.message, /10 decks this month/);
+  assert.match(res.message, /30 decks this month/);
   assert.equal(res.retry, false);
   assert.equal(store.s.decks.gen_t.cost.stopped, "month-decks");
   assert.equal(Object.keys(store.s.items).length, 0);
-  assert.equal(Object.keys(store.s.facts).length, 14, "facts and cards made before the stop stay saved");
-  assert.equal(Object.keys(store.s.cards).length, 14);
+  assert.equal(Object.keys(store.s.facts).length, 12, "facts and cards made before the stop stay saved");
+  assert.equal(Object.keys(store.s.cards).length, 12);
+  assert.equal(store.s.decks.gen_t.run, null, "a cap stop ends the round");
   // A timeout is retryable; the next run starts with the op that failed (same body, so the same idem).
   const job2 = SMALL(freshJob());
   const seen = [];
@@ -550,7 +555,7 @@ test("step loop: a cap error stops with what was saved; resume re-sends the same
   const r2 = await PC.runRound(job2, { send: send2, store: st2 });
   assert.equal(r2.ok, true);
   assert.equal(seen[mark], failedIdem, "the resumed mcq carries the same idem");
-  assert.equal(r2.accepted, 14);
+  assert.equal(r2.accepted, 10);
 });
 
 test("step loop: '10 more' sends only unused facts, pulls more chunks, and ends when the source is used up", async () => {
@@ -568,10 +573,10 @@ test("step loop: '10 more' sends only unused facts, pulls more chunks, and ends 
   assert.ok(sentFids.every((fid) => !usedBefore.has(fid)), "no used fact is sent again");
   assert.equal(new Set(bodies.filter((b) => b.op === "facts").map((b) => b.chunk.i)).size, bodies.filter((b) => b.op === "facts").length, "a chunk is read once");
   assert.equal(res.ok, true);
-  assert.equal(res.accepted, 4, "the last 4 facts make 4 questions");
+  assert.equal(res.accepted, 8, "the 2 facts left plus the last chunk's 6 make 8 questions");
   assert.equal(res.more, false, "all 18 sentences are now used");
   const last = await PC.runRound(SMALL(PC.newJob({ m: store.s.decks.gen_t, sents: store.s.src.gen_t.sents, sections: store.s.src.gen_t.sections, facts: Object.values(store.s.facts), items: Object.values(store.s.items), saved: true, target: 10, ctx })), { send: fakeServer().send, store });
-  assert.deepEqual(last, { ok: true, accepted: 0, more: false, stopped: false });
+  assert.deepEqual(last, { ok: true, accepted: 0, more: false, stopped: false, mt: 0, full: false });
 });
 
 test("nextOp: a round's batches are capped, so cost has a ceiling; stop request ends after the current op", () => {

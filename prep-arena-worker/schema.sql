@@ -135,3 +135,17 @@ CREATE TABLE IF NOT EXISTS social_push (
   last_at INTEGER,
   at INTEGER NOT NULL
 );
+
+-- PrepNucleus deck backup (migrations/0004_prep_decks.sql)
+CREATE TABLE IF NOT EXISTS prep_deck_keys (
+  uh TEXT PRIMARY KEY,
+  salt BLOB NOT NULL
+);
+CREATE TABLE IF NOT EXISTS prep_decks (
+  uh TEXT NOT NULL,
+  id TEXT NOT NULL,
+  blob BLOB NOT NULL,
+  size INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  PRIMARY KEY (uh, id)
+);

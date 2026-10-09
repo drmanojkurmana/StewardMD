@@ -1,4 +1,4 @@
-/* PrepNucleus Layer C (prep-create.js, prep-cards.js): Your decks, Make a deck, progress, flashcards. Scoped under
+/* PrepNucleus Layer C (prep-create.js, prep-cards.js): Your decks, a deck, Make a deck (steps, page picker), progress, flashcards. Scoped under
    .pn-root and built on prep.css's --pn-* tokens, so body.dark switches the palette with it; the two colours added here
    are redefined for body.dark below. Loaded after prep.css by prep-loader.js. */
 .pn-root { --pc-warn-bg: #fdf3e1; --pc-warn-line: #e7c98a; }
@@ -42,3 +42,115 @@ body.dark .pn-root { --pc-warn-bg: #33270f; --pc-warn-line: #6b5420; }
   .pn-root .pc-back { animation: none; }
   .pn-root .pc-bar i { transition: none; }
 }
+
+/* ==== 2026-10-09 create overhaul: steps, page picker, deck as a module, progress stages ==== */
+.pn-root { --pc-sel: var(--pn-pri); --pc-sheet: rgba(238, 243, 244, .86); }
+body.dark .pn-root { --pc-sheet: rgba(5, 14, 18, .86); }
+.pn-root .pc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* steps: Source, Pages, Settings */
+.pn-root .pc-steps { display: flex; gap: 6px; list-style: none; margin: 0 auto 2px; padding: 0; counter-reset: none; }
+.pn-root .pc-steps li { flex: 1 1 0; display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 10px; border-radius: var(--pn-r-md); background: var(--pn-s1); color: var(--pn-mut); font-size: 13px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .pc-steps li > span { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--pn-card); font-family: var(--pn-num); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pn-root .pc-steps li > span svg { width: 13px; height: 13px; }
+.pn-root .pc-steps li.on { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
+.pn-root .pc-steps li.on > span { background: var(--pn-pri); color: var(--pn-on-pri); }
+.pn-root .pc-steps li.done > span { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
+
+.pn-root .pc-seg .pn-chip { min-height: 44px; }
+.pn-root .pc-drop { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 84px; padding: 16px; border: 1.5px dashed var(--pn-line); border-radius: var(--pn-r-lg); background: var(--pn-card); text-align: left; color: var(--pn-text); transition: border-color var(--pn-d-quick) ease, transform var(--pn-d-press) var(--pn-ease); }
+.pn-root .pc-drop:active { transform: scale(.985); }
+.pn-root .pc-drop > span:last-child { display: flex; flex-direction: column; gap: 3px; }
+.pn-root .pc-drop small { color: var(--pn-mut); font-size: 13px; line-height: 1.4; }
+.pn-root .pc-busy, .pn-root .pc-readp { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.pn-root .pc-readp { flex-direction: row; padding: 14px 16px; }
+.pn-root .pc-readp .pn-load { padding: 0; text-align: left; }
+.pn-root .pc-spin { flex: 0 0 auto; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--pn-s2); border-top-color: var(--pn-pri); animation: pc-spin 0.9s linear infinite; }
+@keyframes pc-spin { to { transform: rotate(360deg); } }
+.pn-root .pc-mtl { margin-top: -4px; }
+
+/* page picker */
+.pn-root .pc-pgbody { padding-bottom: 0; }
+.pn-root .pc-pgtop { position: sticky; top: -4px; z-index: 2; display: flex; flex-direction: column; gap: 8px; margin: 0 auto; padding: 8px 0 10px; background: var(--pc-sheet); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
+.pn-root .pc-pgn { font-size: 15px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .pc-pgn b { font-family: var(--pn-num); font-size: 22px; font-weight: 800; color: var(--pn-text); margin-right: 2px; }
+.pn-root .pc-pgform { display: flex; gap: 8px; }
+.pn-root .pc-pgform .pc-in { flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 8px 12px; }
+.pn-root .pc-pgform .pn-btn { min-height: 44px; }
+.pn-root .pc-pgacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .pc-pgacts .pn-chip[disabled] { opacity: .45; }
+.pn-root .pc-pgmsg { min-height: 1.4em; font-size: 13.5px; color: var(--pn-mut); line-height: 1.4; }
+.pn-root .pc-pgmsg.warn { color: var(--pn-bad); font-weight: 600; }
+.pn-root .pc-pg { position: relative; flex: 0 0 auto; contain: layout; }
+.pn-root .pc-pc { touch-action: manipulation; -webkit-tap-highlight-color: transparent; scroll-margin-top: 200px; scroll-margin-bottom: 96px; position: absolute; top: 0; left: 0; width: var(--pc-cw); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0; border: 0; background: none; color: var(--pn-text); }
+.pn-root .pc-pimg { position: relative; display: block; width: 100%; height: var(--pc-ch); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--pn-line), var(--pn-shadow); transition: box-shadow var(--pn-d-quick) ease, transform var(--pn-d-press) var(--pn-ease); }
+body.dark .pn-root .pc-pimg { background: #e9eef0; }
+.pn-root .pc-pimg img { display: block; width: 100%; height: 100%; object-fit: contain; animation: pn-fade var(--pn-d-quick) ease-out; }
+.pn-root .pc-pc:active .pc-pimg { transform: scale(.96); }
+.pn-root .pc-pc.on .pc-pimg { box-shadow: 0 0 0 3px var(--pc-sel), var(--pn-glow); }
+.pn-root .pc-pc.anchor .pc-pimg { box-shadow: 0 0 0 3px var(--pn-amber); }
+.pn-root .pc-ptick { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, .9); color: transparent; box-shadow: 0 0 0 1.5px rgba(9, 38, 44, .25); transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease; }
+.pn-root .pc-pc.on .pc-ptick { background: var(--pc-sel); color: var(--pn-on-pri); box-shadow: none; }
+.pn-root .pc-pnum { font-family: var(--pn-num); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--pn-mut); line-height: 18px; }
+.pn-root .pc-pc.on .pc-pnum { color: var(--pn-pri-ink); }
+.pn-root .pc-pc:focus-visible { outline: none; }
+.pn-root .pc-pc:focus-visible .pc-pimg { box-shadow: 0 0 0 3px var(--pn-text); }
+.pn-root .pc-pgfoot { position: sticky; bottom: 0; z-index: 2; margin: 8px auto 0; padding: 10px 0 calc(14px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(180deg, transparent, var(--pn-bg) 28%); }
+.pn-root .pc-pgfoot .pn-btn { width: 100%; }
+.pn-root .pn-btn[disabled] { opacity: .5; box-shadow: none; }
+
+/* Your decks: rows */
+.pn-root .pc-drow { flex-direction: row; align-items: center; gap: 12px; padding: 14px; width: 100%; text-align: left; color: var(--pn-text); transition: transform var(--pn-d-press) var(--pn-ease); }
+.pn-root .pc-drow:active { transform: scale(.985); }
+.pn-root .pc-drow > svg:last-child { width: 18px; height: 18px; flex: 0 0 auto; color: var(--pn-mut); }
+.pn-root .pc-mini { height: 4px; margin-top: 6px; }
+.pn-root .pc-mini i, .pn-root .pc-bar i { transform-origin: 0 50%; }
+.pn-root .pc-tag { flex: 0 0 auto; padding: 4px 9px; border-radius: var(--pn-r-pill); background: var(--pn-s1); color: var(--pn-mut); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.pn-root .pc-tag.on { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
+.pn-root .pc-live { position: relative; }
+.pn-root .pc-pulse { flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; background: var(--pn-pri); box-shadow: 0 0 0 0 var(--pn-pri); animation: pc-pulse 1.6s ease-out infinite; }
+@keyframes pc-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pn-pri) 55%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+.pn-root .pc-capl { text-align: center; }
+.pn-root .pc-skel { height: 76px; border-radius: var(--pn-r-lg); background: linear-gradient(90deg, var(--pn-s1) 0%, var(--pn-s2) 50%, var(--pn-s1) 100%); background-size: 200% 100%; animation: pc-shimmer 1.4s ease-in-out infinite; }
+@keyframes pc-shimmer { to { background-position: -200% 0; } }
+.pn-root .pc-decks .pn-load { padding: 12px; }
+.pn-root .pc-empty { display: flex; flex-direction: column; gap: 6px; }
+.pn-root .pc-empty b { color: var(--pn-text); font-size: 16px; }
+
+/* one deck */
+.pn-root .pc-dhero { gap: 12px; }
+.pn-root .pc-dfig { display: flex; align-items: baseline; gap: 8px; }
+.pn-root .pc-dfig .pn-mut { font-size: 15px; }
+.pn-root .pc-dstat { color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .pc-more { gap: 8px; }
+.pn-root .pc-more .pn-btn { width: 100%; }
+.pn-root .pc-morel { font-size: 14.5px; line-height: 1.5; text-wrap: pretty; }
+.pn-root .pc-pad { padding: 16px; }
+.pn-root .pc-danger { color: var(--pn-bad); margin-top: 6px; }
+.pn-root .pc-danger svg { width: 18px; height: 18px; }
+
+/* progress */
+.pn-root .pc-progp { align-items: stretch; text-align: left; }
+.pn-root .pc-phase { display: flex; align-items: center; gap: 10px; font-weight: 650; }
+.pn-root .pc-stages { display: flex; flex-direction: column; gap: 6px; list-style: none; margin: 2px 0 0; padding: 0; }
+.pn-root .pc-stages li { position: relative; padding-left: 22px; font-size: 13.5px; color: var(--pn-mut); }
+.pn-root .pc-stages li::before { content: ""; position: absolute; left: 4px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--pn-s2); }
+.pn-root .pc-stages li.on { color: var(--pn-text); font-weight: 650; }
+.pn-root .pc-stages li.on::before { left: 1px; width: 10px; height: 10px; margin-top: -7px; background: none; border: 2px solid var(--pn-pri-soft); border-top-color: var(--pn-pri); animation: pc-spin 0.9s linear infinite; }
+.pn-root .pc-stages li.done::before { background: var(--pn-pri-ink); opacity: .6; }
+.pn-root .pn-btn .pc-btnsub { display: block; font-size: 12px; font-weight: 600; opacity: .75; }
+.pn-root .pn-btn:has(.pc-btnsub) { flex-wrap: wrap; row-gap: 0; padding-top: 6px; padding-bottom: 6px; }
+.pn-root .pn-btn:has(.pc-btnsub) .pc-btnsub { flex: 1 0 100%; text-align: center; }
+
+@media (min-width: 700px) {
+  .pn-root #pcSetView > *, .pn-root #pcCreateView > *, .pn-root #pcDeckView > *, .pn-root #pcProgView > * { max-width: 600px; }
+  .pn-root .pc-pgbody > * { max-width: 920px; }
+  .pn-root .pc-decks { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+  .pn-root #pcDecksView > * { max-width: 920px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pc-spin, .pn-root .pc-stages li.on::before { animation-duration: 2.4s; }
+  .pn-root .pc-pulse, .pn-root .pc-skel, .pn-root .pc-pimg img { animation: none; }
+  .pn-root .pc-pimg, .pn-root .pc-drop, .pn-root .pc-drow { transition: none; }
+}
+@media (prefers-reduced-transparency: reduce) { .pn-root .pc-pgtop { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--pn-bg); } }

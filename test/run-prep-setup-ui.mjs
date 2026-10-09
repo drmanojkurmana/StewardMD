@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep36" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep37" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet
@@ -345,7 +345,9 @@ try {
   const dir = join(process.env.CLAUDE_JOB_DIR || tmpdir(), "prep-c-setup-" + Date.now()); mkdirSync(dir, { recursive: true });
   const pdfPath = join(dir, "Radiology notes.pdf"); writeFileSync(pdfPath, makeImagePdf(), "latin1");
   { const { result: { root } } = await call("DOM.getDocument", { depth: 0 }); const { result: { nodeId } } = await call("DOM.querySelector", { nodeId: root.nodeId, selector: "#pcFile" }); await call("DOM.setFileInputFiles", { nodeId, files: [pdfPath] }); }
-  ok(await until(`var f=document.querySelector("#pcCreateView .pc-file"); return !!f && /2 pages/.test(f.textContent);`, 20000), "the PDF opens");
+  ok(await until(`return !!document.getElementById("pcPagesView") && /^2 of 60 selected/.test(document.getElementById("pcPgN").textContent);`, 20000), "the PDF opens in the page picker, both pages picked");
+  await click('#smdPrep [data-act="c-pgok"]');
+  await until(`return !!document.getElementById("pcSetView");`, 5000);
   await click('#smdPrep [data-act="c-own"]');
   await click('#smdPrep [data-act="c-go"]');
   ok(await until(`return document.querySelectorAll("#pcImgView .pc-thumb").length === 2;`, 20000), "two pictures found: the repeated logo and the small icon are left out");
@@ -367,8 +369,10 @@ try {
   ok(/2 questions on your images/.test(await screenText()), "the result says how many image questions were made");
   await shots("deck-saved");
   await click('#smdPrep [data-act="c-done"]');
-  await until(`return !!document.querySelector('#pcDecks [data-act=c-prac]');`, 5000);
-  await click('#pcDecks [data-act=c-prac]');
+  await until(`return !!document.querySelector('#pcDecks [data-act=c-open]');`, 5000);
+  await click('#pcDecks [data-act=c-open]');
+  await until(`return !!document.querySelector('#pcDeckView [data-act=c-prac]');`, 5000);
+  await click('#pcDeckView [data-act=c-prac]');
   ok(await until(sheetOpen, 5000) && await count("type", "img") === 2, "practising the deck opens the sheet; 2 image-based questions");
   await click('#pnSetup [data-act=su-type][data-v=img]');
   await click('#pnSetup [data-act=su-mode][data-v=study]');
@@ -385,4 +389,10 @@ try {
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN: PrepNucleus practice setup" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
-finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
+finally {
+  try { ws && ws.close(); } catch {} if (serveProc) serveProc.kill();
+  const gone = new Promise((res) => { if (chrome.exitCode != null) return res(); chrome.once("exit", res); });
+  chrome.kill(); await Promise.race([gone, sleep(3000)]);
+  if (chrome.exitCode == null) { try { chrome.kill("SIGKILL"); } catch {} }
+  process.exit(fails === 0 ? 0 : 1);
+}
