@@ -136,7 +136,8 @@ try {
   await ev(`document.querySelector("#smdPrep > .pn-body").__old = 1; return 1;`);
   const span = await sampleScroll(`function(){ document.querySelector("#smdPrep [data-act=mtag]").click(); }`, 400);
   ok(YQ > 40 && span && span[0] >= YQ - 1 && span[1] <= YQ + 1, "tapping a mistake tag repaints in place without moving, on every frame (scrollTop " + JSON.stringify(span) + ", kept at " + YQ + ")");
-  ok(await ev(`return !document.querySelector("#smdPrep > .pn-body").__old;`) === true, "the tap really repainted the screen (a new body)");
+  // Native pass 2: the repaint patches the screen, so the body is the same node (it was a new node before).
+  ok(await ev(`return document.querySelector("#smdPrep > .pn-body").__old === 1 && !!document.querySelector("#smdPrep [data-act=mtag]");`) === true, "the tap repainted the screen by patching it (same body node, the tags still there)");
   await click("#smdPrep [data-act=next]");
   ok(await until(`var i=document.querySelector("#smdPrep .pn-yq-fig img"); return !!(i && i.complete && i.naturalWidth > 0);`, 6000), "the next question (an image question) shows its image");
   ok(await ev(`return document.querySelector("#smdPrep > .pn-body").scrollTop === 0;`) === true, "a new question starts at the top");

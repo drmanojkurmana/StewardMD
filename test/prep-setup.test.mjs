@@ -135,6 +135,24 @@ test("very hard: a fifth difficulty (d 4 or vh), counted, filtered, drawn and na
   assert.match(h.msg, /^No very hard questions match/);
 });
 
+test("defaults never pick an empty option: fit() falls back to All (Mix for difficulty), keeps a choice that has questions", () => {
+  const L = [[it("a1"), it("a2", { d: 1 }), it("a3", { d: 3 })]], ctx = { cards: {}, bm: {}, mt: {}, today: 10 };
+  // The owner's phone: "Incorrect before" remembered, nothing answered wrong yet -> All, every question back.
+  const f = S.fit(L, { type: "all", seen: "wrong", d: "mix", n: 20 }, ctx);
+  assert.equal(f.sel.seen, "all"); assert.deepEqual(f.moved, ["seen"]);
+  assert.equal(S.counts(L, f.sel, ctx).total, 3);
+  // Several empty rows at once: each falls back.
+  const g = S.fit(L, { type: "img", seen: "bm", d: "4", n: 10 }, ctx);
+  assert.deepEqual([g.sel.type, g.sel.seen, g.sel.d], ["all", "all", "mix"]);
+  assert.deepEqual(g.moved, ["seen", "type", "d"]);
+  // A choice with questions is kept; a row the scope hides is left alone.
+  const h = S.fit(L, { type: "all", seen: "new", d: "1", n: 10 }, ctx);
+  assert.deepEqual([h.sel.seen, h.sel.d, h.moved.length], ["new", "1", 0]);
+  assert.equal(S.fit(L, { seen: "wrong" }, ctx, { seen: false }).sel.seen, "wrong");
+  // An empty scope has nothing to fall back to: the choice stays and the sheet says the scope is empty.
+  assert.equal(S.fit([[]], { seen: "wrong" }, ctx).sel.seen, "wrong");
+});
+
 test("empty pool: names the row to relax; a scope with nothing says so", () => {
   const L = pool(), ctx = ctxFor(L);
   const h = S.relaxHint(L, { type: "img", seen: "due", d: "3", n: 10 }, ctx);

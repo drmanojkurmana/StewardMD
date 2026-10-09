@@ -29,6 +29,8 @@
    browser's speechSynthesis. Neither sends audio or text anywhere. Pure helpers load under node for tests. */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
 
   /* ================= pure ================= */
   var SPEEDS = [0.75, 1, 1.25, 1.5];
@@ -556,15 +558,15 @@
   function bindCmp(stage) {
     var on = false, x0 = 0, y0 = 0, lock = 0, last = null;
     var at = function (e) { var r = stage.getBoundingClientRect(); return (e.clientX - r.left) / (r.width || 1) * 100; };
-    stage.addEventListener("pointerdown", function (e) { if (e.target.closest && e.target.closest(".pn-cmp-r")) return; on = true; lock = 0; x0 = e.clientX; y0 = e.clientY; if (e.pointerType === "mouse") { cmpSet(stage, at(e), true); lock = 1; } });
-    stage.addEventListener("pointermove", function (e) {
+    ON(stage, "lsn-cmp", "pointerdown", function (e) { if (e.target.closest && e.target.closest(".pn-cmp-r")) return; on = true; lock = 0; x0 = e.clientX; y0 = e.clientY; if (e.pointerType === "mouse") { cmpSet(stage, at(e), true); lock = 1; } });
+    ON(stage, "lsn-cmp", "pointermove", function (e) {
       if (!on) return;
       if (!lock) { var dx = Math.abs(e.clientX - x0), dy = Math.abs(e.clientY - y0); if (dx < 6 && dy < 6) return; lock = dx > dy ? 1 : -1; if (lock > 0) { try { stage.setPointerCapture(e.pointerId); } catch (x) {} } }
       if (lock > 0) { e.preventDefault(); last = at(e); cmpSet(stage, last, false); }
     });
     var up = function (e) { if (on && !lock && e.type === "pointerup") cmpSet(stage, at(e), true); else if (on && lock > 0 && last != null) cmpSet(stage, last, false); on = false; last = null; };
-    stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
-    var r = stage.querySelector(".pn-cmp-r"); if (r) r.addEventListener("input", function () { cmpSet(stage, +r.value, false); });
+    ON(stage, "lsn-cmp", "pointerup", up); ON(stage, "lsn-cmp", "pointercancel", up);
+    var r = stage.querySelector(".pn-cmp-r"); if (r) ON(r, "lsn-cmp", "input", function () { cmpSet(stage, +r.value, false); });
   }
 
   // Quick check: one tap answers; the right option lights, a wrong pick is marked, the reason shows under it.
@@ -676,7 +678,7 @@
     if (L.zoom) bindPinch(r.querySelector(".pn-zoom-sc"));
   }
   function bindIx(r) {
-    [].forEach.call(r.querySelectorAll("[data-spot]"), function (st) { st.addEventListener("click", function (e) { spotTap(st, e); }); });
+    [].forEach.call(r.querySelectorAll("[data-spot]"), function (st) { ON(st, "lsn-spot", "click", function (e) { spotTap(st, e); }); });
     [].forEach.call(r.querySelectorAll("[data-cmp]"), bindCmp);
   }
   /* The enlarged image: pinch between 1x and 4x around the fingers' midpoint, drag to pan once zoomed, tap to toggle
@@ -700,8 +702,8 @@
       else if (p.length === 1) g = { pinch: 0, px: p[0].x, py: p[0].y, x: Z.x, y: Z.y };
       else g = null;
     };
-    sc.addEventListener("pointerdown", function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { sc.setPointerCapture(e.pointerId); } catch (x) {} start(); });
-    sc.addEventListener("pointermove", function (e) {
+    ON(sc, "lsn", "pointerdown", function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { sc.setPointerCapture(e.pointerId); } catch (x) {} start(); });
+    ON(sc, "lsn", "pointermove", function (e) {
       if (!pts[e.pointerId] || !g) return;
       pts[e.pointerId] = { x: e.clientX, y: e.clientY };
       var p = list();
@@ -720,14 +722,14 @@
       else if (Z.s > 1.05) { btn.classList.add("big"); btn.setAttribute("aria-pressed", "true"); }
       start();
     };
-    sc.addEventListener("pointerup", up); sc.addEventListener("pointercancel", up);
+    ON(sc, "lsn", "pointerup", up); ON(sc, "lsn", "pointercancel", up);
   }
   function bindSwipe(el) {
     if (!el) return;
     var x0 = 0, y0 = 0, on = false;
-    el.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl,.pn-cmp-sl,.pn-flips"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
-    el.addEventListener("pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
-    el.addEventListener("pointercancel", function () { on = false; });
+    ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl,.pn-cmp-sl,.pn-flips"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
+    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
+    ON(el, "lsn", "pointercancel", function () { on = false; });
   }
 
   /* ---------- navigation ---------- */
@@ -802,9 +804,10 @@
     index().then(function (ix) {
       var mods = subjectLessons(ix, topics), n = 0;
       mods.forEach(function (m) { n += m.list.length; });
-      if (!n || !wrap.isConnected || wrap.querySelector("[data-act=l-subject]")) return;
+      if (!n || !wrap.isConnected) return;
+      if (wrap.querySelector("[data-act=l-subject]")) { wrap.hidden = false; return; }
       var b = G.document.createElement("button");
-      b.type = "button"; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
+      b.type = "button"; b.__pnKeep = 1; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
       b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + "</span>";
       var last = wrap.querySelector(".su-lastb");
       wrap.insertBefore(b, last || null);

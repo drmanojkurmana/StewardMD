@@ -684,6 +684,70 @@
      - a new question (st.run.i changed) starts at the top; a tab or filter (nav 0) keeps the place when it can;
      - focus moves without scrolling (preventScroll);
      - a push or pop keeps the leaving body for one cross-fade (.pn-ghost), so the frame is never empty. */
+  /* Native pass 2 (owner screen recording 2026-10-09, after OTA v244): a repaint of the same screen, and the setup sheet
+     on every chip, still rebuilt the DOM. A rebuilt node is a new node: every inner scroller (a sideways chip row, a
+     sheet's own body) restarts at 0, a pressed chip loses its :active state mid-press, images decode again, and WebKit
+     relayouts the lot. morph(a, b) patches the live tree a to match the parsed tree b instead: same tag and id at the
+     same place = the same node, its attributes and text updated in place; anything else is inserted or removed. Inputs
+     keep what the student is typing (a focused field's value is never overwritten). PREP_DOM.on(el, site, type, fn)
+     binds a listener once per element and site and swaps the handler on later calls, so code that wires a node after
+     each paint keeps working when the node survives the patch. */
+  function sameNode(x, y) {
+    if (!x || !y || x.nodeType !== y.nodeType) return false;
+    if (x.nodeType !== 1) return true;
+    return x.nodeName === y.nodeName && (x.id || "") === (y.id || "") && x.getAttribute("data-key") === y.getAttribute("data-key");
+  }
+  function morphAttrs(a, b) {
+    var i, n, ba = b.attributes, aa = a.attributes;
+    for (i = aa.length - 1; i >= 0; i--) { n = aa[i].name; if (!b.hasAttribute(n)) a.removeAttribute(n); }
+    for (i = 0; i < ba.length; i++) { n = ba[i]; if (a.getAttribute(n.name) !== n.value) a.setAttribute(n.name, n.value); }
+    var tag = a.nodeName;
+    if ((tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") && a !== D.activeElement) {
+      if (tag === "TEXTAREA") { if (a.value !== b.value) a.value = b.value; }
+      else if (tag === "INPUT" && (a.type === "checkbox" || a.type === "radio")) { if (a.checked !== b.hasAttribute("checked")) a.checked = b.hasAttribute("checked"); }
+      else if (b.hasAttribute("value") && a.value !== b.getAttribute("value")) a.value = b.getAttribute("value");
+    }
+  }
+  function morphKids(a, b) {
+    var ac = a.firstChild, bc = b.firstChild, next, m;
+    // Decoration added at run time (sparkles, confetti, balloons, the lessons' Learn button) carries __pnKeep: the patch
+    // walks past it and never removes it, as the markup does not know it.
+    var skip = function (n) { while (n && n.__pnKeep) n = n.nextSibling; return n; };
+    while (bc) {
+      next = bc.nextSibling;
+      ac = skip(ac);
+      if (!ac) { a.appendChild(bc); bc = next; continue; }
+      if (sameNode(ac, bc)) { morphOne(ac, bc); ac = ac.nextSibling; bc = next; continue; }
+      // An old node that is gone in the new tree (the next new node matches the one after it): drop it.
+      if (sameNode(ac.nextSibling, bc) && !sameNode(ac, next)) { m = ac.nextSibling; a.removeChild(ac); ac = m; continue; }
+      // A node with an id further on: move it here (keeps its state) rather than rebuild everything between.
+      m = null;
+      if (bc.nodeType === 1 && bc.id) for (var s = ac.nextSibling; s; s = s.nextSibling) if (s.nodeType === 1 && s.id === bc.id && sameNode(s, bc)) { m = s; break; }
+      if (m) { a.insertBefore(m, ac); morphOne(m, bc); }
+      else a.insertBefore(bc, ac);
+      bc = next;
+    }
+    while (ac) { next = ac.nextSibling; if (!ac.__pnKeep) a.removeChild(ac); ac = next; }
+  }
+  function morphOne(a, b) {
+    if (a.nodeType !== 1) { if (a.nodeValue !== b.nodeValue) a.nodeValue = b.nodeValue; return; }
+    morphAttrs(a, b);
+    if (a.nodeName === "TEXTAREA") return;
+    morphKids(a, b);
+  }
+  // patch(el, html): el's children become html, patched in place.
+  function patchHtml(el, html) {
+    var t = D.createElement(el.nodeName === "svg" ? "div" : el.nodeName);
+    t.innerHTML = html;
+    morphKids(el, t);
+  }
+  function onOnce(el, site, type, fn, opts) {
+    if (!el) return;
+    var k = "__pn_" + site + "_" + type;
+    if (!el[k]) el.addEventListener(type, function (e) { var f = el[k]; if (f) return f.call(this, e); }, opts);
+    el[k] = fn;
+  }
+  G.PREP_DOM = { patch: patchHtml, morph: morphKids, on: onOnce };
   function bodyOf(r) { return r ? r.querySelector(":scope > .pn-body") : null; }
   function screenKey() { var r = st.run; return st.stack.length + "|" + (r && !r.done && st.stack[st.stack.length - 1] === renderRun ? "q" + r.i : ""); }
   function paint(html, focusSel) {
@@ -711,10 +775,19 @@
       old.removeAttribute("id");
       ghost.appendChild(old);
     }
-    root.innerHTML = html;
+    // The same screen again (an answer, a tag, a filter, a toggle): patch it, so the body and every inner scroller keep
+    // their place without being set back, and a pressed control stays the same node. A new screen is built afresh.
+    var inPlace = !ghost && old && st.pk && st.pk.key === key && st.pk.fn === top && (!live || live.d === 0), keep = inPlace ? D.activeElement : null;
+    if (inPlace) patchHtml(root, html); else root.innerHTML = html;
     var nb = bodyOf(root);
-    if (nb) { nb.scrollTop = y; if (y && nb.scrollTop < y - 1) settleScroll(nb, y); }
-    st.want = nb && y && nb.scrollTop < y - 1 ? { key: key, y: y, t: Date.now() } : null;
+    // Patched: its scroll position never changed (and is not read here: no forced layout). Unless a screen restored by
+    // back is still owed its kept place (its first paint was a short loading state).
+    var owed = st.want && st.want.key === key && Date.now() - st.want.t < 2000;
+    if (nb && nb === old && !owed) st.want = null;
+    else {
+      if (nb) { nb.scrollTop = y; if (y && nb.scrollTop < y - 1) settleScroll(nb, y); }
+      st.want = nb && y && nb.scrollTop < y - 1 ? { key: key, y: y, t: Date.now() } : null;
+    }
     st.pk = { key: key, depth: st.stack.length, fn: top };
     if (ghost) {
       D.body.appendChild(ghost); old.scrollTop = oldY;
@@ -725,7 +798,8 @@
       G.setTimeout(drop, 450);
     }
     if (live && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, live.d); } catch (e) {} }
-    var f = focusSel ? root.querySelector(focusSel) : root.querySelector(".pn-bar .pn-ib");
+    // A patched screen keeps the focus where it was (the control just pressed is the same node).
+    var f = focusSel ? root.querySelector(focusSel) : inPlace && keep && keep !== D.body && root.contains(keep) ? null : root.querySelector(".pn-bar .pn-ib");
     try { if (f) f.focus({ preventScroll: true }); } catch (e) {}
     lessonZoomToViewer();
   }
@@ -945,7 +1019,7 @@
       // Learn (prep-lessons.js, only when a module of this subject has a lesson), then "Start with last settings".
       var go = setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" : "";
       var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
-      if (box) box.innerHTML = head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
+      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
       if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
   }
@@ -1203,8 +1277,12 @@
   function bindRunSwipe() {
     var body = root && root.querySelector(".pn-run"), qw = body && body.querySelector("#pnQw");
     if (!qw) return;
+    // Bound once per body (a patched repaint keeps the body); the question card is looked up at each press.
+    if (body.__pnSwipe) return;
+    body.__pnSwipe = 1;
     var x0 = 0, y0 = 0, t0 = 0, id = null, on = false, moved = false, dx = 0, vx = 0, lt = 0, lx = 0;
     body.addEventListener("pointerdown", function (e) {
+      qw = body.querySelector("#pnQw") || qw;
       st.dragAt = 0;   // a new press is a new intent
       if (on || e.pointerType === "mouse" || e.clientX < 24 || (e.target.closest && e.target.closest(".pn-yq-fig,.pn-stack,.pn-mtag,.pn-wrap"))) return;
       on = true; moved = false; id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; t0 = lt = Date.now(); dx = vx = 0;
@@ -1271,10 +1349,16 @@
       g.hist.push([now, e.clientY]); while (g.hist.length > 2 && now - g.hist[0][0] > 100) g.hist.shift();
       put(g, dy >= 0 ? dy : -(-dy * 0.55 * g.h) / (g.h + 0.55 * -dy) * 0.4);
     });
-    // Without this the page would claim a downward drag at the top of a scrolling sheet as an overscroll.
-    root.addEventListener("touchmove", function (e) {
+    // Without this the page would claim a downward drag at the top of a scrolling sheet as an overscroll. Native pass 2:
+    // the non-passive touchmove sits on each sheet, not on the whole overlay. On iOS a non-passive touch listener makes
+    // WebKit wait for JavaScript before every scroll it covers; on the root that was every screen, so a busy main thread
+    // (a repaint, an image decode) made all scrolling stutter.
+    var tm = function (e) {
       if (g && g.top && e.touches && e.touches.length === 1 && (g.on || e.touches[0].clientY > g.y0) && e.cancelable) e.preventDefault();
-    }, { passive: false });
+    };
+    var arm = function (w) { if (w && w.nodeType === 1 && w.classList.contains("pn-sheet-wrap") && !w.__pnTouch) { w.__pnTouch = 1; w.addEventListener("touchmove", tm, { passive: false }); } };
+    Array.prototype.forEach.call(root.querySelectorAll(":scope > .pn-sheet-wrap"), arm);
+    if (G.MutationObserver) new G.MutationObserver(function (ms) { ms.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, arm); }); }).observe(root, { childList: true });
     var end = function (e) {
       if (!g || e.pointerId !== g.id) return;
       var d = g; g = null;

@@ -2,7 +2,7 @@
  * What must hold: Practice on a module opens the setup sheet (not the runner); each option shows the pool it leaves and
  * the counts change live with the other rows; Start draws exactly what was chosen (type, difficulty, count) and passes
  * the timer to the runner (per question in a timed test moves on by itself); the choice is remembered for the module and
- * "Start with last settings" starts in one tap; an empty pool says which row to relax and disables Start; back closes
+ * "Start with last settings" starts in one tap; an option that would leave no question is disabled (native pass 2; the relax hint stays for a scope with nothing in it); back closes
  * the sheet first; the subject, bookmarks, mistakes and custom module open it too. Layer C: a PDF with two pictures
  * shows them as a strip, the kept ones are sent one per imcq call with the page text near them (MOCKED generator, every
  * /api/ request answered here), the deck keeps the image questions, and practising the deck through the sheet shows the
@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep39" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep40" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet
@@ -159,8 +159,10 @@ try {
   await click('#pnSetup [data-act=su-d][data-v="3"]');
   const hardImg = await ev(`return [0,5,10,15,20,25,30,35].filter(function(i){return i%3===2;}).length;`);
   ok(new RegExp(hardImg + "\\s*questions? match").test(await text("#suStatus")), "Image-based and Hard: " + await text("#suStatus"));
+  // Native pass 2 (owner 2026-10-09): an option that would leave no question cannot be chosen.
+  ok(await ev(`var b=document.querySelector('#pnSetup [data-act=su-seen][data-v=bm]'); return b.disabled && b.getAttribute("aria-checked")==="false";`) === true, "an option with 0 questions (Bookmarked) is disabled");
   await click('#pnSetup [data-act=su-seen][data-v=bm]');
-  ok(/No .* questions match\. Choose /.test(await text("#suStatus")) && await ev(`return document.getElementById("suGo").disabled;`) === true, "empty pool: the row to relax is named and Start is off: " + await text("#suStatus"));
+  ok(new RegExp(hardImg + "\\s*questions? match").test(await text("#suStatus")) && await ev(`return document.getElementById("suGo").disabled;`) === false, "tapping it changes nothing; Start stays on: " + await text("#suStatus"));
   await shots("sheet-empty");
   await click('#pnSetup [data-act=su-seen][data-v=new]');
   await click('#pnSetup [data-act=su-d][data-v=mix]');

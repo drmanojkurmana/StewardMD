@@ -15,6 +15,8 @@
    (new cards a day, default 20; new cards started today; extra allowed today). Pure helpers load under node. */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
 
   /* ================= pure ================= */
   var KINDS = ["basic", "cloze", "occl"];
@@ -421,11 +423,11 @@
       if (now && now !== armed) haptic();
       armed = now;
     };
-    el.addEventListener("pointerdown", function (e) {
+    ON(el, "pk", "pointerdown", function (e) {
       if (!r.shown || r.busy || on || e.pointerType === "mouse" || e.clientX < 28) return;
       on = true; moved = false; id = e.pointerId; x0 = e.clientX; y0 = e.clientY; t0 = Date.now(); dx = dy = 0; armed = 0;
     });
-    el.addEventListener("pointermove", function (e) {
+    ON(el, "pk", "pointermove", function (e) {
       if (!on || e.pointerId !== id) return;
       var mx = e.clientX - x0, my = e.clientY - y0;
       if (!moved) {
@@ -449,8 +451,8 @@
       if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(el, from, "translateX(0px) translateY(0px) rotate(0deg)"))) el.style.transform = "";
       else G.setTimeout(function () { if (el.isConnected && !el.classList.contains("drag")) el.style.transform = ""; }, 700);
     };
-    el.addEventListener("pointerup", end);
-    el.addEventListener("pointercancel", end);
+    ON(el, "pk", "pointerup", end);
+    ON(el, "pk", "pointercancel", end);
   }
 
   /* ---------- keys: Space or Enter shows the answer, 1 to 4 grade. No animation for keys. ---------- */
