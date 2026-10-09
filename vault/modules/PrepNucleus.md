@@ -1023,7 +1023,7 @@ best way of learning."
   prep-nudges.test.mjs moved above the first test (a mock.module made while a test runs is undone with it); the sprint
   assertion only applies in IST. run-prep-ask-ui waits for the sheet's open animation before measuring.
 
-## Release-readiness round 2 (2026-10-10, branch `fix/prep-ready2`, prep45)
+## Release-readiness round 2 (2026-10-10, branch `fix/prep-ready2`, prep46)
 - **Image items no longer give the answer away.** All 137 live image items (ss-radiology bank, overlay sets radnotes and
   radmax3) were read with their images (OCR plus a visual pass). 47 stems were rewritten so they keep the clinical
   context but no longer name or describe the answer finding (answer keys, options and explanations untouched; reviewed
