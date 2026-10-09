@@ -280,3 +280,93 @@ html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: v
 #dxOverlay #dxMgmt.dx-reader .dx-reader-sec figure { margin: 0 0 14px; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-sec table { width: 100%; border-collapse: collapse; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-sec img, #dxOverlay #dxMgmt.dx-reader .dx-reader-sec svg { max-width: 100%; }
+
+/* ============================================================================
+ * Disease reader: phone fit and textbook order (2026-10-09).
+ * Root cause of the clipped page: .dx-mgmt-body is a grid whose implicit column was `auto`, and grid
+ * items default to min-width:auto. The track grew to the widest min-content inside it (a v2 table with
+ * min-width:480px, a fixed-width flowchart SVG), so the whole column was wider than the phone and the
+ * pinned panel (overflow:hidden) clipped the right edge. One minmax(0,1fr) column plus min-width:0
+ * keeps every child inside the screen; wide tables and flowcharts scroll inside their own box.
+ * ========================================================================== */
+#dxOverlay #dxMgmt.dx-reader { --rd-gut-l: max(20px, env(safe-area-inset-left, 0px)); --rd-gut-r: max(20px, env(safe-area-inset-right, 0px)); }
+/* the sticky jump row pins to the top of the body's content box, so the top gutter lives on the hero */
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body { grid-template-columns: minmax(0, 1fr); padding-top: 0; padding-left: var(--rd-gut-l); padding-right: var(--rd-gut-r); overscroll-behavior-y: contain; scroll-padding-top: 72px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-hero { padding-top: 22px; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-top { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#dxOverlay #dxMgmt.dx-reader :is(.dx-mgmt-body > *, .dx-reader-content > *, .kbr-sec > *, .dx-reader-glance > *) { min-width: 0; max-width: 100%; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body :is(p, li, dd, dt, h2, h3, h4, figcaption, summary) { overflow-wrap: anywhere; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body :is(td, th) { overflow-wrap: break-word; word-break: normal; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec .dx-mgmt-sec { margin: 20px 0 6px; font: 600 16px/1.35 var(--sans, system-ui); letter-spacing: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec :is(.kbfc-svg, .kbfig-svg) { max-width: none; height: auto; }
+#dxOverlay #dxMgmt.dx-reader :is(.kbfc-wrap, .kbfig-wrap, .kbv2-scroll, .kbr-scroll) { overscroll-behavior-x: contain; }
+#dxOverlay #dxMgmt.dx-reader :is(.kbv2-scroll, .kbr-scroll):focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }
+
+/* jump-to row: sticks under the header while the body scrolls; scrolls sideways on its own */
+#dxOverlay #dxMgmt.dx-reader .kbr-jump { position: sticky; top: 0; z-index: 3; margin: -12px calc(-1 * var(--rd-gut-r)) -12px calc(-1 * var(--rd-gut-l)); max-width: none; padding: 8px 0; background: var(--panel, #fff); border-bottom: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .kbr-jump-in { display: flex; gap: 6px; padding: 0 var(--rd-gut-r) 0 var(--rd-gut-l); overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+#dxOverlay #dxMgmt.dx-reader .kbr-jump-in::-webkit-scrollbar { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbr-chip { flex: none; min-height: 40px; padding: 0 14px; border: 1px solid var(--rd-line); border-radius: 999px; background: transparent; color: var(--rd-ink); font: 500 14px/1 var(--sans, system-ui); white-space: nowrap; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; transition: background-color 140ms ease-out, color 140ms ease-out, transform 140ms ease-out; }
+#dxOverlay #dxMgmt.dx-reader .kbr-chip[hidden] { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbr-chip:active { transform: scale(0.97); }
+#dxOverlay #dxMgmt.dx-reader .kbr-chip[aria-current="true"] { border-color: transparent; background: color-mix(in srgb, var(--reader-accent) 13%, transparent); color: var(--reader-accent); font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader .kbr-chip:focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { #dxOverlay #dxMgmt.dx-reader .kbr-chip:hover { background: color-mix(in srgb, var(--reader-accent) 7%, transparent); } }
+#dxOverlay #dxMgmt.dx-reader :is(.kbr-sec, #kbr-glance) { scroll-margin-top: 68px; }
+#dxOverlay #dxMgmt.dx-reader :is(.kbr-sec, #kbr-glance):focus { outline: none; }
+
+/* at a glance: summary, red flags, high-yield points */
+#dxOverlay #dxMgmt.dx-reader .kbr-summary { font-size: 16px; line-height: 1.55; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-hy h4 { margin: 4px 0 2px; font: 600 15px var(--sans, system-ui); color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance .ev-brief { margin: 4px 0 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert .kbr-more { border-bottom: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert .kbr-more summary { min-height: 44px; font: 600 14px var(--sans, system-ui); color: var(--rd-red); cursor: pointer; }
+
+/* sections: hairline, serif heading, then text, tables and flowcharts in reading order */
+#dxOverlay #dxMgmt.dx-reader .kbr-sec { margin: 0 0 26px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec[hidden] { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec > h3 { font-size: 21px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec > h3 + .ev-subh { margin-top: 6px; padding-top: 0; border-top: 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec p { margin: 8px 0; font-size: 15px; line-height: 1.6; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec p.ev-lead { font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader .kbr-sec .ev-viewer, #dxOverlay #dxMgmt.dx-reader .kbr-sec .ev-wrap { margin-top: 14px; }
+#dxOverlay #dxMgmt.dx-reader :is(.kbv2-h, .kbr-cap) { margin: 18px 0 8px; font: 600 15px/1.35 var(--sans, system-ui); color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbv2-sec { margin: 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-kind { margin-left: 6px; font: 600 13px var(--rd-cond); font-variant: all-small-caps; letter-spacing: .04em; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fig { margin: 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#dxOverlay #dxMgmt.dx-reader .kbr-tbl { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+#dxOverlay #dxMgmt.dx-reader .kbr-tbl :is(th, td) { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rd-line); text-align: left; vertical-align: top; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-tbl thead th { border-bottom: 2px solid var(--rd-ink); font: 600 14px var(--rd-cond); font-variant: all-small-caps; letter-spacing: .04em; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-tbl td:first-child { font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader .kbr-steps { margin: 0; padding: 0; list-style: none; counter-reset: kbr-step; }
+#dxOverlay #dxMgmt.dx-reader .kbr-step { position: relative; padding: 10px 0 10px 34px; border-top: 1px solid var(--rd-line); counter-increment: kbr-step; font-size: 15px; line-height: 1.5; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-step::before { content: counter(kbr-step); position: absolute; left: 0; top: 10px; width: 22px; height: 22px; border: 1px solid var(--rd-line); border-radius: 50%; font: 600 12px/22px var(--sans, system-ui); text-align: center; color: var(--rd-mut); font-variant-numeric: tabular-nums; }
+#dxOverlay #dxMgmt.dx-reader .kbr-step--crit::before { border-color: currentColor; color: var(--rd-red); }
+#dxOverlay #dxMgmt.dx-reader .kbr-branch { font: 500 13px var(--sans, system-ui); color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-act { display: block; margin-top: 2px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-media { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--rd-line); border-radius: 12px; background: var(--panel, #fff); }
+#dxOverlay #dxMgmt.dx-reader .kbr-ann { margin: 10px 0 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-ann dt { font-weight: 600; font-size: 14px; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-ann dd { margin: 0 0 8px; font-size: 14px; line-height: 1.5; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-note, #dxOverlay #dxMgmt.dx-reader .kbr-sec .kbv2-foot { margin: 6px 0 0; font-size: 13px; line-height: 1.45; color: var(--rd-mut); opacity: 1; }
+#dxOverlay #dxMgmt.dx-reader .kbr-refs { font-size: 14px; line-height: 1.5; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-refs strong { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+#dxOverlay #dxMgmt.dx-reader .kbr-refs > div { padding: 6px 0; border-bottom: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .kbr-refs > div:last-child { border-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-chip { transition: none; } }
+/* a table or flowchart wider than the phone scrolls in its own box; edge shadows say there is more */
+#dxOverlay #dxMgmt.dx-reader :is(.kbv2-scroll, .kbr-scroll) {
+  background:
+    linear-gradient(to right, var(--panel, #fff) 30%, transparent) left center / 32px 100% no-repeat local,
+    linear-gradient(to left, var(--panel, #fff) 30%, transparent) right center / 32px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, .16), transparent) left center / 12px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, .16), transparent) right center / 12px 100% no-repeat scroll;
+}
+body.dark #dxOverlay #dxMgmt.dx-reader :is(.kbv2-scroll, .kbr-scroll) {
+  background:
+    linear-gradient(to right, var(--panel, #0c0c0e) 30%, transparent) left center / 32px 100% no-repeat local,
+    linear-gradient(to left, var(--panel, #0c0c0e) 30%, transparent) right center / 32px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(255, 255, 255, .22), transparent) left center / 12px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(255, 255, 255, .22), transparent) right center / 12px 100% no-repeat scroll;
+}

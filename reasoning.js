@@ -4378,6 +4378,185 @@
       });
     } catch (e) {}
   }
+  /* Disease reader body in textbook order (owner, 2026-10-09: "mobile fit + readable order").
+   *   At a glance: summary, the key red flags, 2 to 4 high-yield points.
+   *   Then the sections that have content, in this order: Causes, Pathophysiology, Diagnosis and
+   *   investigations, Differential diagnosis, Management and treatment, Prognosis, Clinical pearls and
+   *   pitfalls, References. Fields map onto headings; nothing is written that the record does not hold.
+   *   Tables and flowcharts sit inside the section they belong to: kb-v2-loader.js fills one slot per
+   *   kind (diagnostic, ddx, treatment, flowchart) from the one bucket it loads; legacy tables,
+   *   algorithms and diagrams go by their content, or to Diagnosis when it is unclear. */
+  var KBR_LABELS = { causes: ["Causes", "Causes"], patho: ["Pathophysiology", "Pathophysiology"], dx: ["Diagnosis and investigations", "Diagnosis"],
+    ddx: ["Differential diagnosis", "Differentials"], mgmt: ["Management and treatment", "Management"], prog: ["Prognosis", "Prognosis"],
+    pearls: ["Clinical pearls and pitfalls", "Pearls"], refs: ["References", "References"] };
+  function kbrTable(t) {
+    var ths = (t.headers || []).map(function (h) { return '<th scope="col">' + esc(h) + '</th>'; }).join("");
+    var trs = (t.rows || []).map(function (row) { return '<tr>' + (row || []).map(function (c) { return '<td>' + esc(c) + '</td>'; }).join("") + '</tr>'; }).join("");
+    return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(t.title || "") + '</figcaption>' +
+      '<div class="kbr-scroll" tabindex="0" role="region" aria-label="' + esc(t.title || "Table") + ', scrolls sideways"><table class="kbr-tbl"' + ((t.headers || []).length >= 4 ? ' style="min-width:' + ((t.headers || []).length * 130) + 'px"' : '') + '><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
+      (t.caption ? '<p class="kbr-note">' + esc(t.caption) + '</p>' : '') + '</figure>';
+  }
+  function kbrAlgo(a) {
+    return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(a.title || "") + '</figcaption><ol class="kbr-steps">' +
+      (a.steps || []).map(function (st) {
+        return '<li class="kbr-step' + (st.critical ? " kbr-step--crit" : "") + '"><b>' + esc(st.step) + '</b>' +
+          (st.branch ? ' <span class="kbr-branch">' + esc(st.branch) + '</span>' : '') + '<span class="kbr-act">' + esc(st.action) + '</span></li>';
+      }).join("") + '</ol>' + (a.caption ? '<p class="kbr-note">' + esc(a.caption) + '</p>' : '') + '</figure>';
+  }
+  var KBR_DTYPES = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+  function kbrDiagram(d) {
+    var dsrc = String(d.src || "");
+    var media = dsrc.charAt(0) === "#"
+      ? '<svg class="kbr-media" role="img" aria-label="' + esc(d.title) + '"><use href="' + esc(dsrc) + '"></use></svg>'
+      : '<img class="kbr-media" src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy">';
+    var ann = (d.annotations && d.annotations.length)
+      ? '<dl class="kbr-ann">' + d.annotations.map(function (a) { return '<dt>' + esc(a.label) + '</dt><dd>' + esc(a.description) + '</dd>'; }).join("") + '</dl>' : '';
+    return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(d.title) + ' <span class="kbr-kind">' + esc(KBR_DTYPES[d.type] || d.type || "") + '</span></figcaption>' +
+      media + (d.caption ? '<p class="kbr-note">' + esc(d.caption) + '</p>' : '') + ann + '</figure>';
+  }
+  // A legacy table belongs where its title and headers point; the standard "Clinical Features &
+  // Management Matrix" spans several sections, so it stays in Diagnosis (its old "diagnostic matrix" home).
+  function kbrTableHome(t) {
+    var s = ((t.title || "") + " " + (t.headers || []).join(" ")).toLowerCase();
+    if (/differential|\bddx\b|mimic|\bversus\b|\bvs\.?\s/.test(s)) return "ddx";
+    if (/clinical features (?:&|and) management matrix|clinical dimension/.test(s)) return "dx";
+    if (/\btreat|therap|\bdos(?:e|ing)\b|regimen|antibiotic|\bdrug/.test(s)) return "mgmt";
+    return "dx";
+  }
+  function kbrAlgoHome(a) {
+    var s = String(a.title || "").toLowerCase();
+    return (/diagnos|work-?\s?up|evaluat|approach to|investigat/.test(s) && !/manag|treat/.test(s)) ? "dx" : "mgmt";
+  }
+  function kbReaderBodyHTML(id, H, o) {
+    evEnsure();   // the bold high-yield styles and the other-source viewers' toggles
+    o = o || {};
+    H = H || {};
+    var v2on = !!window.SMD_KBV2_ON;
+    function v2(kind) { return v2on ? '<div class="kbv2-slot" data-kbv2-id="' + esc(id) + '" data-kbv2-kind="' + kind + '"></div>' : ""; }
+    var arr = function (x) { return (x || []).filter(function (s) { return s && String(s).trim(); }); };
+    var pearls = arr(H.clinicalPearls), red = arr(H.redFlags);
+
+    // At a glance
+    var summary = "", pathoRest = "";
+    var patho = H.pathophysiology ? stripCite(H.pathophysiology) : "";
+    if (o.reason) { summary = medFormat(o.reason); pathoRest = patho ? medLead(patho) : ""; }
+    else if (patho) {
+      // the first full sentence (ends in a full stop, next one starts with a capital) is the summary
+      var m = patho.match(/^([\s\S]{25,320}?\.)\s+([A-Z(][\s\S]+)$/);
+      if (m) { summary = medFormat(m[1]); pathoRest = paraChunks(m[2]); } else summary = medFormat(patho);
+    }
+    var brief = evBriefing(id), glancePearls = [];
+    if (!brief && pearls.length) { glancePearls = pearls.slice(0, 3); pearls = pearls.slice(3); }
+    var redHtml = "";
+    if (red.length) {
+      redHtml = '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(red.slice(0, 4), "danger") +
+        (red.length > 4 ? '<details class="kbr-more"><summary>' + (red.length - 4) + ' more red flag' + (red.length - 4 > 1 ? 's' : '') + DX_CHEV + '</summary>' + evList(red.slice(4), "danger") + '</details>' : '') + '</section>';
+    }
+    var glance = (summary || redHtml || brief || glancePearls.length)
+      ? '<div class="dx-reader-glance" id="kbr-glance" tabindex="-1"><h3>At a glance</h3>' + (summary ? '<p class="kbr-summary">' + summary + '</p>' : '') + redHtml +
+        (brief ? brief : (glancePearls.length ? '<section class="kbr-hy"><h4>High-yield points</h4>' + evList(glancePearls) + '</section>' : '')) + '</div>'
+      : "";
+
+    // Sort legacy visuals into their sections
+    var put = { patho: "", dx: "", ddx: "", mgmt: "" };
+    (H.algorithms || []).forEach(function (a) { put[kbrAlgoHome(a)] += kbrAlgo(a); });
+    var legacyTbl = { dx: "", ddx: "", mgmt: "" };
+    (H.tables || []).forEach(function (t) { legacyTbl[kbrTableHome(t)] += kbrTable(t); });
+    var imaging = "";
+    (H.diagrams || []).forEach(function (d) {
+      // a drawn mechanism belongs to Pathophysiology; films, smears, scans and tracings are diagnostic
+      var look = ((d.title || "") + " " + (d.caption || "")).toLowerCase();
+      if (d.type === "diagram" && patho && !/smear|film|stain|biops|histolog|patholog|x-?ray|radiograph|\bct\b|\bmri\b|scan|ultrasound|\becg\b|\beeg\b|endoscop|fundus/.test(look)) put.patho += kbrDiagram(d);
+      else imaging += kbrDiagram(d);
+    });
+
+    var _dd = {}; arr(H.additionalDifferentials).forEach(function (x) { _dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
+    var mim = arr(H.infectionMimics).concat(arr(H.nonInfectiousMimics)).filter(function (x) { return !_dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()]; });
+    var ix = arr(o.keyIx).concat(arr(H.additionalInvestigations));
+    var other = "";
+    ["idsa", "sanford"].forEach(function (k) {
+      var src; try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      if (src) { src.srcKey = k; other += evViewerHTML(src, { expanded: false }); }
+    });
+    var refSrc = null; try { refSrc = evHarrisonSrc(id); } catch (e) { refSrc = null; }
+
+    var sev = H.severityClassification ? '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(H.severityClassification)) + '</p>' : "";
+    var dxText = (o.confirm || "") + evSub("Investigations", evList(ix)) + sev;
+    var ddxText = evList(arr(H.additionalDifferentials)) + evSub("Mimics", evList(mim));
+    var prog = H.prognosis ? '<p>' + medFormat(stripCite(H.prognosis)) + '</p>' : "";
+    var pearlsHtml = (pearls.length ? evSub(glancePearls.length ? "More pearls" : "Pearls", evList(pearls)) : "") + evSub("Pitfalls", evList(arr(H.pitfalls), "warn"));
+    var refs = refSrc && refSrc.cite ? '<div class="kbr-refs">' + refSrc.cite + '</div>' : "";
+    // [key, text the record holds, the full section with v2 slots placed after the text]
+    var secs = [
+      ["causes", o.causes || "", o.causes || ""],
+      ["patho", pathoRest + put.patho, pathoRest + put.patho],
+      ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging],
+      ["ddx", ddxText + legacyTbl.ddx, ddxText + v2("ddx") + legacyTbl.ddx],
+      ["mgmt", (o.mgmt || "") + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
+      ["prog", prog, prog],
+      ["pearls", pearlsHtml, pearlsHtml],
+      ["refs", refs, refs + v2("foot")]
+    ];
+    var body = "", chips = glance ? '<button type="button" class="kbr-chip" data-jump="kbr-glance">At a glance</button>' : "";
+    secs.forEach(function (s) {
+      var key = s[0], L = KBR_LABELS[key];
+      if (!s[2]) return;
+      // a section that only holds v2 slots is hidden by kb-v2-loader.js when the record has nothing for it
+      body += '<section class="dx-reader-sec kbr-sec kbr-sec--' + key + '" id="kbr-' + key + '" tabindex="-1"' + (s[1] ? '' : ' data-kbr-slotonly="1"') + '>' +
+        '<h3>' + L[0] + '</h3>' + s[2] + '</section>';
+      chips += '<button type="button" class="kbr-chip" data-jump="kbr-' + key + '">' + L[1] + '</button>';
+    });
+    var jump = chips ? '<nav class="kbr-jump" aria-label="Jump to section"><div class="kbr-jump-in">' + chips + '</div></nav>' : "";
+    return { glance: glance, body: body, jump: jump };
+  }
+  // Section chips: scroll the reader body (never the pinned panel) and mark the section in view.
+  function kbWireJump(el) {
+    var body = el.querySelector(".dx-mgmt-body"), nav = el.querySelector(".kbr-jump");
+    if (!body || !nav) return;
+    var row = nav.querySelector(".kbr-jump-in");
+    var chips = [].slice.call(nav.querySelectorAll(".kbr-chip"));
+    var reduce = false; try { reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    function offsetIn(t) { return t.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop; }
+    nav.addEventListener("click", function (ev) {
+      var b = ev.target && ev.target.closest ? ev.target.closest(".kbr-chip") : null; if (!b) return;
+      var t = el.querySelector("#" + b.getAttribute("data-jump")); if (!t) return;
+      function go(smooth) {
+        var top = Math.max(0, offsetIn(t) - nav.offsetHeight - 12);
+        // never stop short of the row's resting place, or the hero peeks out above the pinned row
+        var prev = nav.previousElementSibling;
+        if (prev) top = Math.max(top, offsetIn(prev) + prev.offsetHeight + (parseFloat(getComputedStyle(body).rowGap) || 0) - 12);
+        try { body.scrollTo({ top: top, behavior: smooth ? "smooth" : "auto" }); } catch (e) { body.scrollTop = top; }
+      }
+      go(!reduce);
+      // lazy figures above the target can load mid-scroll and push it down: settle once the glide ends
+      setTimeout(function () {
+        var want = nav.getBoundingClientRect().bottom + 12, now = t.getBoundingClientRect().top;
+        if (Math.abs(now - want) > 6) go(false);
+      }, 650);
+      try { t.focus({ preventScroll: true }); } catch (e2) {}
+    });
+    var raf = 0;
+    function mark() {
+      raf = 0;
+      var line = nav.getBoundingClientRect().bottom + 24, cur = null;
+      chips.forEach(function (c) {
+        var t = el.querySelector("#" + c.getAttribute("data-jump"));
+        if (t && !t.hidden && t.getBoundingClientRect().top <= line) cur = c;
+      });
+      if (!cur || body.scrollTop < 4) cur = chips[0];
+      else if (body.scrollTop + body.clientHeight >= body.scrollHeight - 4) {   // at the end the last section cannot reach the top
+        var shown = chips.filter(function (c) { return !c.hidden; }); cur = shown[shown.length - 1] || cur;
+      }
+      chips.forEach(function (c) { if (c === cur) c.setAttribute("aria-current", "true"); else c.removeAttribute("aria-current"); });
+      if (cur && row) {
+        var l = cur.offsetLeft, r = l + cur.offsetWidth;
+        if (l < row.scrollLeft + 8) row.scrollLeft = Math.max(0, l - 16);
+        else if (r > row.scrollLeft + row.clientWidth - 8) row.scrollLeft = r - row.clientWidth + 16;
+      }
+    }
+    body.addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(mark); }, { passive: true });
+    mark();
+  }
   function openDiseaseRef(id, opts) {
     kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
@@ -4399,7 +4578,7 @@
     // (the page used to print it twice, an accordion and then a numbered Management section).
     /* Infective syndromes (SYNDROMES, 51) keep their management in the stewardship case data, not in a
      * tx list. Owner, 2026-10-03: show it on the disease page and drop the link to the old case page. */
-    var synMgmt = "";
+    var synMgmt = "", synCauses = "";
     if (syn) {
       var rx = function (d) {
         var line = [d.dose, d.route, d.frequency, d.duration ? "for " + d.duration : ""].filter(Boolean).join(", ");
@@ -4408,36 +4587,30 @@
       var regs = (syn.regimens && syn.regimens.length) ? syn.regimens
         : [{ label: "First-line", drugs: syn.firstLine || [] }, { label: "Alternative", drugs: syn.alternatives || [] }];
       var P = syn.pathogens || {}, orgs = [].concat(P.veryLikely || [], P.likely || []);
-      synMgmt = '<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div>' +
-        (syn.decision && syn.decision.label ? '<p class="dx-mgmt-decision ' + esc(syn.decision.status || "") + '"><b>' + esc(syn.decision.label) + '</b></p>' : '') +
-        (orgs.length ? '<p><b>Likely organisms:</b> ' + esc(orgs.join(", ")) + '</p>' : '') +
+      // The likely organisms are the cause of the syndrome: they open the Causes section of the reader.
+      synCauses = orgs.length ? '<p><b>Likely organisms:</b> ' + esc(orgs.join(", ")) + '</p>' : '';
+      synMgmt = (syn.decision && syn.decision.label ? '<p class="dx-mgmt-decision ' + esc(syn.decision.status || "") + '"><b>' + esc(syn.decision.label) + '</b></p>' : '') +
         regs.filter(function (g) { return g.drugs && g.drugs.length; }).map(function (g) {
           return '<div class="dx-mgmt-sec">' + esc(g.label || "Regimen") + '</div><ol class="dx-mgmt-tx">' + g.drugs.map(rx).join("") + '</ol>';
         }).join("") +
         (syn.stewardship && syn.stewardship.length ? '<div class="dx-mgmt-sec">Stewardship</div><ul class="dx-mgmt-ul">' + syn.stewardship.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '') +
         (syn.deescalation ? '<div class="dx-mgmt-sec">De-escalation</div><p>' + medFormat(syn.deescalation) + '</p>' : '');
     }
-    var mgmtHtml = syn ? synMgmt : (refInf && briefTx)
-      ? ('<div class="dx-mgmt-sec tx">Management</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>'
-         + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '')
-         + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + medFormat(dm.dispo) + '</p>' : '')
-         + (dm && dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
-      : "";
-    /* ONE management place per disease page (owner, 2026-10-01: "keep only one management page, either the
-     * collapse or the open management page"):
-     *   - infective with a stewardship case (SYNDROMES): the "Open full stewardship page" button only;
-     *   - infective reference disease: the numbered Management section in the body (mgmtHtml) only;
-     *   - non-infective: this collapse only. It carries what the separate management page added (how to
-     *     confirm, score calculators, disposition, source); investigations and red flags are already above. */
-    var mgmtFold = "";
-    if (!syn && !refInf) {
-      var mfx = "";
-      if (dm && dm.dx) mfx += '<p><b>How to confirm.</b> ' + medFormat(dm.dx) + '</p>';
-      if (briefTx && briefTx.length) mfx += '<ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ol>';
-      mfx += scoreChipsBlock({ id: id, name: name });
-      if (dm && dm.dispo) mfx += '<p><b>Disposition.</b> ' + medFormat(dm.dispo) + '</p>';
-      if (dm && dm.src) mfx += '<p class="dx-mgmt-src">Source: ' + esc(dm.src) + '</p>';
-      if (mfx) mgmtFold = '<details class="dx-reader-mgmt"><summary>Management' + DX_CHEV + '</summary>' + mfx + '</details>';
+    /* ONE management place per disease page (owner, 2026-10-01). Since 2026-10-09 it is the
+     * "Management and treatment" section of the reader body (kbReaderBodyHTML), in textbook order:
+     *   - infective with a stewardship case (SYNDROMES): the regimens, stewardship and de-escalation;
+     *   - infective reference disease: the numbered DX_MGMT / enrichment list, disposition, source;
+     *   - non-infective: the same list plus score calculators, disposition and source.
+     * "How to confirm" and the curated key investigations move to Diagnosis and investigations. */
+    var rdMgmt = "", rdConfirm = "", rdKeyIx = "";
+    if (syn) rdMgmt = synMgmt;
+    else {
+      if (briefTx && briefTx.length) rdMgmt += '<ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>';
+      if (!refInf) rdMgmt += scoreChipsBlock({ id: id, name: name });
+      if (dm && dm.dispo) rdMgmt += '<p><b>Disposition.</b> ' + medFormat(dm.dispo) + '</p>';
+      if (dm && dm.src) rdMgmt += '<p class="dx-mgmt-src">Source: ' + esc(dm.src) + '</p>';
+      if (!refInf && dm && dm.dx) rdConfirm = '<p><b>How to confirm.</b> ' + medFormat(dm.dx) + '</p>';
+      if (refInf && briefTx && dm && dm.ix && dm.ix.length) rdKeyIx = dm.ix.slice(0, 8);
     }
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
@@ -4445,50 +4618,7 @@
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
-    var visualSecs = "";
-    if (H) {
-      if (window.SMD_KBV2_ON) visualSecs += '<section class="dx-reader-sec"><div class="kbv2-slot" data-kbv2-id="' + esc(id) + '"></div></section>';
-      if (H.algorithms && H.algorithms.length) {
-        var algHtml = H.algorithms.map(function (a) {
-          var steps = (a.steps || []).map(function (st, idx) {
-            return '<div class="kbp-flow-node' + (st.critical ? " kbp-flow-crit" : "") + '" style="margin-bottom:8px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc">' +
-              '<div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;margin-bottom:4px"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#0284c7;color:#fff;font-size:11px">' + (idx + 1) + '</span><span>' + esc(st.step) + '</span>' +
-              (st.branch ? '<span style="margin-left:auto;padding:2px 8px;border-radius:4px;background:#e0f2fe;color:#0369a1;font-size:11px">' + esc(st.branch) + '</span>' : '') + '</div>' +
-              '<div style="font-size:13px;line-height:1.5;color:#334155">' + esc(st.action) + '</div></div>';
-          }).join("");
-          return '<div style="margin-bottom:14px"><strong style="display:block;margin-bottom:8px;color:#0f172a;font-size:14px">' + esc(a.title) + '</strong>' + steps + (a.caption ? '<p style="font-size:12px;color:#64748b;font-style:italic;margin:6px 0 0">' + esc(a.caption) + '</p>' : '') + '</div>';
-        }).join("");
-        visualSecs += '<section class="dx-reader-sec dx-reader-algo"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Algorithm &amp; Pathway</h3>' + algHtml + '</section>';
-      }
-
-      if (H.tables && H.tables.length) {
-        var tblHtml = H.tables.map(function (t) {
-          var ths = (t.headers || []).map(function (h) { return '<th style="padding:8px 10px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px;font-weight:700;color:#1e293b;text-align:left">' + esc(h) + '</th>'; }).join("");
-          var trs = (t.rows || []).map(function (row) {
-            return '<tr>' + (row || []).map(function (cell) { return '<td style="padding:8px 10px;border:1px solid #e2e8f0;font-size:12px;line-height:1.45;color:#334155;vertical-align:top">' + esc(cell) + '</td>'; }).join("") + '</tr>';
-          }).join("");
-          return '<div style="margin-bottom:16px;overflow-x:auto"><strong style="display:block;margin-bottom:8px;color:#0f172a;font-size:14px">' + esc(t.title) + '</strong><table style="width:100%;border-collapse:collapse"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table>' + (t.caption ? '<p style="font-size:12px;color:#64748b;font-style:italic;margin:6px 0 0">' + esc(t.caption) + '</p>' : '') + '</div>';
-        }).join("");
-        visualSecs += '<section class="dx-reader-sec dx-reader-matrix"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Diagnostic Matrix</h3>' + tblHtml + '</section>';
-      }
-
-      if (H.diagrams && H.diagrams.length) {
-        var DTYPES = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
-        var dgHtml = H.diagrams.map(function (d) {
-          var dsrc = String(d.src || "");
-          var media = dsrc.charAt(0) === "#"
-            ? '<svg role="img" aria-label="' + esc(d.title) + '" style="display:block;width:100%;height:auto;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc"><use href="' + esc(dsrc) + '"></use></svg>'
-            : '<img src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy" style="display:block;width:100%;max-width:100%;height:auto;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc">';
-          var ann = (d.annotations && d.annotations.length)
-            ? '<ul style="list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px">' + d.annotations.map(function (a) {
-                return '<li style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;background:#f0fdfa;font-size:12px;line-height:1.45;color:#334155"><strong style="color:#0f766e">' + esc(a.label) + '</strong> ' + esc(a.description) + '</li>';
-              }).join("") + '</ul>' : '';
-          return '<figure style="margin:0 0 16px;min-width:0;overflow:hidden"><span style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:999px;background:#ccfbf1;color:#0f766e;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">' + esc(DTYPES[d.type] || d.type) + '</span>' +
-            media + '<figcaption style="margin-top:8px"><strong style="display:block;color:#0f172a;font-size:14px">' + esc(d.title) + '</strong><span style="display:block;font-size:12.5px;line-height:1.5;color:#475569;margin-top:2px">' + esc(d.caption) + '</span></figcaption>' + ann + '</figure>';
-        }).join("");
-        visualSecs += '<section class="dx-reader-sec dx-reader-diagrams"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Diagrams &amp; Imaging</h3>' + dgHtml + '</section>';
-      }
-    }
+    var rd = kbReaderBodyHTML(id, H, { reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
@@ -4496,20 +4626,13 @@
         '<section class="dx-reader-hero">' + kbBannerHTML() +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
+        rd.jump +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
-        '<div class="dx-reader-glance"><h3>At a glance</h3>' +
-          (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
-          (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
-          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations' + DX_CHEV + '</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          mgmtFold +
-        '</div><div class="dx-reader-content">' +
-        mgmtHtml +   // "Why this" is not repeated here: the same sentence opens At a glance above
-        visualSecs +
-        (harrisonRef(id, { expanded: true, omit: { redFlags: !!(H && H.redFlags && H.redFlags.length), investigations: !!(H && H.additionalInvestigations && H.additionalInvestigations.length) } }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
-
-        '</div>' +
+        rd.glance +
+        '<div class="dx-reader-content">' + (rd.body || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') + '</div>' +
       '</div>';
     kbDedupeReader(el);
+    try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();

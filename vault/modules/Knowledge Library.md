@@ -100,3 +100,21 @@ that disease as the topic: a clearable "About: <disease>" chip above the compose
 choice (Research only when `smd_maik_research` is on). The button is not rendered when MaiK is not loaded.
 MaiK can also reach these pages by name: "pneumonia" or "open pneumonia" in MaiK gives a card listing the
 pneumonia pages (see [[StewardMD Edge]]). Headless check: `test/run-kb-nav-askmaik-ui.mjs`.
+
+## Disease reader: phone fit and textbook order (2026-10-09, branch kb-reader-mobile-flow)
+
+- **Overflow root cause:** `.dx-mgmt-body` is a grid with an implicit `auto` column and grid items at
+  `min-width:auto`, so the column grew to the widest min-content inside it (the v2 table's
+  `min-width:480px`, flowchart SVGs). The pinned panel (`overflow:hidden`) then clipped the right edge.
+  Fix in `knowledge-library.css`: `grid-template-columns:minmax(0,1fr)` + `min-width:0` on children;
+  wide tables and flowcharts scroll inside their own box (edge shadows), safe-area gutters on both sides.
+- **Order:** `kbReaderBodyHTML()` in reasoning.js builds At a glance (summary, first 4 red flags + "N more",
+  curated briefing or first 3 pearls), then Causes, Pathophysiology, Diagnosis and investigations,
+  Differential diagnosis, Management and treatment, Prognosis, Clinical pearls and pitfalls, References.
+  Only sections with content render. A sticky chip row (`.kbr-jump`, `kbWireJump()`) jumps between them.
+- **Tables inline:** reader slots carry `data-kbv2-kind` (diagnostic, ddx, treatment, flowchart,
+  flowchart-dx, foot); kb-v2-loader.js renders each kind into its slot from the one cached bucket and
+  hides a slot-only section that comes back empty. A slot without a kind (differential-card Know more)
+  still renders everything. Legacy tables/algorithms/diagrams are placed by title/content.
+- The reader no longer shows the "Know more" Harrison panel; IDSA/Sanford viewers sit in Management.
+- Tests: `node test/run-kb-reader-mobile-ui.mjs` (390/360, zoom 0.95 and 1, order, homes, chips, dark, ?kbv2=0).
