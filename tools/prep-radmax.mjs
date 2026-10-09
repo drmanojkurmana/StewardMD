@@ -14,9 +14,12 @@
 //   node tools/prep-radmax.mjs run --run R [--pick ...] [--cap 100]
 //       G1 write -> code gates -> S1 blind solve + R1 review -> G2 redo once (with the reasons) -> gates -> S2 + R2
 //       Resumable (state in work/<R>/state.json); a submitted Batch job is polled, never resubmitted.
+//   node tools/prep-radmax.mjs run --run R --depth [--learn b1,b2] [--avoid-runs d1] [--per 3] [--floor 15]
+//       depth round: text units only, more items on facts their accepted items do not test (see depthUnits);
+//       with --srd-notes: notes pages re-aimed at the thin ss-radiology modules (see notesToSrd)
 //   node tools/prep-radmax.mjs haiku-prep --runs R1,R2          inputs for the Haiku steps (image votes A/B, fact check,
 //                                                               duplicate groups) -> work/haiku/
-//   node tools/prep-radmax.mjs assemble --runs R1,R2            bank files (rad-* overlay, srd-* bank), cites, reports
+//   node tools/prep-radmax.mjs assemble --runs R1,R2 [--out out]  bank files (rad-* overlay, srd-* bank), cites, reports
 // Cost rows: $CLAUDE_JOB_DIR/tmp/radmax/log.tsv (else <dir>/work/log.tsv).
 import fs from "node:fs";
 import os from "node:os";
@@ -262,7 +265,7 @@ function rulesText(bank) {
 }
 /* genPrompt(unit, redo) -> one core prompt for a text unit (the slate of wished items) or a redo of rejected drafts. */
 export function genPrompt(u, redo) {
-  const bank = SOURCES[u.src].bank;
+  const bank = (u.bank || SOURCES[u.src].bank);
   const system = ["You write single-best-answer MCQs for the NEET-SS (DM / DNB superspecialty) radiology entrance and for strong NEET-PG candidates, from the SOURCE pages given."].concat(rulesText(bank)).join("\n");
   const src = "<source>\n" + (u.header ? "Context: " + u.header + "\n" : "") + u.segs.map((s) => "[" + s.id + "] " + s.tx).join("\n") + "\n</source>" + (u.modHint ? "\nModule: " + u.modHint + (u.modFixed ? " (use it for every item)" : " is the usual module for these pages; choose another only when the item clearly belongs there") + "." : "");
   let ask;
@@ -270,15 +273,18 @@ export function genPrompt(u, redo) {
     ask = "These drafts from the same source were rejected for the reasons given. Write one replacement for each, on the same concept, same format and level, fixing the problem (or choose a different concept from the source if the concept cannot support a sound item):\n" +
       redo.map((r, i) => `R${i}: format ${r.fmt}, level ${r.dif}. Rejected because: ${cleanText(r.why, 400)}\nDraft stem: ${cleanText(r.q, 900)}\nDraft options: ${r.o.map((o, k) => L[k] + ". " + cleanText(o, 200)).join(" | ")}; key ${L[r.a]}`).join("\n\n");
   } else {
-    const avoid = (u.avoid || []).length ? "\nThese questions already exist on these pages; test other facts or test at a clearly higher level (do not duplicate):\n" + u.avoid.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
+    const avoid = (u.avoid || []).length ? (u.depth
+      ? "\nThese questions already exist on these pages. Each new item must test a fact or decision that none of them tests (another finding, sign, differential, modality choice, anatomical detail, complication or management step stated in the source); do not reword, reformat or re-level them:\n"
+      : "\nThese questions already exist on these pages; test other facts or test at a clearly higher level (do not duplicate):\n") + u.avoid.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
+    const prefer = (u.prefer || []).length ? "\nThese modules have few questions so far: " + u.prefer.map((m) => m + " (" + MOD_NAMES[m] + ")").join(", ") + ". When these pages state facts that belong to one of them, write at least one item on those facts and set mod to that module. Never stretch a fact to fit a module." : "";
     const learn = (u.lessons || []).length ? "\nEarlier drafts from these pages were rejected for these reasons; do not repeat these faults:\n" + u.lessons.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
     ask = `Write ${u.want.length} items, each on a different concept of these pages (prefer items that combine several facts over near-duplicates), in this order:\n` + u.want.map((w, i) => `${i + 1}. format ${w.fmt}, level ${w.dif}`).join("\n") +
-      "\nIf the pages cannot support an item of the wished format or level, write the closest sound item instead (change the format or level and say so in fmt and dif). Return fewer items rather than unsupported ones." + avoid + learn;
+      "\nIf the pages cannot support an item of the wished format or level, write the closest sound item instead (change the format or level and say so in fmt and dif). Return fewer items rather than unsupported ones." + avoid + prefer + learn;
   }
   return { op: "radmax-gen", system, user: src + "\n" + ask, schema: GEN_SCHEMA, maxOut: Math.min(8000, 300 + 1500 * (redo ? redo.length : u.want.length)), temperature: redo ? 0.5 : 0.8 };
 }
 export function imgPrompt(u, redo) {
-  const bank = SOURCES[u.src].bank, w = u.want[0];
+  const bank = (u.bank || SOURCES[u.src].bank), w = u.want[0];
   const system = [
     "You write one image-based single-best-answer MCQ for the NEET-SS (DM / DNB superspecialty) radiology entrance from the attached figure and the SOURCE text that describes it.",
     "Look at the image first. Set sure to false (and return no item) when you cannot see in the image what the caption and source say it shows, when the image is a drawing, a table, a page of text or a logo, when printed words on the image give the answer away, or when several panels make the question ambiguous. why: one line on what the image shows or why it is unusable.",
@@ -356,7 +362,7 @@ const tableOk = (nt) => { const rows = String(nt).split("\n").filter((l) => /^\s
 /* gates(it, unit) -> [] when the item passes every code gate, else the reasons. */
 export function gates(it, u) {
   const out = [], ground = (u.header || "") + " " + groundOf(u.segs);
-  const bank = SOURCES[u.src].bank, mods = bank === "rad" ? RAD_MODULES : SRD_MODULES;
+  const bank = (u.bank || SOURCES[u.src].bank), mods = bank === "rad" ? RAD_MODULES : SRD_MODULES;
   if (!it.fmt) out.push("format missing"); if (!it.dif) out.push("level missing");
   if (u.modFixed && it.mod !== u.modHint) it.mod = u.modHint;
   if (!mods.includes(it.mod)) out.push("module not in the list");
@@ -494,7 +500,8 @@ async function runAll(dir, args) {
   };
   console.log(`run ${run}: ${units.length} units (${units.filter((u) => u.kind === "text").length} text asking ${units.filter((u) => u.kind === "text").reduce((a, u) => a + u.want.length, 0)} items, ${units.filter((u) => u.kind === "img").length} figures)`);
   // avoid lists for the notes (stems already live on those pages)
-  const live = liveStemsByPage(dir); for (const u of units) if (u.kind === "text" && live[u.src]) u.avoid = [...new Set(u.pages.flatMap((p) => live[u.src][p] || []))].slice(0, 12);
+  if (args.flags.has("depth")) { const ctx = depthContext(dir, args); units = args.flags.has("srd-notes") ? notesToSrd(units, ctx) : depthUnits(units, ctx); }
+  const live = liveStemsByPage(dir); for (const u of units) if (u.kind === "text" && live[u.src]) u.avoid = [...new Set((u.avoid || []).concat(u.pages.flatMap((p) => live[u.src][p] || []).slice(0, 12)))].slice(0, 24);
   const g1 = await go("G1-gen", genLines(units), "gen", 0.55);
   if (dry) { dryRest(dir, run, units); return; }
   const d1 = readDrafts(units, g1, "g1");
@@ -587,6 +594,57 @@ async function fixRun(dir, args, allU) {
   const usd = Object.values(state.stages).reduce((a, st) => a + ((st.usage && st.usage.usd) || 0), 0);
   writeJson(path.join(work, "summary.json"), { fixInput: items.length, drafts: d.length, accepted: out.length, usd });
   console.log(JSON.stringify({ fixInput: items.length, drafts: d.length, accepted: out.length, usd }));
+}
+
+/* Depth round: more items per text unit on facts its accepted items do not test yet. Every unit's accepted stems are
+ * passed as "do not repeat"; levels lean to Easy and Very Hard (the thinnest); a unit whose earlier drafts landed in a
+ * thinly covered module is asked for one more item and told which thin modules to favour. Figures are not re-asked. */
+export const DEPTH_BIAS = { fmt: [["vignette", 0.22], ["recognition", 0.14], ["true-false", 0.2], ["match", 0.14], ["reasoning", 0.3]], dif: [["Easy", 0.28], ["Moderate", 0.2], ["Hard", 0.24], ["Very Hard", 0.28]] };
+/* thinModules(counts, floor) -> module ids (both banks) with fewer than floor live items. */
+export function thinModules(counts, floor = 15) { return RAD_MODULES.concat(SRD_MODULES).filter((m) => (counts[m] || 0) < floor); }
+/* depthUnits(units, { accepted: Map uid -> stems, prior: Map uid -> Set(modules), thin: [module], per }) -> text units
+ * with a fresh slate, the avoid list and the preferred thin modules. */
+export function depthUnits(units, { accepted, prior, thin, per = 3, round = "depth" }) {
+  return units.filter((u) => u.kind === "text").map((u) => {
+    const bank = (u.bank || SOURCES[u.src].bank), mine = thin.filter((m) => m.startsWith(bank + "-"));
+    const seen = prior.get(u.uid) || new Set(), hits = u.modFixed ? [] : mine.filter((m) => seen.has(m));
+    const prefer = u.modFixed ? [] : hits.length ? hits : bank === "rad" ? mine : [];
+    const n = Math.min(5, per + (bank === "rad" ? 1 : 0) + (hits.length ? 1 : 0));
+    return { ...u, depth: true, want: slate(n, round + u.uid, DEPTH_BIAS), avoid: (accepted.get(u.uid) || []).slice(0, 12), prefer };
+  });
+}
+/* The owner's notes also teach topics whose NEET-SS (srd-*) modules are thin (neuro, head and neck, chest, breast,
+ * intervention, nuclear medicine, physics, emergency). notesToSrd(units, ctx) -> the notes text units whose earlier
+ * drafts landed in a matching rad-* module, re-aimed at the ss-radiology bank (u.bank "srd") with those thin srd modules
+ * preferred and levels leaning Hard and Very Hard. */
+export const RAD_TO_SRD = {
+  "rad-neuroradiology": ["srd-neuro-vascular", "srd-neuro-tumour", "srd-neuro-metabolic", "srd-hn-skullbase", "srd-hn-neck"], "rad-chest": ["srd-chest-ild", "srd-chest-focal"],
+  "rad-obgyn-breast": ["srd-breast"], "rad-interventional": ["srd-ir"], "rad-nm-scans": ["srd-nuclear"], "rad-xray": ["srd-physics"], "rad-radiation-protection": ["srd-physics"],
+  "rad-ct-mri": ["srd-physics"], "rad-ultrasound": ["srd-physics"], "rad-contrast": ["srd-physics"], "rad-musculoskeletal": ["srd-emergency"], "rad-paediatric": ["srd-paeds"], "rad-genitourinary": ["srd-gu-kidney"],
+};
+export const SRD_NOTES_BIAS = { fmt: DEPTH_BIAS.fmt, dif: [["Easy", 0.1], ["Moderate", 0.25], ["Hard", 0.35], ["Very Hard", 0.3]] };
+export function notesToSrd(units, { accepted = new Map(), prior, thin, per = 3, round = "srdn" }) {
+  const thinSrd = new Set(thin.filter((m) => m.startsWith("srd-")));
+  return units.filter((u) => u.kind === "text" && SOURCES[u.src].bank === "rad").flatMap((u) => {
+    const prefer = [...new Set([...(prior.get(u.uid) || [])].flatMap((m) => RAD_TO_SRD[m] || []).filter((m) => thinSrd.has(m)))];
+    if (!prefer.length) return [];
+    return [{ ...u, bank: "srd", depth: true, avoid: (accepted.get(u.uid) || []).slice(0, 12), prefer, want: slate(per, round + u.uid, SRD_NOTES_BIAS) }];
+  });
+}
+/* depthContext(dir, args) -> accepted stems per unit (out/items-full.json plus --avoid-runs items), the modules of every
+ * earlier draft per unit (all run folders) and the thin modules (live counts: radnotes and radmax overlays, bank v8,
+ * plus --avoid-runs items). */
+function depthContext(dir, args) {
+  const acc = readJson(path.join(dir, "out/items-full.json"), []).concat(String(args["avoid-runs"] || "").split(",").filter(Boolean).flatMap((r) => readJson(path.join(dir, "work", r, "items.json"), [])));
+  const accepted = new Map(); for (const i of acc) { const l = accepted.get(i.uid) || []; l.push(i.q); accepted.set(i.uid, l); }
+  const prior = new Map(); for (const r of fs.readdirSync(path.join(dir, "work")).filter((r) => fs.existsSync(path.join(dir, "work", r, "items.json")))) for (const i of readJson(path.join(dir, "work", r, "items.json"), [])) { const s = prior.get(i.uid) || new Set(); s.add(i.mod); prior.set(i.uid, s); }
+  const counts = {}; const add = (m, n) => { counts[m] = (counts[m] || 0) + n; };
+  for (const d of [path.join(dir, "../out/overlay/radiology"), path.join(dir, "ship/overlay/radiology")]) if (fs.existsSync(d)) for (const f of fs.readdirSync(d)) add(f.replace(/\.json$/, ""), (readJson(path.join(d, f), { items: [] }).items || []).length);
+  for (const t of readJson(path.join(dir, "../ss/out/v8/ss-radiology/index.json"), { topics: [] }).topics) add(t.id, t.count);
+  for (const i of acc.filter((i) => i.run && String(args["avoid-runs"] || "").split(",").includes(i.run))) add(i.mod, 1);
+  const thin = thinModules(counts, Number(args.floor) || 15);
+  console.log("depth: thin modules " + thin.join(", "));
+  return { accepted, prior, thin, per: Number(args.per) || 3, round: "depth-" + args.run };
 }
 
 function dryRest(dir, run, units) {
@@ -689,7 +747,7 @@ function assemble(dir, args) {
     if (it.fig) usedFig.add(it.fig.id);
     kept.push(it);
   }
-  const out = path.join(dir, "out"); fs.rmSync(out, { recursive: true, force: true });
+  const out = path.resolve(dir, args.out || "out"); fs.rmSync(out, { recursive: true, force: true });
   const byMod = {}; for (const it of kept) (byMod[it.mod] = byMod[it.mod] || []).push(it);
   for (const [m, list] of Object.entries(byMod)) {
     const bank = m.startsWith("rad-") ? "rad" : "srd";

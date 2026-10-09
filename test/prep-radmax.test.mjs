@@ -2,7 +2,7 @@
 // No PDF text here: the fixtures are made-up radiology sentences.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L, fixCandidates, collectLessons } from "../tools/prep-radmax.mjs";
+import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L, fixCandidates, collectLessons, depthUnits, thinModules, genPrompt, notesToSrd } from "../tools/prep-radmax.mjs";
 import { buildDupInputs } from "../tools/prep-radmax-dup.mjs";
 
 const SRC = "Pleural effusion blunts the costophrenic angle on an erect radiograph. About 200 ml of fluid is needed before the lateral angle blunts. A subpulmonic effusion mimics a raised hemidiaphragm. Ultrasound detects small effusions and guides aspiration.";
@@ -106,4 +106,27 @@ test("buildDupInputs: only checked items are new; live includes the bank and ear
   assert.deepEqual(out[0].new.map((x) => x.id), ["n1", "n4"]);
   assert.deepEqual(out[0].live.map((x) => x.id), ["L1", "k1"]);
   assert.equal(out[0].new[0].key, "B. b");
+});
+
+test("depthUnits: text units only, accepted stems avoided, thin modules favoured, prompt says test other facts", () => {
+  const img = { ...unit, uid: "notes1-fig-x", kind: "img" }, srd = { ...unit, uid: "rdn11-c1-p9", src: "rdn11" }, anat = { ...unit, uid: "radn1-p9", src: "radn1", modFixed: true, modHint: "srd-anat-body" };
+  const thin = thinModules({ "rad-chest": 40, "srd-abd-liver": 80 }, 15);
+  assert.ok(thin.includes("rad-xray") && !thin.includes("rad-chest") && thin.includes("srd-ir") && !thin.includes("srd-abd-liver"));
+  const out = depthUnits([unit, img, srd, anat], { accepted: new Map([["notes1-p5", ["Old stem one?"]]]), prior: new Map([["rdn11-c1-p9", new Set(["srd-ir", "srd-abd-liver"])]]), thin, per: 3 });
+  assert.deepEqual(out.map((u) => u.uid), ["notes1-p5", "rdn11-c1-p9", "radn1-p9"]);
+  const [n, r, a] = out;
+  assert.equal(n.want.length, 4); assert.deepEqual(n.avoid, ["Old stem one?"]); assert.ok(n.prefer.every((m) => m.startsWith("rad-")) && n.prefer.includes("rad-xray"));
+  assert.equal(r.want.length, 4); assert.deepEqual(r.prefer, ["srd-ir"]);
+  assert.equal(a.want.length, 3); assert.deepEqual(a.prefer, []);
+  const p = genPrompt(n);
+  assert.match(p.user, /must test a fact or decision that none of them tests/); assert.match(p.user, /Old stem one\?/); assert.match(p.user, /rad-xray \(/);
+  assert.doesNotMatch(genPrompt(unit).user, /must test a fact or decision/);
+});
+
+test("notesToSrd: notes units with drafts in a mapped rad module are aimed at the thin srd modules", () => {
+  const thin = ["srd-chest-ild", "srd-chest-focal", "srd-ir", "rad-xray"];
+  const out = notesToSrd([unit, { ...unit, uid: "notes1-p9" }, { ...unit, uid: "rdn11-c1-p9", src: "rdn11" }], { prior: new Map([["notes1-p5", new Set(["rad-chest", "rad-gi"])], ["notes1-p9", new Set(["rad-gi"])], ["rdn11-c1-p9", new Set(["rad-chest"])]]), thin, accepted: new Map([["notes1-p5", ["Old?"]]]) });
+  assert.deepEqual(out.map((u) => u.uid), ["notes1-p5"]);
+  assert.equal(out[0].bank, "srd"); assert.deepEqual(out[0].prefer, ["srd-chest-ild", "srd-chest-focal"]); assert.deepEqual(out[0].avoid, ["Old?"]);
+  assert.match(genPrompt(out[0]).system, /srd-chest-ild = /); assert.doesNotMatch(genPrompt(out[0]).system, /rad-chest = /);
 });
