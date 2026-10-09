@@ -7666,24 +7666,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         row.appendChild(dl); row.appendChild(cl); think.appendChild(row);
         maikBuddyCue("error"); scroll(); return;
       }
-      /* Owner screenshot (2026-10-10): "empty reply (HTTP 405)" on every question. Cause: the per-phone
-       * test switch "Block cloud AI (test)" (maik-engine.js, Settings > MaiK > Advanced) was left ON, so
-       * reasoning.js aiBase() sent every cloud call to a dead path that answers 405. Say so plainly and
-       * offer the one tap that turns it off, instead of blaming the network. */
-      var _blocked = false; try { _blocked = localStorage.getItem("smd_ai_cloud_block") === "1"; } catch (e) {}
-      if (r && _blocked && (r.error === "server-empty" || r.error === "server" || r.status === 405)) {
-        think.innerHTML = '<div class="maik-welcome">MaiK Cloud is blocked on this phone. The test switch <b>Block cloud AI (test)</b> in Settings, MaiK, Advanced is on, so no question can reach MaiK Cloud.' +
-          '<br><br>The deterministic StewardMD engine, calculators and reference tools remain available.</div>'; maikBuddyCue("error");
-        var unB = document.createElement("button"); unB.type = "button"; unB.className = "maik-chip"; unB.style.marginTop = "8px"; unB.textContent = "Turn off the block and ask again";
-        unB.addEventListener("click", function () {
-          if (_maikBusy) return;
-          try { localStorage.removeItem("smd_ai_cloud_block"); window.__SMD_CLOUD_ATTEMPTS = 0; } catch (e) {}
-          var bub = think.closest(".maik-b") || think; try { bub.remove(); } catch (e) {}
-          runClinical(question, question, depth, active, topicLabel);
-        });
-        think.appendChild(unB);
-        return;
-      }
       if (r && r.error) {
         think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error");
         var tryB = document.createElement("button"); tryB.type = "button"; tryB.className = "maik-chip"; tryB.style.marginTop = "8px"; tryB.textContent = "Try again";

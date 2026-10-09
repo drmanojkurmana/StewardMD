@@ -470,10 +470,7 @@ clinical turn's `data-mg` id to `{stop, done}`; `maikStopNow` stops all of them 
 `maikSweepOrphans(false)`, which clears only orbs with no live turn ("This answer was interrupted").
 `thinking-orbs.js` stops its rAF loop once the canvas is detached. Test: `test/run-maik-stop-ui.mjs`.
 
-## "Block cloud AI (test)" left on reads as "empty reply (HTTP 405)" (2026-10-10)
-With `smd_ai_cloud_block=1` (Settings > MaiK > Advanced), `reasoning.js aiBase()` sends cloud calls to
-`/api/ai-blocked-by-test-switch`, which Cloudflare Pages answers 405 with no body. `runClinical` now names
-the switch and offers "Turn off the block and ask again" instead of blaming the network.
-Headless gotcha: a fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every
-`SMD_AI.explain*` call waiting on the consent tick (no request is ever made). Seed `smd_consent_guest`
-with `consentAcceptedAt` + `clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.
+## Headless test gotcha: AI consent (2026-10-10)
+A fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every `SMD_AI.explain*` call
+waiting on the consent tick (no request is ever made). Seed `smd_consent_guest` with `consentAcceptedAt` +
+`clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.

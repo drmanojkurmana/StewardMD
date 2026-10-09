@@ -1,5 +1,4 @@
-// Real-browser test: the bottom-nav "Ask Maik" tab shows the MaiK mark (maik-ai-mark.png), light + dark, and the
-// "Block cloud AI (test)" switch is named (with a one-tap fix) instead of "empty reply (HTTP 405)".
+// Real-browser test: the bottom-nav "Ask Maik" tab shows the MaiK mark (maik-ai-mark.png), light + dark.
 //   node test/run-maik-tab-ui.mjs      (CHROME=/path/to/chrome to override the browser)
 import { spawn } from 'node:child_process';
 import http from 'node:http';
@@ -14,7 +13,6 @@ const PORT = 9093, CDP = 9493, OUT = "/tmp/stewardmd-maiktab";
 const TYPES = { '.html': 'text/html', '.js': 'application/javascript', '.mjs': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2' };
 const server = http.createServer((req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname); 
-  if (p.startsWith('/api/ai-blocked-by-test-switch')) { res.writeHead(405); res.end(); return; }   // what Cloudflare Pages answers for the dead path
   if (p.startsWith('/api/')) { res.writeHead(404, { 'content-type': 'application/json' }); res.end('{"error":"not_found"}'); return; }
   const fp = p === '/dose-rules.json.gz' ? join(repo, 'data/dose-rules.json.gz') : join(repo, normalize(p === '/' ? '/index.html' : p).replace(/^(\.\.[/\\])+/, ''));
   readFile(fp, (err, data) => { if (err) { res.writeHead(404); res.end('404'); return; } res.writeHead(200, { 'content-type': TYPES[extname(fp)] || 'application/octet-stream' }); res.end(data); });
@@ -46,16 +44,5 @@ try {
   ok(await ev(`(()=>{const i=document.querySelector('.rnav-maik-mark img');return i.naturalWidth>0&&getComputedStyle(i).display!=='none'})()`), 'mark still visible in dark mode');
   await ev(`document.querySelector('.rnav-tab-maik').click();1`);
   ok(await until(`!!document.getElementById('maikSheet')`, 8000), 'tapping it still opens Ask Maik');
-  // The per-phone test switch "Block cloud AI (test)" left ON: say so and offer the fix, not "empty reply (HTTP 405)".
-  // A fresh profile has no AI consent yet (privacy.js would wait on the consent tick): record a prior one.
-  await ev(`localStorage.setItem('smd_consent_guest',JSON.stringify({consentAcceptedAt:'2026-01-01',clinicalAuthorityConfirmedAt:'2026-01-01'}));localStorage.setItem('smd_ai_cloud_block','1');try{SMD_MAIK_ENGINE&&SMD_MAIK_ENGINE.setPref&&SMD_MAIK_ENGINE.setPref('cloud')}catch(e){};1`);
-  ok(await until(`!!document.getElementById('maikQ')`, 8000), 'composer ready');
-  await ev(`(()=>{const q=document.getElementById('maikQ');q.value='How to treat organophosphate poisoning?';q.dispatchEvent(new Event('input',{bubbles:true}));document.getElementById('maikSend').click();return 1})()`);
-  ok(await until(`/MaiK Cloud is blocked on this phone/.test(document.getElementById('maikSheet').innerText)`, 40000), 'blocked switch is named, with where to find it');
-  ok(await ev(`!/empty reply/.test(document.getElementById('maikSheet').innerText)`), 'no misleading "empty reply" notice');
-  const chip = await ev(`(()=>{const b=[...document.querySelectorAll('#maikSheet .maik-chip')].find(x=>/Turn off the block/.test(x.textContent));if(!b)return false;b.click();return true})()`);
-  ok(chip === true, '"Turn off the block and ask again" chip present');
-  ok(await ev(`localStorage.getItem('smd_ai_cloud_block')===null`), 'chip clears the switch');
-  ok(await until(`!/MaiK Cloud is blocked on this phone/.test(document.getElementById('maikSheet').innerText)`, 8000), 'question re-sent without the block');
 } catch (e) { console.error(e); failures++; }
 finally { try { ws?.close(); } catch {} chrome.kill('SIGKILL'); server.close(); console.log(failures ? `\n${failures} FAILED` : '\nALL PASS'); process.exit(failures ? 1 : 0); }
