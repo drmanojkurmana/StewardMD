@@ -119,9 +119,9 @@ try {
 
   // ---- NEET-SS tab -> Radiology -> module
   await ev(`PREP.open(); return 1;`);
-  ok(await until(`return !!document.querySelector("#smdPrep [data-act=exam][data-v=neet-ss]");`, 20000), "PrepNucleus opens with exam tabs");
+  ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 20000), "PrepNucleus opens on home");
   ok(await ev(`return !!window.PREP_RAD;`) === true, "prep-loader.js loads prep-rad.js");
-  await click(`#smdPrep [data-act=exam][data-v=neet-ss]`);
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=subject][data-s="${SID}"]');`, 8000), "the NEET-SS tab lists Radiology");
   await shot("home");
   await click(`#smdPrep [data-act=subject][data-s="${SID}"]`);

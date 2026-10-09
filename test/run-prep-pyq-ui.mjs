@@ -81,9 +81,9 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=y-home]");`, 20000), "home shows Previous year papers on the NEET-PG tab");
   ok(await ev(`return !!window.PREP_PYQ;`) === true, "prep-loader.js loads prep-pyq.js");
   ok(/Previous year papers/.test(await text("#smdPrep [data-act=y-home]")), "the row is named Previous year papers");
-  await click(`#smdPrep [data-act=exam][data-v=neet-ss]`);
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   ok(await until(`return !document.querySelector("#smdPrep [data-act=y-home]");`, 4000), "the NEET-SS tab has no papers row");
-  await click(`#smdPrep [data-act=exam][data-v=neet-pg]`);
+  await ev(`PREP._host.setExam("neet-pg"); return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=y-home]");`, 4000);
 
   // ---- papers list

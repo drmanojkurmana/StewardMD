@@ -263,3 +263,6 @@ body.dark .pn-root .pl-segb.on { background: var(--pn-seg); }
   .pn-root .pl-sheet { max-height: 100%; }
   .pn-root .pl-sheet > .pn-sheet-act { bottom: -20px; margin-bottom: -20px; padding-bottom: 20px; border-radius: 0 0 var(--pn-r-xl) var(--pn-r-xl); }
 }
+
+/* Settings: six exams wrap to two rows of three, so no label is squeezed on a phone. */
+.pn-root .pl-g-exam .pl-seg { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }

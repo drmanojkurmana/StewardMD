@@ -262,6 +262,8 @@ if [ -f prep/taxonomy.json ]; then
   [ -f "prep/bank/${BV:-v1}/manifest.json" ] && cp "prep/bank/${BV:-v1}/manifest.json" "$WWW/prep/bank/${BV:-v1}/"
   # A subject piloted in its own bank version (taxonomy "bv", e.g. ss-radiology in v6) ships that version's index.
   for p in $(node -e 'const t=require("./prep/taxonomy.json");for(const b of t.branches)for(const s of b.subjects)if(s.bv)console.log(s.bv+"/"+s.id)' 2>/dev/null); do ix="prep/bank/$p/index.json"; [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+  # Overlay item counts per module (tools/prep-overlay-counts.mjs, a few KB): the module and subject counts include them.
+  [ -f prep/bank/overlay-counts.json ] && mkdir -p "$WWW/prep/bank" && cp prep/bank/overlay-counts.json "$WWW/prep/bank/"
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
   if [ -f prep/lessons/v1/index.json ]; then

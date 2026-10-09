@@ -759,3 +759,19 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
   `test/fixtures/prep-rad/`; `REAL=~/prep-data/rad/out` runs on the real pilot output; `SHOTS`, `PN_LIGHT`).
 - **Gotchas:** Arena's `NEET_SS_SUBJECTS` does not include `ss-radiology`. Files under v6 are add-only like any bank
   version; a changed module file needs a new name or version once the subject is live.
+
+## Subject screen, Learn, exam once (2026-10-09, prep33)
+- **Exam asked once.** Onboarding's exam step has no Skip; the choice lives in `pl.exam` (synced) with `exam` as the tab.
+  Home has no exam tabs any more (they stay only if prep-plan.js is missing); it shows a Settings row ("Exam: X ·
+  plan and reminder", `data-act=p-settings`) that opens the Your plan sheet, the only place to change it. Exams: NEET-PG,
+  INI-CET, NEET-SS, INI-SS (tab neet-ss, no own mock pattern), USMLE, FMGE. Tests switch with `PREP._host.setExam(id)`.
+- **Subject actions** are one block `.pn-subacts` (a direct child of `#pnSub`, so the column's width and auto margins):
+  Practise, Learn, Start with last settings. The old `.pn-subgo { margin: 4px 0 2px }` overrode the auto margins and
+  left-aligned the button in a column wider than the content (owner iPad screenshot 2026-10-09).
+- **Learn.** `PREP_LESSONS.subjectButton` adds Learn when a module of the subject has a lesson (`subjectLessons`);
+  `l-subject` opens the subject's lessons grouped by module. The module screen's slot is headed "Learn".
+- **Overlay counts.** `prep/bank/overlay-counts.json` (tools/prep-overlay-counts.mjs, rerun after an overlay upload) gives
+  `t.ov`; `countFor` = bank count + overlay items, so Radiology and Medicine counts match what practice draws.
+- **ss-radiology v8 counts are real:** radmax items went mostly to cardiac, abdomen, MSK and anatomy; neuro, head and neck,
+  chest, breast, IR, nuclear and physics hold 2 to 10 items each (targets 40 to 80). Content gap, not a cache bug.
+- Test: `test/run-prep-subject-ui.mjs` (390, 820, 1180; alignment within 1 px, Learn, exam once), `test/prep-subject.test.mjs`.

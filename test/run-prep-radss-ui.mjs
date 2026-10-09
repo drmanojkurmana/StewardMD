@@ -96,8 +96,8 @@ try {
 
   // ---- NEET-SS tab -> Radiology -> module with a lesson
   await ev(`PREP.open(); return 1;`);
-  ok(await until(`return !!document.querySelector("#smdPrep [data-act=exam][data-v=neet-ss]");`, 20000), "PrepNucleus opens with exam tabs");
-  await click(`#smdPrep [data-act=exam][data-v=neet-ss]`);
+  ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 20000), "PrepNucleus opens on home");
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=subject][data-s="${SID}"]');`, 8000), "the NEET-SS tab lists Radiology");
   await click(`#smdPrep [data-act=subject][data-s="${SID}"]`);
   ok(await until(`return !!document.querySelector('#smdPrep .pn-mod[data-m="${MID}"]');`, 8000), "Radiology lists the module " + MID);
@@ -144,7 +144,7 @@ try {
   await ev(`PREP.close(); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
   await ev(`PREP.open(); return 1;`);
-  if (await until(`return !!document.querySelector("#smdPrep [data-act=exam][data-v=neet-ss]");`, 20000)) await click(`#smdPrep [data-act=exam][data-v=neet-ss]`);
+  if (await until(`return !!document.querySelector("#smdPrep #pnHome");`, 20000)) await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   if (await until(`return !!document.querySelector('#smdPrep [data-act=subject][data-s="${SID}"]');`, 8000)) await click(`#smdPrep [data-act=subject][data-s="${SID}"]`);
   if (await until(`return !!document.querySelector('#smdPrep .pn-mod[data-m="${MID}"]');`, 8000)) await click(`#smdPrep .pn-mod[data-m="${MID}"]`);
   if (await until(`return !!document.querySelector("#smdPrep [data-act=start][data-k=study]");`, 8000)) await click(`#smdPrep [data-act=start][data-k=study]`);
