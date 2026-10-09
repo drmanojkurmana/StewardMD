@@ -128,17 +128,26 @@ export function r11Captions(pages) {
   }
   return out;
 }
+// =====================================================================================================================
+// Book profiles: the default is the owner's four PDFs; another book (tools/prep-ctc.mjs) registers its own sources,
+// chapters, page-text folder, figure catalog, lesson set and key prefix with useBook() before main().
+// =====================================================================================================================
+export const BOOKS = { radbook: { name: "radbook", set: SET, key: "radbook", dir: "prep-data/radnotes/book", srcDir: (dir) => path.join(dir, "..", "max", "src"), sources: SOURCES, chapters: CHAPTERS, dropSets: ["radnotes"] } };
+let BOOK = BOOKS.radbook;
+export function useBook(b) { BOOK = { ...BOOKS.radbook, ...b }; return BOOK; }
+export const book = () => BOOK;
 export const mediaName = (id) => "rb-" + String(id).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") + ".webp";
 
 // =====================================================================================================================
 // Catalog
 // =====================================================================================================================
 function loadPages(dir) {
-  const src = path.join(dir, "..", "max", "src"), out = {};
-  for (const s of Object.keys(SOURCES)) out[s] = readJson(path.join(src, s + ".pages.json"), []);
+  const src = BOOK.srcDir(dir), out = {};
+  for (const s of Object.keys(BOOK.sources)) out[s] = readJson(path.join(src, s + ".pages.json"), []);
   return out;
 }
 function catalog(dir) {
+  if (BOOK.catalog) return BOOK.catalog(dir, { loadPages, writeJson });
   const pages = loadPages(dir), rn = path.join(dir, ".."), figs = [];
   for (const f of readJson(path.join(rn, "figs.json"), [])) {
     const src = f.pdf === 1 ? "notes1" : "notes2";
@@ -499,17 +508,17 @@ function votesApply(ctx) {
 // Assemble: lesson files (keyed radbook-<order><seq>-<slug>), media list, index entries
 // =====================================================================================================================
 const slug = (s) => normText(s).split(" ").filter((w) => w && !STOPW.has(w)).slice(0, 5).join("-").slice(0, 40).replace(/-+$/, "");
-export function lessonKey(l) { return "radbook-" + String(l.order).padStart(2, "0") + String(l.seq).padStart(4, "0") + "-" + slug(l.title); }
+export function lessonKey(l) { return BOOK.key + "-" + String(l.order).padStart(2, "0") + String(l.seq).padStart(4, "0") + "-" + slug(l.title); }
 export function buildLesson(l, quiz, run, model) {
   const steps = l.steps.map((s) => ({ tx: s.tx, say: s.say, vis: s.vis }));
-  return { v: 1, id: lessonKey(l), module: l.mod, subject: subjectOf(l.mod), set: SET, title: l.title, minutes: minutesFor(steps), steps, quiz: quiz || [],
+  return { v: 1, id: lessonKey(l), module: l.mod, subject: subjectOf(l.mod), set: BOOK.set, title: l.title, minutes: minutesFor(steps), steps, quiz: quiz || [],
     gen: "AI", run, model, checks: { shape: true, numbers: true, verbatim: true, selfCheck: true, figureVotes: true, redone: l.redone, dropped: l.dropped.length } };
 }
 /* mergeIndex(live, lessons, dropSets) -> the live index without the superseded sets' entries, plus one entry per lesson. */
-export function mergeIndex(live, lessons, dropSets = ["radnotes"]) {
+export function mergeIndex(live, lessons, dropSets = BOOK.dropSets) {
   const mods = {};
   for (const [k, v] of Object.entries((live && live.modules) || {})) if (!(v && dropSets.includes(v.set))) mods[k] = v;
-  for (const l of lessons) mods[l.id] = { title: l.title, minutes: l.minutes, steps: l.steps.length, gen: l.gen, module: l.module, set: SET };
+  for (const l of lessons) mods[l.id] = { title: l.title, minutes: l.minutes, steps: l.steps.length, gen: l.gen, module: l.module, set: BOOK.set };
   return { v: 1, modules: mods };
 }
 function assemble(ctx) {
@@ -597,9 +606,9 @@ export function parseArgs(argv) {
   }
   return a;
 }
-async function main() {
-  const args = parseArgs(process.argv.slice(2)), cmd = args._[0];
-  const dir = args.dir || path.join(os.homedir(), "prep-data/radnotes/book");
+export async function main(argv = process.argv.slice(2)) {
+  const args = parseArgs(argv), cmd = args._[0];
+  const dir = args.dir || path.join(os.homedir(), BOOK.dir);
   if (cmd === "catalog") return catalog(dir);
   const ctx = ctxOf(dir);
   if (cmd === "dry-run") return dryRun(ctx);
@@ -607,7 +616,7 @@ async function main() {
   if (cmd === "votes-prep") return votesPrep(ctx);
   if (cmd === "votes-apply") return votesApply(ctx);
   if (cmd === "assemble") return assemble(ctx);
-  if (cmd === "upload") return upload(ctx, args);
+  if (cmd === "upload") { if (BOOK.noUpload) throw new Error(BOOK.noUpload); return upload(ctx, args); }
   if (cmd === "topics") { const qa = figQaMap(dir); for (const t of topicsOf(ctx)) console.log([t.tid, t.mod, t.pages.join("-"), topicFigs(ctx, t, qa).length, t.ttl].join("\t")); return; }
   console.log("commands: catalog | dry-run | run --part figqa|outline|lessons|quiz | votes-prep | votes-apply | assemble | upload [--dry-run] | topics");
 }
